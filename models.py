@@ -350,3 +350,23 @@ class AdventureingGear(db.Model):
     category = db.Column(db.Text, nullable=False)
     cost = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
+
+
+# Conditions Tables
+
+class CharacterConditions(db.Model):
+    """Character's Conditions table"""
+
+    __tablename__ = "character_conditions"
+    condition_id = db.Column(db.Integer, db.ForeignKey("conditions.id"))
+    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"))
+
+
+class Condition(db.Model):
+    """Conditions Table"""
+
+    __tablename__ = "conditions"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
