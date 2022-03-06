@@ -1,4 +1,4 @@
-from app import app
+# from app import app
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
@@ -23,6 +23,8 @@ class User(db.Model):
     username = db.Column(db.Text, nullable=False, unique=True)
     password = db.Column(db.Text, nullable=False)
 
+    character = db.relationship("Character", backref="user")
+
 
 class Character(db.Model):
     """Characters Table"""
@@ -33,7 +35,7 @@ class Character(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.Text, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-    species_id = db.Column(db.Integer, db.ForeignKey("speces.id"))
+    species_id = db.Column(db.Integer, db.ForeignKey("species.id"))
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
     xp_points = db.Column(db.Integer, nullable=False)
     strength = db.Column(db.Integer, nullable=False)
@@ -81,6 +83,11 @@ class Character(db.Model):
     languages = db.Column(db.Text, nullable=False)
 
 
+    character_class = db.relationship("Class", backref="character")
+    character_species = db.relationship("Species", backref="character")
+    character_background = db.relationship("Background", backref="character")
+
+
 # Classes table and all associated tables
 
 class Class(db.Model):
@@ -118,6 +125,9 @@ class ClassFeatures(db.Model):
     details = db.Column(db.Text, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
+    to_class = db.relationship("Class", backref="features")
+
+    
 
 class Archetype(db.Model):
     """Archetypes table"""
@@ -129,6 +139,9 @@ class Archetype(db.Model):
     caster_type = db.Column(db.Text, nullable=False)
     features = db.Column(db.PickleType, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="archetypes")
+
 
 
 class FightingStyles(db.Model):
@@ -142,6 +155,9 @@ class FightingStyles(db.Model):
     aspects = db.Column(db.PickleType, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
+    to_class = db.relationship("Class", backref="fighting_styles")
+
+
 
 class FightingMastery(db.Model):
     """Fighting Mastery Table"""
@@ -154,6 +170,9 @@ class FightingMastery(db.Model):
     aspects = db.Column(db.PickleType, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
+    to_class = db.relationship("Class", backref="fighting_masteries")
+
+
 
 class LightsaberForms(db.Model):
     """Lightsaber Forms Table"""
@@ -164,6 +183,9 @@ class LightsaberForms(db.Model):
     prerequiste = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="lightsaber_forms")
+
 
 
 class TechPowers(db.Model):
@@ -181,6 +203,9 @@ class TechPowers(db.Model):
     concentration = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="tech_powers")
+
     
 
 class ForcePowers(db.Model):
@@ -198,6 +223,9 @@ class ForcePowers(db.Model):
     concentration = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="force_powers")
+
 
 
 # Speces and associated tables
@@ -230,6 +258,7 @@ class SpecieTraits(db.Model):
     details = db.Column(db.Text, nullable=False)
     species_id = db.Column(db.Integer, db.ForeignKey("species.id"))
 
+    to_species = db.relationship("Species", backref="traits")
 
 # Backgrounds and associated Tables
 
@@ -256,6 +285,8 @@ class Feat(db.Model):
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
     feats = db.Column(db.PickleType, nullable=False)
 
+    to_background = db.relationship("Background", backref="feats")
+
 
 class PersonalityTraits(db.Model):
     """Personality Traits Table"""
@@ -266,6 +297,9 @@ class PersonalityTraits(db.Model):
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
     traits = db.Column(db.PickleType, nullable=False)
 
+    to_background = db.relationship("Background", backref="traits")
+
+
 class Ideals(db.Model):
     """Ideals Table"""
 
@@ -274,6 +308,9 @@ class Ideals(db.Model):
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
     ideals = db.Column(db.PickleType, nullable=False)
+
+    to_background = db.relationship("Background", backref="ideals")
+
 
 
 class Bonds(db.Model):
@@ -285,6 +322,9 @@ class Bonds(db.Model):
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
     bonds = db.Column(db.PickleType, nullable=False)
 
+    to_background = db.relationship("Background", backref="bonds")
+
+
 class Flaws(db.Model):
     """Flaws Table"""
 
@@ -294,6 +334,9 @@ class Flaws(db.Model):
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
     flaws = db.Column(db.PickleType, nullable=False)
 
+    to_background = db.relationship("Background", backref="flaws")
+
+
 
 # Equipment Tables
 
@@ -301,12 +344,12 @@ class Flaws(db.Model):
 class CharacterEquipment(db.Model):
     """Character's Equipment Table"""
 
-    __tablename__ = "character_equipment"
+    __tablename__ = "character_equipments"
 
-    aromr_id = db.Column(db.Integer, db.ForeignKey("armors.id"))
-    weapon_id = db.Column(db.Integer, db.ForeignKey("weapons.id"))
-    adventuring_gear_id = db.Column(db.Integer, db.ForeignKey("adventuring_gears.id"))
-    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"))
+    aromr_id = db.Column(db.Integer, db.ForeignKey("armors.id"), primary_key=True)
+    weapon_id = db.Column(db.Integer, db.ForeignKey("weapons.id"), primary_key=True)
+    adventuring_gear_id = db.Column(db.Integer, db.ForeignKey("adventuring_gears.id"), primary_key=True)
+    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"), primary_key=True)
 
 
 
@@ -325,6 +368,8 @@ class Armor(db.Model):
     armor_class = db.Column(db.Text, nullable=False)
     stealth = db.Column(db.Text, nullable=False)
 
+    to_character = db.relationship("Character", secondary="character_equipments", backref="armor")
+
 
 class Weapon(db.Model):
     """Weapons Table"""
@@ -339,6 +384,9 @@ class Weapon(db.Model):
     weight = db.Column(db.Integer, nullable=False)
     damage = db.Column(db.Text, nullable=False)
 
+    to_character = db.relationship("Character", secondary="character_equipments", backref="weapon")
+
+
 
 class AdventureingGear(db.Model):
     """Adventuring Gear Table"""
@@ -351,6 +399,8 @@ class AdventureingGear(db.Model):
     cost = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
 
+    to_character = db.relationship("Character", secondary="character_equipments", backref="adventuring_gear")
+
 
 # Conditions Tables
 
@@ -358,8 +408,8 @@ class CharacterConditions(db.Model):
     """Character's Conditions table"""
 
     __tablename__ = "character_conditions"
-    condition_id = db.Column(db.Integer, db.ForeignKey("conditions.id"))
-    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"))
+    condition_id = db.Column(db.Integer, db.ForeignKey("conditions.id"), primary_key=True)
+    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"), primary_key=True)
 
 
 class Condition(db.Model):
@@ -370,3 +420,5 @@ class Condition(db.Model):
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     details = db.Column(db.Text, nullable=False)
+
+    to_character = db.relationship("Character", secondary="character_conditions", backref="conditions")
