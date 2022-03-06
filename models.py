@@ -208,3 +208,145 @@ class Specie(db.Model):
     __tablename__ = "species"
 
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    bio_and_appeaerance = db.Column(db.Text, nullable=False)
+    society_and_culture = db.Column(db.Text, nullable=False)
+    names = db.Column(db.Text, nullable=False)
+    ability_score_increase = db.Column(db.Text, nullable=False)
+    age = db.Column(db.Text, nullable=False)
+    alignment = db.Column(db.Text, nullable=False)
+    size = db.Column(db.Text, nullable=False)
+    speed = db.Column(db.Text, nullable=False)
+    languages = db.Column(db.Text, nullable=False)
+
+
+class SpecieTraits(db.Model):
+    """Species Traits Table"""
+
+    __tablename__ = "species_traits"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    species_id = db.Column(db.Integer, db.ForeignKey("species.id"))
+
+
+# Backgrounds and associated Tables
+
+class Background(db.Model):
+    """Backgrounds Table"""
+
+    __tablename__ = "backgrounds"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    intro = db.Column(db.Text, nullable=False)
+    skill_proficiencies = db.Column(db.Text, nullable=False)
+    languages = db.Column(db.Text, nullable=False)
+    background_feature_name = db.Column(db.Text, nullable=False)
+    background_feature_details = db.Column(db.Text, nullable=False)
+
+
+class Feat(db.Model):
+    """Feats table"""
+
+    __tablename__ = "feats"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
+    feats = db.Column(db.PickleType, nullable=False)
+
+
+class PersonalityTraits(db.Model):
+    """Personality Traits Table"""
+
+    __tablename__ = "personality_traits"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
+    traits = db.Column(db.PickleType, nullable=False)
+
+class Ideals(db.Model):
+    """Ideals Table"""
+
+    __tablename__ = "ideals"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
+    ideals = db.Column(db.PickleType, nullable=False)
+
+
+class Bonds(db.Model):
+    """Bonds Table"""
+
+    __tablename__ = "bonds"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
+    bonds = db.Column(db.PickleType, nullable=False)
+
+class Flaws(db.Model):
+    """Flaws Table"""
+
+    __tablename__ = "flaws"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
+    flaws = db.Column(db.PickleType, nullable=False)
+
+
+# Equipment Tables
+
+
+class CharacterEquipment(db.Model):
+    """Character's Equipment Table"""
+
+    __tablename__ = "character_equipment"
+
+    aromr_id = db.Column(db.Integer, db.ForeignKey("armors.id"))
+    weapon_id = db.Column(db.Integer, db.ForeignKey("weapons.id"))
+    adventuring_gear_id = db.Column(db.Integer, db.ForeignKey("adventuring_gears.id"))
+    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"))
+
+
+
+
+class Armor(db.Model):
+    """Armor table"""
+
+    __tablename__ = "armors"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    type = db.Column(db.Text, nullable=False)
+    properties = db.Column(db.PickleType, nullable=False)
+    cost = db.Column(db.Integer, nullable=False)
+    weight = db.Column(db.Integer, nullable=False)
+    armor_class = db.Column(db.Text, nullable=False)
+    stealth = db.Column(db.Text, nullable=False)
+
+
+class Weapon(db.Model):
+    """Weapons Table"""
+
+    __tablename__ = "weapons"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    type = db.Column(db.Text, nullable=False)
+    properties = db.Column(db.PickleType, nullable=False)
+    cost = db.Column(db.Integer, nullable=False)
+    weight = db.Column(db.Integer, nullable=False)
+    damage = db.Column(db.Text, nullable=False)
+
+
+class AdventureingGear(db.Model):
+    """Adventuring Gear Table"""
+
+    __tablename__ = "adventuring_gears"
+
+    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    category = db.Column(db.Text, nullable=False)
+    cost = db.Column(db.Integer, nullable=False)
+    weight = db.Column(db.Integer, nullable=False)
