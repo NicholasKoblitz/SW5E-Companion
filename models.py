@@ -237,10 +237,24 @@ class BerserkerInstincts(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     prerequisite = db.Column(db.Text)
-    description = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
     to_class = db.relationship("Class", backref="instincts")
+
+
+class ForceEmpoweredCasting(db.Model):
+    """Force-empowered Casting Table"""
+
+    __tablename__ = "force-empowered casting"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+    
+    to_class = db.relationship("Class", backref="force_empowered")
+
 
     
 
