@@ -53,3 +53,26 @@ def signup():
     else:
         return render_template("signup.html", form=form)
        
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    """Logs in the user"""
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+
+        user = User.authenticate(username=form.username.data, password=form.password.data)
+
+        if user:
+            session[USER_KEY] = user.id
+            redirect("/user/dashboard")
+
+    return render_template("login.html", form=form)
+
+
+@app.route("/logout")
+def logout():
+
+   if USER_KEY in session:
+       del session[USER_KEY]
