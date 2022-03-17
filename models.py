@@ -149,71 +149,65 @@ class Archetype(db.Model):
 class FightingStyles(db.Model):
     """Fighting Styles Table"""
 
-    __tablename__ = "fighting styles"
+    __tablename__ = "fighting_styles"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    aspects = db.Column(db.PickleType, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
-    to_class = db.relationship("Class", backref="fighting_styles")
+    to_class = db.relationship("Class", secondary="character_fighting_styles", backref="fighting_styles")
 
 
 
 class FightingMastery(db.Model):
     """Fighting Mastery Table"""
 
-    __tablename__ = "fighting masteries"
+    __tablename__ = "fighting_masteries"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    aspects = db.Column(db.PickleType, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
-    to_class = db.relationship("Class", backref="fighting_masteries")
+    to_class = db.relationship("Class", secondary="character_fighting_masteries", backref="fighting_masteries")
 
 
 
 class LightsaberForms(db.Model):
     """Lightsaber Forms Table"""
 
-    __tablename__ = "lightsaber forms"
+    __tablename__ = "lightsaber_forms"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    prerequiste = db.Column(db.Text, nullable=False)
+    name = db.Column(db.Text, nullable=False)
+    prerequisite = db.Column(db.Text)
     description = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
-    to_class = db.relationship("Class", backref="lightsaber_forms")
+    to_class = db.relationship("Class", secondary="character_lightsaber_forms", backref="lightsaber_forms")
 
 
 
 class TechPowers(db.Model):
     """Tech-Power Table"""
 
-    __tablename__ = "tech powers"
+    __tablename__ = "tech_powers"
     
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     level = db.Column(db.Integer, nullable=False)
-    force_alignment = db.Column(db.Text, nullable=False)
     casting_period = db.Column(db.Text, nullable=False)
     range = db.Column(db.Text, nullable=False)
     duration = db.Column(db.Text, nullable=False)
     concentration = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
-    to_class = db.relationship("Class", backref="tech_powers")
+    to_class = db.relationship("Class", secondary="character_tech_powers", backref="tech_powers")
 
     
 
 class ForcePowers(db.Model):
     """Force Powers Table"""
 
-    __tablename__ = "force powers"
+    __tablename__ = "force_powers"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
@@ -223,12 +217,12 @@ class ForcePowers(db.Model):
     range = db.Column(db.Text, nullable=False)
     duration = db.Column(db.Text, nullable=False)
     concentration = db.Column(db.Text, nullable=False)
+    prerequisite = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
 
-    to_class = db.relationship("Class", backref="force_powers")
+    to_class = db.relationship("Class", secondary="character_force_powers", backref="force_powers")
 
-
+# Class specific abilities
 class BerserkerInstincts(db.Model):
     """Berserker Instincts Table"""
 
@@ -255,8 +249,138 @@ class ForceEmpoweredCasting(db.Model):
     
     to_class = db.relationship("Class", backref="force_empowered")
 
+class Maneuver(db.Model):
+    """Maneuvers Table"""
 
+    __tablename__ = "maneuvers"
     
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="maneuver")
+
+class GuardianAura(db.Model):
+    """Guardian Aura Table"""
+
+    __tablename__ = "guardian_aura"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="aura")
+
+
+class MonasticVows(db.Model):
+    """Monastic Vows Table"""
+
+    __tablename__ = "monastic_vows"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    prerequisite = db.Column(db.Text)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="vows")
+
+
+class OperativeExploits(db.Model):
+    """Operative Exploits Table"""
+
+    __tablename__ = "operative_exploits"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    prerequisite = db.Column(db.Text)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="exploits")
+
+
+class ScholarDiscovery(db.Model):
+    """Scholar's Discoveries Table"""
+
+    __tablename__ = "scholar_discoveries"
+    
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    prerequisite = db.Column(db.Text)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="discoveries")
+
+
+class ScoutRoutine(db.Model):
+    """Scout Routines Table"""
+
+    __tablename__ = "scout_routines"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="routines")
+
+
+class SentinelIdeals(db.Model):
+    """Sentinel Ideals Table"""
+
+    __tablename__ = "sentinel_ideals"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
+
+    to_class = db.relationship("Class", backref="ideals")
+
+
+
+# Many-to-many tables
+class CharacterFightingStyle(db.Model):
+	
+	__tablename__ = "character_fighting_styles"
+	
+	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+	fighting_style_id = db.Column(db.Integer,  db.ForeignKey("fighting_styles.id", ondelete="cascade"), primary_key=True)
+	
+
+class CharacterForcePower(db.Model):
+	
+	__tablename__ = "character_force_powers"
+	
+	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+	force_power_id = db.Column(db.Integer,  db.ForeignKey("force_powers.id", ondelete="cascade"), primary_key=True)
+	
+class CharacterTechPower(db.Model):
+	
+	__tablename__ = "character_tech_powers"
+
+	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+	tech_power_id = db.Column(db.Integer,  db.ForeignKey("tech_powers.id", ondelete="cascade"), primary_key=True)
+	
+	
+class CharacterFightingMastery(db.Model):
+	
+	__tablename__ = "character_fighting_masteries"
+	
+	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+	fighting_mastery_id = db.Column(db.Integer,  db.ForeignKey("fighting_masteries.id", ondelete="cascade"), primary_key=True)
+
+class CharacterLightsaberForms(db.Model):
+
+    __tablename__ = "character_lightsaber_forms"
+    
+    class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+    lightsaber_form_id = db.Column(db.Integer,  db.ForeignKey("lightsaber_forms.id", ondelete="cascade"), primary_key=True)
+
 
 # Speces and associated tables
 
@@ -281,14 +405,21 @@ class Specie(db.Model):
 class SpecieTraits(db.Model):
     """Species Traits Table"""
 
-    __tablename__ = "species_traits"
+    __tablename__ = "traits"
 
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     details = db.Column(db.Text, nullable=False)
-    species_id = db.Column(db.Integer, db.ForeignKey("species.id"))
 
-    to_species = db.relationship("Specie", backref="traits")
+    to_species = db.relationship("Specie", secondary="species_traits", backref="traits")
+
+class SpeciesToTraits(db.Model):
+    """Join Table for Speices and thier traits"""
+
+    __tablename__ = "species_traits"
+
+    species_id = db.Column(db.Integer, db.ForeignKey("species.id"), primary_key=True)
+    trait_id = db.Column(db.Integer, db.ForeignKey("traits.id"), primary_key=True)
 
 # Backgrounds and associated Tables
 
@@ -301,7 +432,9 @@ class Background(db.Model):
     name = db.Column(db.Text, nullable=False)
     intro = db.Column(db.Text, nullable=False)
     skill_proficiencies = db.Column(db.Text, nullable=False)
-    languages = db.Column(db.Text, nullable=False)
+    tool_proficiencies = db.Column(db.Text)
+    languages = db.Column(db.Text)
+    equipment = db.Column(db.Text, nullable=False)
     background_feature_name = db.Column(db.Text, nullable=False)
     background_feature_details = db.Column(db.Text, nullable=False)
 
@@ -312,10 +445,10 @@ class Feat(db.Model):
     __tablename__ = "feats"
 
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
-    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
-    feats = db.Column(db.PickleType, nullable=False)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
 
-    to_background = db.relationship("Background", backref="feats")
+    to_background = db.relationship("Background", secondary="feats_backgrounds", backref="feats")
 
 
 class PersonalityTraits(db.Model):
@@ -324,23 +457,20 @@ class PersonalityTraits(db.Model):
     __tablename__ = "personality_traits"
 
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
-    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
-    traits = db.Column(db.PickleType, nullable=False)
+    details = db.Column(db.Text, nullable=False)
 
-    to_background = db.relationship("Background", backref="traits")
+    to_background = db.relationship("Background", secondary="personality_traits_backgrounds", backref="traits")
 
 
 class Ideals(db.Model):
     """Ideals Table"""
 
     __tablename__ = "ideals"
-
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
-    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
-    ideals = db.Column(db.PickleType, nullable=False)
+    name = db.Column(db.Text, nullable=False)
+    details = db.Column(db.Text, nullable=False)
 
-    to_background = db.relationship("Background", backref="ideals")
-
+    to_background = db.relationship("Background", secondary="ideals_backgrounds", backref="ideals")
 
 
 class Bonds(db.Model):
@@ -349,10 +479,9 @@ class Bonds(db.Model):
     __tablename__ = "bonds"
 
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
-    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
-    bonds = db.Column(db.PickleType, nullable=False)
+    details = db.Column(db.Text, nullable=False)
 
-    to_background = db.relationship("Background", backref="bonds")
+    to_background = db.relationship("Background", secondary="bonds_backgrounds", backref="bonds")
 
 
 class Flaws(db.Model):
@@ -361,11 +490,55 @@ class Flaws(db.Model):
     __tablename__ = "flaws"
 
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
-    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"))
-    flaws = db.Column(db.PickleType, nullable=False)
+    details = db.Column(db.Text, nullable=False)
 
-    to_background = db.relationship("Background", backref="flaws")
+    to_background = db.relationship("Background", secondary="flaws_backgrounds", backref="flaws")
 
+
+# Many-to-Many Tables
+
+class FeatsBackround(db.Model):
+    """Background Feats"""
+
+    __tablename__ = "feats_backgrounds"
+
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"), primary_key=True)
+    feat_id = db.Column(db.Integer, db.ForeignKey("feats.id"), primary_key=True)
+
+
+class PersonalityBackground(db.Model):
+    """Background Personality Traits"""
+
+    __tablename__ = "personality_traits_backgrounds"
+
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"), primary_key=True)
+    personality_trait_id = db.Column(db.Integer, db.ForeignKey("personality_traits.id"), primary_key=True)
+
+class IdealsBackgrounds(db.Model):
+    """Background Ideals"""
+
+    __tablename__ = "ideals_backgrounds"
+
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"), primary_key=True)
+    ideal_id = db.Column(db.Integer, db.ForeignKey("ideals.id"), primary_key=True)
+
+
+class BondsBackgrounds(db.Model):
+    """Background Bonds"""
+
+    __tablename__ = "bonds_backgrounds"
+
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"), primary_key=True)
+    bond_id = db.Column(db.Integer, db.ForeignKey("bonds.id"), primary_key=True)
+
+
+class FlawsBackgrounds(db.Model):
+    """Background Flaws"""
+
+    __tablename__ = "flaws_backgrounds"
+
+    background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id"), primary_key=True)
+    flaw_id = db.Column(db.Integer, db.ForeignKey("flaws.id"), primary_key=True)
 
 
 # Equipment Tables
@@ -410,11 +583,12 @@ class Armor(db.Model):
     id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     type = db.Column(db.Text, nullable=False)
-    properties = db.Column(db.PickleType, nullable=False)
+    properties = db.Column(db.PickleType)
     cost = db.Column(db.Integer, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
     armor_class = db.Column(db.Text, nullable=False)
-    stealth = db.Column(db.Text, nullable=False)
+    stealth = db.Column(db.Text)
+    details = db.Column(db.Text)
 
     to_character = db.relationship("Character", secondary="character_armors", backref="armor")
 
@@ -445,7 +619,8 @@ class AdventureingGear(db.Model):
     name = db.Column(db.Text, nullable=False)
     category = db.Column(db.Text, nullable=False)
     cost = db.Column(db.Integer, nullable=False)
-    weight = db.Column(db.Integer, nullable=False)
+    weight = db.Column(db.Float, nullable=False)
+    details = db.Column(db.Text)
 
     to_character = db.relationship("Character", secondary="character_adventuring_gears", backref="adventuring_gear")
 
