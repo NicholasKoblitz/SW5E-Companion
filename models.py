@@ -3,7 +3,7 @@ from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-bctypt = Bcrypt()
+bcrypt = Bcrypt()
 
 def connect_db(app):
     """Connects the app to the database"""
@@ -24,6 +24,34 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
 
     character = db.relationship("Character", backref="user")
+
+    @classmethod
+    def signup(cls, username, password):
+        """Signs up the user"""
+
+        hashed_password = bcrypt.generate_password_hash(password).decode("UTF-8")
+
+        user = User(
+            username = username,
+            password = hashed_password
+        )
+
+        db.session.add(user)
+        return user
+
+    @classmethod
+    def authenticate(cls, username, password):
+
+
+        user = cls.query.filter_by(username=username).first
+
+        if user:
+            is_auth = bcrypt.check_password_hash(user.password, password)
+            if is_auth:
+                return user
+                
+        return False
+
 
 
 class Character(db.Model):
