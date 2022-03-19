@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Cost</th>
+                <th>Weight (lbs)</th>
+                <th  style="display: none;">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in gear %}
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>{{item.catrgory}}</td>
+                    <td>{{item.cost}}</td>
+                    <td>{{item.weight}}</td>
+                    <td style="display: none;">{{item.details}}</td>
+                    <td>
+                        <form action="/character/equipment/adventure-gear", method="POST">
+                            <input type="text" value="{{item.name}}" name="gear" hidden>
+                            <button type="submit">Select</button>
+                    </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <form action="/character/equipment">
+        <button>Back</button>
+    </form>
+
+
+{% endblock %}

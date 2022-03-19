@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Properties</th>
+                <th>Cost</th>
+                <th>Weight (lbs)</th>
+                <th>Damage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for weapon in weapons %}
+                <tr>
+                    <td>{{weapon.name}}</td>
+                    <td>{{weapon.type}}</td>
+                    <td>{{weapon.properties}}</td>
+                    <td>{{weapon.cost}}</td>
+                    <td>{{weapon.weight}}</td>
+                    <td>{{weapon.damage}}</td>
+                    <td>
+                        <form action="/character/equipment/weapons", method="POST">
+                            <input type="text" value="{{weapon.name}}" name="weapon" hidden>
+                            <button type="submit">Select</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <form action="/character/equipment">
+        <button>Back</button>
+    </form>
+{% endblock %}

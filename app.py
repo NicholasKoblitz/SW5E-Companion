@@ -185,7 +185,7 @@ def get_ability_scores():
     
     return render_template("ability_scores.html", form=form)
 
-@app.route("/character/description")
+@app.route("/character/description", methods=["GET", "POST"])
 def get_description():
     """Displays the character description form"""
 
@@ -217,6 +217,85 @@ def get_description():
 
         return redirect("/character/equipment")
     
-    return render_template("description.html")
+    return render_template("description.html", form=form)
+
+@app.route("/character/equipment")
+def get_equipment():
+    """Displays Equipment Page"""
+
+    return render_template('equipment.html')
+
+
+
+@app.route("/character/equipment/armors")
+def get_armor():
+    """Display Armors page"""
+
+    armors = Armor.query.all()
+
+    return render_template("armors.html", armors=armors)
+
+@app.route("/character/equipment/armors", methods=["POST"])
+def choose_armor():
+    """Saves armor choice to session"""
+
+    session["armor"] = None
+
+    if session["armor"] != None:
+
+        session.pop("armor")
+
+    session["armor"] = request.form["armor"]
+
+    return redirect("/character/equipment")
+
+
+@app.route("/character/equipment/weapons")
+def get_weapons():
+    """Displays Weapons Page"""
+
+    weapons = Weapon.query.all()
+
+    return render_template("weapons.html", weapons=weapons)
+
+
+@app.route("/character/equipment/weapons", methods=["POST"])
+def choose_weapon():
+    """Saves weapon choice to session"""
+
+    session["weapon"] = None
+
+    if session["weapon"] != None:
+
+        session.pop("weapon")
+
+    session["weapon"] = request.form["weapon"]
+
+    return redirect("/character/equipment")
+
+
+
+@app.route("/character/equipment/adventure-gear")
+def get_adventure_gear():
+    """Displays Adventure Gear Page"""
+
+    gear = AdventureingGear.query.all()
+
+    return render_template("adventure_gear.html", gear=gear)
+
+
+@app.route("/character/equipment/adventure-gear", methods=["POST"])
+def choose_gear():
+    """Saves adventure gear choice to session"""
+
+    session["gear"] = None
+
+    if session["gear"] != None:
+
+        session.pop("gear")
+
+    session["gear"] = request.form["gear"]
+
+    return redirect("/character/equipment")
 
 #--------------------------------------------------------------------------

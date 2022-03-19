@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2><a href="/character/equipment/armors">Armor</a></h2>
+
+    <p>{{session["armor"]}}</p>
+
+<h2><a href="/character/equipment/weapons">Weapons</a></h2>
+
+    <p>{{session["weapon"]}}</p>
+
+<h2><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
+
+    <p>{{session["gear"]}}</p>
+
+
+    <form action="/character/description">
+        <button>Back</button>
+    </form>
+{% endblock %}
