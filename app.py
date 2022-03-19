@@ -63,11 +63,11 @@ def login():
 
     if form.validate_on_submit():
 
-        user = User.authenticate(username=form.username.data, password=form.password.data)
+        user = User.authenticate(form.username.data, form.password.data)
 
         if user:
             session[USER_KEY] = user.id
-            redirect("/user/dashboard")
+            return redirect(f"/user/{user.id}")
 
     return render_template("login.html", form=form)
 
@@ -77,6 +77,7 @@ def logout():
 
    if USER_KEY in session:
        del session[USER_KEY]
+       return redirect("/")
 
 #--------------------------------------------------------------------------
 

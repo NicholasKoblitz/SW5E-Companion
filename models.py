@@ -43,7 +43,7 @@ class User(db.Model):
     def authenticate(cls, username, password):
 
 
-        user = cls.query.filter_by(username=username).first
+        user = cls.query.filter_by(username=username).first()
 
         if user:
             is_auth = bcrypt.check_password_hash(user.password, password)
