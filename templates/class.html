@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>{{_class.name}}</h2>
+
+    <h3><strong>Introduction</strong></h3>
+    {% for section in _class.intro %}
+        <p>{{section}}</p>
+    {% endfor %}
+
+    <hr>
+
+    <h3><strong>{{_class.description_1_name}}</strong></h3>
+    <p>{{_class.description_1_info}}</p>
+    <hr>
+    <h3><strong>{{_class.description_2_name}}</strong></h3>
+    <p>{{_class.description_2_info}}</p>
+
+    <hr>
+
+    <h3><strong>Class Features</strong></h3>
+    <p><strong>Hit Dice: </strong>{{_class.hit_dice}}</p>
+    <p><strong>Hit Points at 1st Level: </strong>{{_class.hit_points_at_1st_level}}</p>
+    <p><strong>Hit Points at Higher Levels: </strong>{{_class.hit_points_at_higher_levels}}</p>
+
+    <hr>
+
+    <h3><strong>Proficiecies</strong></h3>
+    <p><strong>Armor: </strong>{{_class.armor_proficiencies}}</p>
+    <p><strong>Weapons: </strong>{{_class.weapon_proficiencies}}</p>
+    <p><strong>Tools: </strong>{{_class.tool_proficiencies}}</p>
+    <p><strong>Saving Throws: </strong>{{_class.saving_throw_proficiencies}}</p>
+
+    <hr>
+
+    <h3><strong>Skills</strong></h3>
+    <p>{{_class.skills}}</p>
+
+    <hr>
+
+    <h3><strong>Starting Equipment</strong></h3>
+    {% for section in _class.starting_equipment %}
+        <p>{{section}}</p>
+    {% endfor %}
+
+    <hr>
+
+    <h3><strong>Variant Starting Wealth</strong></h3>
+    <p>In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If you do so, you receive no equipment from your class and background, and instead roll for your starting wealth using the criteria below: </p>
+    <p>{{_class.variant_starting_wealth}}</p>
+
+    <hr>
+
+    {% set lst = _class.description_by_level.items() %}
+    {% set keys = _class.description_by_level["2"].keys() %}
+
+        <table class="table-fixed">
+            <thead>
+                <tr>
+                    {% for item in keys %}
+                            <th>{{item}}</th>   
+                    {% endfor %}
+                </tr> 
+            </thead>
+            <tbody>
+                    {% for (num, section) in lst %} 
+                        <tr>
+                            <td>{{num}}</td>
+                            {% set vals = section.values() %}
+                                {% for item in vals %}
+                                <td>{{item}}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+
+    <form action="/character/classes">
+        <button>Back</button>
+    </form>
+
+    <form action="/character/ability-scores">
+        <button>Next</button>
+    </form>
+{% endblock %}

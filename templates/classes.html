@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Classes</h1>
+<ul>
+{% for class in classes %}
+
+    <li>
+        <a href="/character/classes/{{class.id}}">
+        {{class.name}}
+        </a>
+    </li>
+
+{% endfor %}
+</ul>
+{% endblock %}

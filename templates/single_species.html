@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2>{{specie.name}}</h2>
+
+    <h3><strong>Bio and Appeaerance</strong></h3>
+    <p>{{specie.bio_and_appeaerance}}</p>
+    <hr>
+    <h3><strong>Society and Culture</strong></h3>
+    <p>{{specie.society_and_culture}}</p>
+    <hr>
+    <h3><strong>Names</strong></h3>
+    <p>{{specie.names}}</p>
+    <hr>
+    <section>
+        <p><strong>Ability Score Increase: </strong>{{specie.ability_score_increase}}</p>
+        <p><strong>Age: </strong>{{specie.age}}</p>
+        <p><strong>Alignment: </strong>{{specie.alignment}}</p>
+        <p><strong>Size: </strong>{{specie.size}}</p>
+        <p><strong>Speed: </strong>{{specie.speed}}</p>
+        
+        {% for trait in specie.traits %}
+            <p><strong>{{trait.name}}: </strong>{{trait.details}}</p>
+        {% endfor %}
+        <p><strong>Languages: </strong>{{specie.languages}}</p>
+    </section>
+
+
+
+
+    <form action="/character/species">
+        <button>Back</button>
+    </form>
+
+    <form method="POST">
+        <input type="text" value="{{specie.name}}" name="specie" hidden>
+        <button>Next</button>
+    </form>
+
+{% endblock %}
