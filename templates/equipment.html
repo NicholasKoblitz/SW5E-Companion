@@ -2,6 +2,14 @@
 
 {% block content %}
 
+<form action="/character/description">
+    <button>Back</button>
+</form>
+
+<form action="/character/create-character", method="POST">
+    <button>Create</button>
+</form>
+
 <h2><a href="/character/equipment/armors">Armor</a></h2>
 
     <p>{{session["armor"]}}</p>
@@ -17,5 +25,9 @@
 
     <form action="/character/description">
         <button>Back</button>
+    </form>
+
+    <form action="/character/create-character", method="POST">
+        <button>Create</button>
     </form>
 {% endblock %}

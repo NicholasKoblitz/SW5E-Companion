@@ -65,6 +65,7 @@ class Character(db.Model):
     class_id = db.Column(db.Integer, db.ForeignKey("classes.id",ondelete="cascade"))
     species_id = db.Column(db.Integer, db.ForeignKey("species.id", ondelete="cascade"))
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id", ondelete="cascade"))
+    level = db.Column(db.Integer, nullable=False)
     xp_points = db.Column(db.Integer, nullable=False)
     strength = db.Column(db.Integer, nullable=False)
     str_saving_throw = db.Column(db.Integer, nullable=False)
@@ -100,15 +101,15 @@ class Character(db.Model):
     proficiency_bonus = db.Column(db.Integer, nullable=False)
     initiative = db.Column(db.Integer, nullable=False)
     armor_class = db.Column(db.Integer, nullable=False)
-    hit_ponits = db.Column(db.Integer, nullable=False)
-    hit_dice = db.Column(db.Integer, nullable=False)
+    hit_points = db.Column(db.Integer, nullable=False)
+    hit_dice = db.Column(db.Text, nullable=False)
     base_speed = db.Column(db.Text, nullable=False)
     vision = db.Column(db.Text, nullable=False)
     credits = db.Column(db.Integer, nullable=False)
-    weapons = db.Column(db.PickleType, nullable=False)
-    equipment = db.Column(db.PickleType)
-    proficiencies = db.Column(db.Text, nullable=False)
-    languages = db.Column(db.Text, nullable=False)
+    # weapons = db.Column(db.PickleType, nullable=False)
+    # equipment = db.Column(db.PickleType)
+    proficiencies = db.Column(db.PickleType, nullable=False)
+    languages = db.Column(db.PickleType, nullable=False)
 
 
     character_class = db.relationship("Class", backref="character")
@@ -427,7 +428,9 @@ class Specie(db.Model):
     alignment = db.Column(db.Text, nullable=False)
     size = db.Column(db.Text, nullable=False)
     speed = db.Column(db.Text, nullable=False)
+    speed_val = db.Column(db.Text, nullable=False)
     languages = db.Column(db.Text, nullable=False)
+    language_vals = db.Column(db.PickleType, nullable=False)
 
 
 class SpecieTraits(db.Model):
@@ -463,6 +466,7 @@ class Background(db.Model):
     tool_proficiencies = db.Column(db.Text)
     languages = db.Column(db.Text)
     equipment = db.Column(db.Text, nullable=False)
+    credits = db.Column(db.Integer, nullable=False)
     background_feature_name = db.Column(db.Text, nullable=False)
     background_feature_details = db.Column(db.Text, nullable=False)
 

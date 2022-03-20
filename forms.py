@@ -16,20 +16,35 @@ class LoginForm(FlaskForm):
 class AbilityScoresForm(FlaskForm):
     """Character Ability Scores Form"""
 
-    strength = SelectField("Strength", chocies=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
-    dexterity = SelectField("Dexterity", chocies=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
-    constitution = SelectField("Constitution", chocies=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
-    intelligence = SelectField('Intelligence', chocies=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
-    wisdom = SelectField("Wisdom", chocies=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
-    charisma = SelectField("Charisma", chocies=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+    strength = SelectField("Strength", choices=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+    dexterity = SelectField("Dexterity", choices=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+    constitution = SelectField("Constitution", choices=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+    intelligence = SelectField('Intelligence', choices=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+    wisdom = SelectField("Wisdom", choices=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+    charisma = SelectField("Charisma", choices=[(15,15), (14,14), (13,13), (12,12), (10,10), (8,8)])
+
 
 class DescriptionForm(FlaskForm):
     """Character Description Form"""
 
     name = StringField("Name")
     # image_url = StringField("Image URL")
-    alignment = SelectField("Choose Charatcer Alignment", choices=[("Lawful Light", "Lawful Light"), ("Neutral Light", "Neutral Light"), ("Chaotic Light", "Chaotic Light"), ("Lawful Balanced", "Lawful Balanced"), ("Neutral Balanced", "Neutral Balanced"), ("Chaotic Balanced", "Chaotic Balanced"), ("Lawful Dark", "Lawful Dark"), ("Neutral Dark", "Neutral Dark"), ("Chaotic Dark", "Chaotic Dark")])
-    background = SelectField("Backgrounds", choices=[("Agent", "Agent"), ("Bounty Hunter", "Bounty Hunter"), ("Criminal", "Criminal")])
+    alignment = SelectField("Choose Charatcer Alignment", choices=[
+        ("Lawful Light", "Lawful Light"), 
+        ("Neutral Light", "Neutral Light"), 
+        ("Chaotic Light", "Chaotic Light"), 
+        ("Lawful Balanced", "Lawful Balanced"), 
+        ("Neutral Balanced", "Neutral Balanced"), 
+        ("Chaotic Balanced", "Chaotic Balanced"), 
+        ("Lawful Dark", "Lawful Dark"), 
+        ("Neutral Dark", "Neutral Dark"), 
+        ("Chaotic Dark", "Chaotic Dark")
+        ])
+    background = SelectField("Backgrounds", choices=[
+        ("Agent", "Agent"), 
+        ("Bounty Hunter", "Bounty Hunter"), 
+        ("Criminal", "Criminal")
+        ])
     personality_trait = StringField("Personality Traits")
     ideal = StringField("Ideal")
     bond = StringField("Bond")

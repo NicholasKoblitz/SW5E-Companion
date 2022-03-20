@@ -1,5 +1,5 @@
 import os
-from random import seed
+from random import randint
 import re
 from flask import Flask, render_template, redirect, flash, session, g, request
 from models import db, connect_db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, SpecieTraits, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterConditions, Condition
@@ -19,7 +19,7 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', "kdkkdiieiei1242easndado
 
 connect_db(app)
 
-
+#------------------Before the first request------------------------------
 @app.before_request
 def add_user_to_g():
     """Checks if the user is loged in"""
@@ -29,6 +29,128 @@ def add_user_to_g():
 
     else:
         g.user = None
+
+
+def check_attrubutes(ability_score):
+    """Checks the value of the attrubutes"""
+
+    if ability_score == 1:
+        return -5
+    elif ability_score == 2 or ability_score == 3:
+        return -4
+    elif ability_score == 4 or ability_score == 5:
+        return -3
+    elif ability_score == 6 or ability_score == 7:
+        return -2
+    elif ability_score == 8 or ability_score == 9:
+        return -1
+    elif ability_score == 10 or ability_score == 11:
+        return 0
+    elif ability_score == 12 or ability_score == 13:
+        return 1
+    elif ability_score == 14 or ability_score == 15:
+        return 2
+    elif ability_score == 16 or ability_score == 17:
+        return 3
+    elif ability_score == 18 or ability_score == 19:
+        return 4
+    elif ability_score == 20 or ability_score == 21:
+        return 5
+    elif ability_score == 22 or ability_score == 23:
+        return 6
+    elif ability_score == 24 or ability_score == 25:
+        return 7
+    elif ability_score == 26 or ability_score == 27:
+        return 8
+    elif ability_score == 28 or ability_score == 29:
+        return 9
+    elif ability_score == 30:
+        return 10
+
+def check_proficiency(level):
+    """Finds charatcer's proficiency bonus"""
+
+    if level in range(1,5):
+        return 2
+    elif level in range(5,9):
+        return 3
+    elif level in range(9,13):
+        return 4
+    elif level in range(13,17):
+        return 5
+    elif level in range(17,21):
+        return 6
+
+
+def check_passive_perception(ability_score, level):
+    """Finds the character's passive perception"""
+
+    bonus = check_attrubutes(ability_score)
+    proficiency = check_proficiency(level)
+
+    value = 10 + (bonus + proficiency)
+    
+    return value
+
+def check_armor_class(ability_score):
+    """Finds character's armor class"""
+
+    bonus = check_attrubutes(ability_score)
+
+    value = 10 + bonus
+    
+    return value
+
+
+def find_class_roll_die(_class):
+    """Returns the highest dice value for teh given class"""
+
+    if _class == "Berserker":
+        return 12
+    elif _class == "Counsular":
+        return 6
+    elif _class == "Egineer":
+        return 8
+    elif _class == "Fighter":
+        return 10
+    elif _class == "Guardian":
+        return 10
+    elif _class == "Monk":
+        return 8
+    elif _class == "Operative":
+        return 8
+    elif _class == "Scholar":
+        return 8
+    elif _class == "Scout":
+        return 10
+    elif _class == "Sentinel":
+        return 8
+
+def roll_hit_dice(ability_score, level, _class):
+    """Finds the characters hit points"""
+
+    modifier = check_attrubutes(ability_score)
+    hit_points = 0
+    value = 0
+    class_die = find_class_roll_die(_class)
+
+    if level == 1:
+
+        hit_points = 10 + modifier
+        return hit_points
+
+    else:
+
+        hit_points = 10 + modifier
+        for i in range(2, level + 1):
+            value = randint(1, class_die)
+            hit_points = hit_points + value
+    
+    hit_points = hit_points + modifier
+
+    return hit_points
+        
+#--------------------------------------------------------------------------
 
 
 @app.route("/")
@@ -81,7 +203,7 @@ def logout():
 
 #--------------------------------------------------------------------------
 
-#------------------------User Route---------------------------------------
+#------------------------User Route----------------------------------------
 @app.route("/user/<int:user_id>")
 def display_user(user_id):
     """Displays the user's dashboard"""
@@ -158,7 +280,11 @@ def get_class(class_id):
 def save_class_choice(class_id):
     """Saves user's class choice"""
 
-    session["class"] = request.form["class"]
+    _class = request.form["class"]
+    level = request.form["level"]
+
+    session["class"] = _class
+    session["level"] = level
 
     return redirect("/character/ability-scores")
 
@@ -200,7 +326,7 @@ def get_description():
         # session["image_url"] = form.image_url.data or 
         session["alignment"] = form.alignment.data
         session["background"] = Background.query.filter_by(name = form.background.data).first()
-        session["personality_trait"] = form.personality_trait
+        session["personality_trait"] = form.personality_trait.data
         session["ideal"] = form.ideal.data
         session["bond"] = form.bond.data
         session["flaw"] = form.flaw.data
@@ -223,8 +349,8 @@ def get_description():
 def get_equipment():
     """Displays Equipment Page"""
 
-    return render_template('equipment.html')
 
+    return render_template('equipment.html')
 
 
 @app.route("/character/equipment/armors")
@@ -297,5 +423,79 @@ def choose_gear():
     session["gear"] = request.form["gear"]
 
     return redirect("/character/equipment")
+
+
+@app.route("/character/create-character", methods=["POST"])
+def get_create_character():
+    """Creates the user's character"""
+
+    _class = Class.query.filter_by(name=session["class"]).first()
+    background = Background.query.filter_by(name=session["background"]).first()
+    specie = Specie.query.filter_by(name=session["species"]).first()
+
+    character = Character(
+        user_id = g.user.id,
+        name = session["name"],
+        class_id = _class.id,
+        species_id = specie.id,
+        background_id = background.id,
+        level = int(session["level"]),
+        xp_points = 0,
+        strength = int(session["strength"]),
+        str_saving_throw = check_attrubutes(int(session["strength"])),
+        athletics = check_attrubutes(int(session["strength"])),
+        dexterity = int(session["dexterity"]),
+        dex_saving_throw = check_attrubutes(int(session["dexterity"])),
+        acrobatics = check_attrubutes(int(session["dexterity"])),
+        sleight_of_hand = check_attrubutes(int(session["dexterity"])),
+        stealth = check_attrubutes(int(session["dexterity"])),
+        constitution = int(session["constitution"]),
+        con_saving_thorw = check_attrubutes(int(session["constitution"])),
+        intelligence = int(session["intelligence"]),
+        int_saving_throw = check_attrubutes(int(session["intelligence"])),
+        investagation = check_attrubutes(int(session["intelligence"])),
+        lore = check_attrubutes(int(session["intelligence"])),
+        nature = check_attrubutes(int(session["intelligence"])),
+        piloting = check_attrubutes(int(session["intelligence"])),
+        technology = check_attrubutes(int(session["intelligence"])),
+        wisdom = int(session["wisdom"]),
+        wis_saving_throw = check_attrubutes(int(session['wisdom'])),
+        animal_handling = check_attrubutes(int(session['wisdom'])),
+        insight = check_attrubutes(int(session['wisdom'])),
+        medicine = check_attrubutes(int(session['wisdom'])),
+        perception = check_attrubutes(int(session['wisdom'])), 
+        survival = check_attrubutes(int(session['wisdom'])),
+        charisma = int(session["charisma"]),
+        cha_saving_throw = check_attrubutes(int(session["charisma"])),
+        deception = check_attrubutes(int(session["charisma"])),
+        intimidation = check_attrubutes(int(session["charisma"])),
+        performance = check_attrubutes(int(session["charisma"])),
+        persuasion = check_attrubutes(int(session["charisma"])),
+        passive_perception = check_passive_perception(int(session["wisdom"]), int(session["level"])),
+        proficiency_bonus = check_proficiency(int(session["level"])),
+        initiative = check_attrubutes(int(session["dexterity"])),
+        armor_class = check_armor_class(int(session["dexterity"])),
+        hit_points = roll_hit_dice(int(session["constitution"]), int(session['level']), session['class']),
+        hit_dice = _class.hit_dice,
+        base_speed = specie.speed_val,
+        vision = "Normal" if "Darvision" not in specie.traits else "Darkvision",
+        credits = background.credits,
+        proficiencies = [_class.armor_proficiencies, _class.weapon_proficiencies, _class.tool_proficiencies, background.skill_proficiencies, background.tool_proficiencies],
+        languages = specie.language_vals
+    )
+
+    db.session.add(character)
+    db.session.commit()
+
+    return redirect(f'/character/{character.id}')
+
+
+
+@app.route("/character/<int:character_id>")
+def get_character(character_id):
+
+    character = Character.query.get_or_404(character_id)
+
+    return render_template("overview.html", character=character)
 
 #--------------------------------------------------------------------------

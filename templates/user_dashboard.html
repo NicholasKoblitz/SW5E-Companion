@@ -6,6 +6,9 @@
 {{g.user.username}}
 
 
+{% for character in g.user.character %}
+    {{character.name}}
+{% endfor %}
 <form action="/character/species">
     <button>Add Character</button>
 </form>

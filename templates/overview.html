@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section>
+        <p><strong>Name: </strong>{{character.name}}</p>
+        <p><strong>Level: </strong>{{character.level}}</p>
+        <p><strong>Class: </strong>{{character.character_class.name}}</p>
+        <p><strong>Background: </strong>{{character.character_background.name}}</p>
+        <p><strong>Experince Points: </strong>{{character.xp_points}}</p>
+    </section>
+
+
+{% endblock %}

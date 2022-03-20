@@ -2,6 +2,18 @@
 
 {% block content %}
 
+    <form action="/character/classes">
+        <button>Back</button>
+    </form>
+
+    <form method="POST">
+        <input type="text" value="{{_class.name}}" name="class" hidden>
+        <label for="level"><strong>Class Level: </strong>
+        <input type="number" name="level" min="1" max="20">
+        </label>
+        <button>Next</button>
+    </form>
+
     <h2>{{_class.name}}</h2>
 
     <h3><strong>Introduction</strong></h3>
@@ -76,11 +88,5 @@
             </tbody>
         </table>
 
-    <form action="/character/classes">
-        <button>Back</button>
-    </form>
-
-    <form action="/character/ability-scores">
-        <button>Next</button>
-    </form>
+    
 {% endblock %}
