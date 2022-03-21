@@ -2,14 +2,19 @@
 
 {% block content %}
 
+<form action="/character/backgrounds">
+    <button>Back</button>
+</form>
+
 <form method="POST">
+    <button>Next</button>
     {{ form.hidden_tag() }}
 
     {% for field in form if field.widget.input_type != 'hidden' %}
         {{field.label}}
         {{field}}
     {% endfor %}
-    <button>Next</button>
+    
 </form>
 
 {% endblock %}
