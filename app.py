@@ -1,11 +1,15 @@
+from multiprocessing import reduction
 import os
 from random import randint
-import re
 from flask import Flask, render_template, redirect, flash, session, g, request
+from sqlalchemy.exc import IntegrityError
 from models import db, connect_db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, SpecieTraits, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterConditions, Condition
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
+armors = []
+weapons = []
+advent_gear = []
 
 app = Flask(__name__)
 
@@ -157,6 +161,7 @@ def roll_hit_dice(ability_score, level, _class):
 def home_page():
     """Displays the home page for the site"""
 
+
     return render_template("homepage.html", user = User)
 
 #-----------------------Sign Up and Login Routes-------------------------
@@ -168,11 +173,19 @@ def signup():
 
     if form.validate_on_submit():
 
-        user = User.signup(username=form.username.data, password=form.password.data)
-        db.session.commit()
-        session[USER_KEY] = user.id
+        try:
 
+            user = User.signup(username=form.username.data, password=form.password.data)
+            db.session.commit()
+
+        except IntegrityError:
+
+            flash("Username already taken", 'danger')
+            return render_template("signup.html", form=form)
+
+        session[USER_KEY] = user.id
         return redirect(f"/user/{user.id}")
+
     else:
         return render_template("signup.html", form=form)
        
@@ -349,7 +362,6 @@ def get_description():
 def get_equipment():
     """Displays Equipment Page"""
 
-
     return render_template('equipment.html')
 
 
@@ -365,13 +377,8 @@ def get_armor():
 def choose_armor():
     """Saves armor choice to session"""
 
-    session["armor"] = None
-
-    if session["armor"] != None:
-
-        session.pop("armor")
-
-    session["armor"] = request.form["armor"]
+    armors.append(request.form["armor"])
+    session["armor"] = armors
 
     return redirect("/character/equipment")
 
@@ -389,13 +396,9 @@ def get_weapons():
 def choose_weapon():
     """Saves weapon choice to session"""
 
-    session["weapon"] = None
+    weapons.append(request.form["weapon"])
 
-    if session["weapon"] != None:
-
-        session.pop("weapon")
-
-    session["weapon"] = request.form["weapon"]
+    session["weapon"] = weapons
 
     return redirect("/character/equipment")
 
@@ -414,13 +417,9 @@ def get_adventure_gear():
 def choose_gear():
     """Saves adventure gear choice to session"""
 
-    session["gear"] = None
+    advent_gear.append(request.form["gear"])
 
-    if session["gear"] != None:
-
-        session.pop("gear")
-
-    session["gear"] = request.form["gear"]
+    session["gear"] = advent_gear
 
     return redirect("/character/equipment")
 
@@ -487,6 +486,11 @@ def get_create_character():
     db.session.add(character)
     db.session.commit()
 
+    for item in list(session.keys()):
+        if item != USER_KEY and item != "csrf_token":
+           session.pop(item)
+
+
     return redirect(f'/character/{character.id}')
 
 
@@ -497,5 +501,17 @@ def get_character(character_id):
     character = Character.query.get_or_404(character_id)
 
     return render_template("overview.html", character=character)
+
+
+@app.route("/character/<int:character_id>/delete", methods=["POST"])
+def delete_character(character_id):
+    """Deletes a character"""
+
+    character = Character.query.filter_by(id=character_id).delete()
+    user = User.query.get(g.user.id)
+
+    db.session.commit()
+
+    return redirect(f"/user/{user.id}")
 
 #--------------------------------------------------------------------------
