@@ -3,7 +3,7 @@ import os
 from random import randint
 from flask import Flask, render_template, redirect, flash, session, g, request
 from sqlalchemy.exc import IntegrityError
-from models import db, connect_db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, SpecieTraits, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterConditions, Condition
+from models import db, connect_db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
@@ -293,11 +293,39 @@ def get_class(class_id):
 def save_class_choice(class_id):
     """Saves user's class choice"""
 
+    if not g.user:
+       redirect("/")
+
     _class = request.form["class"]
     level = request.form["level"]
 
     session["class"] = _class
     session["level"] = level
+
+    return redirect("/character/backgrounds")
+
+
+
+@app.route("/character/backgrounds")
+def get_backgrounds():
+    """Displays all backgrounds"""
+
+    if not g.user:
+       redirect("/")
+
+    backgrounds = Background.query.all()
+
+    return render_template("backgrounds.html", backgrounds=backgrounds)
+
+
+@app.route("/character/backgrounds/<int:background_id>", methods=["POST"])
+def save_background_choice(background_id):
+    """Saves user's background choice"""
+
+    if not g.user:
+       redirect("/")
+
+    background = request.form["background"]
 
     return redirect("/character/ability-scores")
 
@@ -338,7 +366,7 @@ def get_description():
         session["name"] = form.name.data
         # session["image_url"] = form.image_url.data or 
         session["alignment"] = form.alignment.data
-        session["background"] = Background.query.filter_by(name = form.background.data).first()
+        # session["background"] = Background.query.filter_by(name = form.background.data).first()
         session["personality_trait"] = form.personality_trait.data
         session["ideal"] = form.ideal.data
         session["bond"] = form.bond.data
@@ -362,12 +390,18 @@ def get_description():
 def get_equipment():
     """Displays Equipment Page"""
 
+    if not g.user:
+       redirect("/")
+
     return render_template('equipment.html')
 
 
 @app.route("/character/equipment/armors")
 def get_armor():
     """Display Armors page"""
+
+    if not g.user:
+       redirect("/")
 
     armors = Armor.query.all()
 
@@ -376,6 +410,7 @@ def get_armor():
 @app.route("/character/equipment/armors", methods=["POST"])
 def choose_armor():
     """Saves armor choice to session"""
+
 
     armors.append(request.form["armor"])
     session["armor"] = armors
@@ -386,6 +421,9 @@ def choose_armor():
 @app.route("/character/equipment/weapons")
 def get_weapons():
     """Displays Weapons Page"""
+
+    if not g.user:
+       redirect("/")
 
     weapons = Weapon.query.all()
 
@@ -408,6 +446,9 @@ def choose_weapon():
 def get_adventure_gear():
     """Displays Adventure Gear Page"""
 
+    if not g.user:
+       redirect("/")
+
     gear = AdventureingGear.query.all()
 
     return render_template("adventure_gear.html", gear=gear)
@@ -427,6 +468,10 @@ def choose_gear():
 @app.route("/character/create-character", methods=["POST"])
 def get_create_character():
     """Creates the user's character"""
+
+
+    if not g.user:
+       redirect("/")
 
     _class = Class.query.filter_by(name=session["class"]).first()
     background = Background.query.filter_by(name=session["background"]).first()
@@ -497,6 +542,9 @@ def get_create_character():
 
 @app.route("/character/<int:character_id>")
 def get_character(character_id):
+
+    if not g.user:
+       redirect("/")
 
     character = Character.query.get_or_404(character_id)
 
