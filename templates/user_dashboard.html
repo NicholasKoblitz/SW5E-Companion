@@ -3,12 +3,26 @@
 
 {% block content %}
 
-{{g.user.username}}
+<h2>{{g.user.username}}</h2>
 
+<section>
+    {% for character in g.user.character %}
 
-{% for character in g.user.character %}
-    {{character.name}}
-{% endfor %}
+        <div>
+            <ul>
+                <li><strong>Name: </strong>{{character.name}}</li>
+                <li><strong>Level: </strong>{{character.level}}</li>
+                <li><strong>Class: </strong>{{character.class}}</li>
+                <li><form action="/character/{{character.id}}/delete" method="POST">
+                        <button>Delete Character</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+    {% endfor %}
+</section>
+
 <form action="/character/species">
     <button>Add Character</button>
 </form>

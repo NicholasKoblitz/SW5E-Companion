@@ -4,18 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>SW5E Companion</title>
 </head>
 <body>
     
     <nav>
-        <h5>SW5E Companion</h5>
+        <h5><a href="/">SW5E Companion</a></h5>
         {% if g.user %}
             <a href="/logout">Logout</a>
+            <a href="/user/{{g.user.id}}">Dashboard</a>
         {% else %}
-            <a href="/signup">Sign-up</a> / <a href="/login">login</a>      
+            <a href="/signup">Sign-up</a> <a href="/login">login</a>      
         {% endif %}
     </nav>
+
+    <div>
+        {% for category, message in get_flashed_messages(with_categories=True) %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    </div>
 
     {% block content %}
     

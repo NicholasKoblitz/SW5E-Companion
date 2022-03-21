@@ -4,12 +4,15 @@
 
 <form method="POST">
     {{ form.hidden_tag() }}
-
+    <ul>
     {% for field in form if field.widget.input_type != 'hidden' %}
-        {{field.label}}
-        {{field}}
+       <li> {{field.label}} {{field}}</li> 
+        
     {% endfor %}
+    </ul>
     <button>Next</button>
 </form>
+
+
 
 {% endblock %}

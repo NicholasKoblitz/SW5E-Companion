@@ -2,6 +2,15 @@
 
 {% block content %}
 
+<form action="/character/species">
+    <button>Back</button>
+</form>
+
+<form method="POST">
+    <input type="text" value="{{specie.name}}" name="specie" hidden>
+    <button>Next</button>
+</form>
+
     <h2>{{specie.name}}</h2>
 
     <h3><strong>Bio and Appeaerance</strong></h3>
@@ -29,13 +38,6 @@
 
 
 
-    <form action="/character/species">
-        <button>Back</button>
-    </form>
-
-    <form method="POST">
-        <input type="text" value="{{specie.name}}" name="specie" hidden>
-        <button>Next</button>
-    </form>
+    
 
 {% endblock %}
