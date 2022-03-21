@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField
+from wtforms import StringField, PasswordField, SelectField, TextAreaField
 
 class SignupForm(FlaskForm):
     """User's sign up form"""
@@ -57,5 +57,5 @@ class DescriptionForm(FlaskForm):
     hair = StringField("Hair")
     eyes = StringField("Eyes")
     skin = StringField('Skin')
-    appearance = StringField('Appearance')
-    backstory = StringField("Backstory")
+    appearance = TextAreaField('Appearance')
+    backstory = TextAreaField("Backstory")
