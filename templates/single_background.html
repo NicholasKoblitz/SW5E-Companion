@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="/character/backgrounds">
+    <button>Back</button>
+</form>
+
+<form method="POST">
+    <input type="text" value="{{background.name}}" name="background" hidden>
+    <button>Next</button>
+</form>
+
+<h2>{{background.name}}</h2>
+
+<h3><strong>Introduction</strong></h3>
+<p>{{background.intro}}</p>
+
+<hr>
+
+<p><strong>Skill Proficiencies: </strong>{{background.skill_proficiencies}}</p>
+<p><strong>Languages: </strong>{{background.languages}}</p>
+<p><strong>Equipment: </strong>{{background.equipment}}</p>
+
+<hr>
+
+<h4><strong>{{background.background_feature_name}}</strong></h4>
+<p>{{background.background_feature_details}}</p>
+
+
+
+
+{% endblock %}

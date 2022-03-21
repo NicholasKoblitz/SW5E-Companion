@@ -1,4 +1,5 @@
 # from app import app
+from ctypes import alignment
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 
@@ -106,10 +107,23 @@ class Character(db.Model):
     base_speed = db.Column(db.Text, nullable=False)
     vision = db.Column(db.Text, nullable=False)
     credits = db.Column(db.Integer, nullable=False)
-    # weapons = db.Column(db.PickleType, nullable=False)
-    # equipment = db.Column(db.PickleType)
     proficiencies = db.Column(db.PickleType, nullable=False)
     languages = db.Column(db.PickleType, nullable=False)
+    alignment = db.Column(db.Text, nullable=False)
+    personality_traits = db.Column(db.Text)
+    ideal = db.Column(db.Text)
+    bond = db.Column(db.Text)
+    flaw = db.Column(db.Text)
+    gender = db.Column(db.Text)
+    place_of_birth = db.Column(db.Text)
+    age = db.Column(db.Text)
+    heigth = db.Column(db.Text)
+    weigth = db.Column(db.Text)
+    hair = db.Column(db.Text)
+    eyes = db.Column(db.Text)
+    skin = db.Column(db.Text)
+    appearance = db.Column(db.Text)
+    backstory = db.Column(db.Text)
 
 
     character_class = db.relationship("Class", backref="character")

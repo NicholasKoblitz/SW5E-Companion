@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Backgrounds</h1>
+
+<form action="/character/classes">
+    <button>Back</button>
+</form>
+
+<ul>
+{% for background in backgrounds %}
+
+    <li>
+        <a href="/character/backgrounds/{{background.id}}">
+        {{background.name}}
+        </a>
+    </li>
+
+{% endfor %}
+</ul>
+{% endblock %}

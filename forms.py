@@ -40,11 +40,11 @@ class DescriptionForm(FlaskForm):
         ("Neutral Dark", "Neutral Dark"), 
         ("Chaotic Dark", "Chaotic Dark")
         ])
-    background = SelectField("Backgrounds", choices=[
-        ("Agent", "Agent"), 
-        ("Bounty Hunter", "Bounty Hunter"), 
-        ("Criminal", "Criminal")
-        ])
+    # background = SelectField("Backgrounds", choices=[
+        # ("Agent", "Agent"), 
+        # ("Bounty Hunter", "Bounty Hunter"), 
+        # ("Criminal", "Criminal")
+        # ])
     personality_trait = StringField("Personality Traits")
     ideal = StringField("Ideal")
     bond = StringField("Bond")

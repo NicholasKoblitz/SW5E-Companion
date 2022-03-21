@@ -1,3 +1,4 @@
+from ctypes import alignment
 from multiprocessing import reduction
 import os
 from random import randint
@@ -212,7 +213,6 @@ def logout():
 
    if USER_KEY in session:
        del session[USER_KEY]
-       return redirect("/")
 
 #--------------------------------------------------------------------------
 
@@ -318,6 +318,14 @@ def get_backgrounds():
     return render_template("backgrounds.html", backgrounds=backgrounds)
 
 
+@app.route("/character/backgrounds/<int:background_id>")
+def get_single_background(background_id):
+    """Displays a single background"""
+
+    background = Background.query.get_or_404(background_id)
+
+    return render_template("single_background.html", background=background)
+
 @app.route("/character/backgrounds/<int:background_id>", methods=["POST"])
 def save_background_choice(background_id):
     """Saves user's background choice"""
@@ -326,6 +334,7 @@ def save_background_choice(background_id):
        redirect("/")
 
     background = request.form["background"]
+    session["background"] = background
 
     return redirect("/character/ability-scores")
 
@@ -364,9 +373,7 @@ def get_description():
     if form.validate_on_submit():
 
         session["name"] = form.name.data
-        # session["image_url"] = form.image_url.data or 
         session["alignment"] = form.alignment.data
-        # session["background"] = Background.query.filter_by(name = form.background.data).first()
         session["personality_trait"] = form.personality_trait.data
         session["ideal"] = form.ideal.data
         session["bond"] = form.bond.data
@@ -380,7 +387,7 @@ def get_description():
         session["eyes"] = form.eyes.data
         session["skin"] = form.skin.data
         session["appearance"] = form.appearance.data
-        session["background"] = form.background.data
+        session["backstory"] = form.backstory.data
 
         return redirect("/character/equipment")
     
@@ -525,7 +532,22 @@ def get_create_character():
         vision = "Normal" if "Darvision" not in specie.traits else "Darkvision",
         credits = background.credits,
         proficiencies = [_class.armor_proficiencies, _class.weapon_proficiencies, _class.tool_proficiencies, background.skill_proficiencies, background.tool_proficiencies],
-        languages = specie.language_vals
+        languages = specie.language_vals,
+        alignment = session["alignment"],
+        personality_traits = session["personality_trait"],
+        ideal = session["ideal"],
+        bond = session["bond"],
+        flaw = session["flaw"],
+        gender = session["gender"],
+        place_of_birth = session["place_of_birth"],
+        age = session["age"],
+        heigth = session["height"],
+        weigth = session["weight"],
+        hair = session["hair"],
+        eyes = session["eyes"],
+        skin = session["skin"],
+        appearance = session["appearance"],
+        backstory = session["backstory"]
     )
 
     db.session.add(character)
