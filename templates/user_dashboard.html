@@ -12,7 +12,7 @@
             <ul>
                 <li><strong>Name: </strong>{{character.name}}</li>
                 <li><strong>Level: </strong>{{character.level}}</li>
-                <li><strong>Class: </strong>{{character.class}}</li>
+                <li><strong>Class: </strong>{{character.character_class.name}}</li>
                 <li><form action="/character/{{character.id}}/delete" method="POST">
                         <button>Delete Character</button>
                     </form>
