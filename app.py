@@ -11,6 +11,7 @@ USER_KEY = "current_user"
 armors = []
 weapons = []
 advent_gear = []
+skills = []
 
 app = Flask(__name__)
 
@@ -181,7 +182,7 @@ def signup():
 
         except IntegrityError:
 
-            flash("Username already taken", 'danger')
+            flash("Username already taken")
             return render_template("signup.html", form=form)
 
         session[USER_KEY] = user.id
@@ -205,14 +206,17 @@ def login():
             session[USER_KEY] = user.id
             return redirect(f"/user/{user.id}")
 
+        flash("Invalid Password")
     return render_template("login.html", form=form)
 
 
 @app.route("/logout")
 def logout():
 
-   if USER_KEY in session:
+    if USER_KEY in session:
        del session[USER_KEY]
+
+    return redirect('/')
 
 #--------------------------------------------------------------------------
 
@@ -222,7 +226,8 @@ def display_user(user_id):
     """Displays the user's dashboard"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     user = User.query.get_or_404(user_id)
 
@@ -236,7 +241,8 @@ def get_species():
     """Displays species selection"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     species = Specie.query.all()
 
@@ -248,7 +254,8 @@ def get_specie(species_id):
     """Displays a single specie information"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     specie = Specie.query.get_or_404(species_id)
 
@@ -270,7 +277,8 @@ def get_classes():
     "Displays character classes"
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     classes = Class.query.all()
 
@@ -282,7 +290,8 @@ def get_class(class_id):
     """Displays a single class"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     _class = Class.query.get_or_404(class_id)
 
@@ -294,11 +303,42 @@ def save_class_choice(class_id):
     """Saves user's class choice"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     _class = request.form["class"]
     level = request.form["level"]
 
+    if _class in ["Berserker", "Counsular", "Fighter", "Guardian", "Monk"]:
+        skill_1 = request.form["0"]
+        skill_2 = request.form["1"]
+
+        skills.append(skill_1)
+        skills.append(skill_2)
+
+    elif _class == "Operative":
+        skill_1 = request.form["0"]
+        skill_2 = request.form["1"]
+        skill_3 = request.form["2"]
+        skill_4 = request.form["3"]
+
+        skills.append(skill_1)
+        skills.append(skill_2)
+        skills.append(skill_3)
+        skills.append(skill_4)
+
+
+    else:
+        skill_1 = request.form["0"]
+        skill_2 = request.form["1"]
+        skill_3 = request.form["2"]
+
+        skills.append(skill_1)
+        skills.append(skill_2)
+        skills.append(skill_3)
+
+
+    session["skills"] = skills
     session["class"] = _class
     session["level"] = level
 
@@ -311,7 +351,8 @@ def get_backgrounds():
     """Displays all backgrounds"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     backgrounds = Background.query.all()
 
@@ -331,10 +372,23 @@ def save_background_choice(background_id):
     """Saves user's background choice"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     background = request.form["background"]
     session["background"] = background
+
+    skill_1 = request.form["0"]
+    skill_2 = request.form["1"]
+    skill_3 = request.form["2"]
+
+    for skill in  skills:
+        if skill in [skill_1, skill_2, skill_3]:
+            flash(f"{skill} was already selected in Class selection")
+            background = Background.query.get_or_404(background_id)
+
+            return render_template("single_background.html", background=background)
+
 
     return redirect("/character/ability-scores")
 
@@ -344,7 +398,8 @@ def get_ability_scores():
     """Displays the character ability scores"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     form = AbilityScoresForm()
 
@@ -366,7 +421,8 @@ def get_description():
     """Displays the character description form"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     form = DescriptionForm()
 
@@ -398,7 +454,8 @@ def get_equipment():
     """Displays Equipment Page"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     return render_template('equipment.html')
 
@@ -408,7 +465,8 @@ def get_armor():
     """Display Armors page"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     armors = Armor.query.all()
 
@@ -430,7 +488,8 @@ def get_weapons():
     """Displays Weapons Page"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     weapons = Weapon.query.all()
 
@@ -454,7 +513,8 @@ def get_adventure_gear():
     """Displays Adventure Gear Page"""
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     gear = AdventureingGear.query.all()
 
@@ -478,7 +538,8 @@ def get_create_character():
 
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     _class = Class.query.filter_by(name=session["class"]).first()
     background = Background.query.filter_by(name=session["background"]).first()
@@ -532,6 +593,7 @@ def get_create_character():
         vision = "Normal" if "Darvision" not in specie.traits else "Darkvision",
         credits = background.credits,
         proficiencies = [_class.armor_proficiencies, _class.weapon_proficiencies, _class.tool_proficiencies, background.skill_proficiencies, background.tool_proficiencies],
+        skills = session["skills"],
         languages = specie.language_vals,
         alignment = session["alignment"],
         personality_traits = session["personality_trait"],
@@ -566,7 +628,8 @@ def get_create_character():
 def get_character(character_id):
 
     if not g.user:
-       redirect("/")
+        flash("Please Sign In")
+        return redirect("/")
 
     character = Character.query.get_or_404(character_id)
 

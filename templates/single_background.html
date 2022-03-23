@@ -8,6 +8,24 @@
 
 <form method="POST">
     <input type="text" value="{{background.name}}" name="background" hidden>
+
+    <label>Choose Skills</label>
+        {% for skill in range(0, background.skill_vals[0]) %}
+            <select name="{{skill}}">
+                    {% for item in background.skill_vals %}
+
+                    {% if item != background.skill_vals[0] %}
+                        {% set val = 0 %}
+
+                        <option value="{{item}}">{{item}}</option>
+
+                        {% set val = val + 1 %}
+                    {% endif %}
+                        
+                {% endfor %}
+            </select>
+        {% endfor %}
+
     <button>Next</button>
 </form>
 

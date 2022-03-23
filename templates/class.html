@@ -11,6 +11,25 @@
         <label for="level"><strong>Class Level: </strong>
         <input type="number" name="level" min="1" max="20">
         </label>
+
+
+        <label>Choose Skills</label>
+        {% for skill in range(0, _class.skill_vals[0]) %}
+            <select name="{{skill}}">
+                    {% for item in _class.skill_vals %}
+
+                    {% if item != _class.skill_vals[0] %}
+                        {% set val = 0 %}
+
+                        <option value="{{item}}">{{item}}</option>
+
+                        {% set val = val + 1 %}
+                    {% endif %}
+                        
+                {% endfor %}
+            </select>
+        {% endfor %}
+
         <button>Next</button>
     </form>
 
@@ -48,20 +67,6 @@
 
     <h3><strong>Skills</strong></h3>
     <p>{{_class.skills}}</p>
-
-    <!-- <form > 
-        <label>Choose Skills</label>
-        {% for skill in range(0, _class.skill_vals[0]) %}
-            <select>
-                {% for item in _class.skill_vals %}
-                    {% if item not _class.skill_vals[0] %}
-                        <option value="{{item}}">{{item}}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-        {% endfor %}
-        <button>Select</button>
-    </form> -->
 
     <hr>
 
