@@ -15,7 +15,7 @@ advent_gear = []
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql:///SW5E'))
+    os.environ.get('DATABASE_URL', 'postgresql:///sw5e'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False

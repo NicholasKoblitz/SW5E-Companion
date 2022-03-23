@@ -49,6 +49,20 @@
     <h3><strong>Skills</strong></h3>
     <p>{{_class.skills}}</p>
 
+    <!-- <form > 
+        <label>Choose Skills</label>
+        {% for skill in range(0, _class.skill_vals[0]) %}
+            <select>
+                {% for item in _class.skill_vals %}
+                    {% if item not _class.skill_vals[0] %}
+                        <option value="{{item}}">{{item}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        {% endfor %}
+        <button>Select</button>
+    </form> -->
+
     <hr>
 
     <h3><strong>Starting Equipment</strong></h3>

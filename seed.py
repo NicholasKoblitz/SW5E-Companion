@@ -21,7 +21,8 @@ berserker = Class(
     weapon_proficiencies="All vibroweapons, simple blasters",
     tool_proficiencies="None",
     saving_throw_proficiencies="Strength, Constitution",
-    skills="Choose two from Animal Handling, Athletics, Intimidation, NAture, Perception, or Survival",
+    skills="Choose two from Animal Handling, Athletics, Intimidation, Nature, Perception, or Survival",
+    skill_vals = [2, "Animal Handling", "Athletics", "Intimidation", "Nature", "Perceprion", "Survival"],
     starting_equipment=[
         "(a) A martial vibroweapon and a light or medium physical shield or (b) Two martial vibroweapons", 
         "(a) Two techaxes or (b) Two vibrospears", "An explorer's pack"
@@ -190,6 +191,7 @@ consular = Class(
     tool_proficiencies = "None",
     saving_throw_proficiencies = "Wisdom, Charisma",
     skills = "Choose two from Deception, Insight, Intimidation, Investigation, Lore, Medicine, and Persuasion",
+    skill_vals = [2, "Deception", "Insight", "Intimidation", "Investigation", "Lore", "Medicine", "Persuasion"],
     starting_equipment = [
         "(a) A simple lightweapon or (b) A simple vibroweapon",
         "(a) A scholar's pack (b) An explorer's pack (c) A diplomat's pack"
@@ -358,6 +360,7 @@ engineer = Class(
     tool_proficiencies = "Tinker's implements, one of our choice",
     saving_throw_proficiencies = "Constitution, Intelligence",
     skills = "Choose three from Investigation, Lore, Medicine, Nature, Piloting, and Technology",
+    skill_vals = [3, "Investigation", "Lore", "Medicine", "Nature", "Piloting", "Technology"],
     starting_equipment = [
         "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
         "(a) a dungeoneer’s pack or (b) an explorer’s pack",
@@ -567,6 +570,7 @@ fighter = Class(
     tool_proficiencies = "None",
     saving_throw_proficiencies = "Strength, Constitution",
     skills = 'Choose two skills from Acrobatics, Animal Handling, Athletics, Lore, Insight, Intimidation, Perception, and Survival',
+    skill_vals = [2, "Acrobatics", "Animal Handling", "Athletics", "Lore", "Insight", "Indimidation", "Perception", "Survival"],
     starting_equipment = [
         "(a) mesh armor or (b) combat suit, blaster rifle, and two power cells",
         "(a) a martial vibroweapon and a light or medium physical shield or (b) two martial vibroweapons",
@@ -737,6 +741,7 @@ guardian = Class(
     tool_proficiencies = "None",
     saving_throw_proficiencies = "Constitution, Charisma",
     skills = "Choose two from Acrobatics, Athletics, Deception, Insight, Intimidation, Lore, Perception, Persuasion, and Piloting",
+    skill_vals = [2, "Acrobatics", "Athletics", "Deception", "Insight", "Indimidation", "Lore", "Perception", "Persuasion", "Piloting"],
     starting_equipment = [
         "(a) a lightweapon or vibroweapon and a light or medium physical shield or (b) two lightweapons or vibroweapons",
         "(a) combat suit and a light physical shield or (b) mesh armor",
@@ -927,6 +932,7 @@ monk = Class(
     tool_proficiencies = "None",
     saving_throw_proficiencies = "Strength, Dexterity",
     skills = "Choose two from Acrobatics, Athletics, Insight, Lore, Perception, and Stealth",
+    skill_vals = [2, "Acrobatics", "Athletics", "Insight", "Lore", "Perception", "Stealth"],
     starting_equipment = [
         "(a) a chakram, (b) a techblade, (c) a simple vibroweapon, or (d) a simple blaster and a power cell",
         "(a) a dungeoneer’s pack or (b) an explorer’s pack",
@@ -1116,6 +1122,7 @@ operative = Class(
     tool_proficiencies = "One specialist's kit of your choice",
     saving_throw_proficiencies = "Dexterity, Intelligence",
     skills = "Choose any four",
+    skill_vals = [4, "Athletics", "Acrobatics", "Sleight of Hand", "Stealth", "Investigation", "Lore", "Nature", "Piloting", "Technology", "Animal Handling", "Insight", "Medicine", "Perception", "Survival", "Deception", "Intimidation", "Performance", "Persuasion"],
     starting_equipment = [
         "(a) a vibrorapier, (b) a hidden blade, (c) a simple blaster and a power cell, or (d) a simple vibroweapon",
         "a) a simple blaster and two power cells or (b) a simple vibroweapon and a light physical shield",
@@ -1267,6 +1274,7 @@ scholar = Class(
     tool_proficiencies = "Any one",
     saving_throw_proficiencies = "Wisdom, Intelligence",
     skills = "Choose three from Deception, Insight, Intimidation, Investigation, Lore, Medicine, Nature, Persuasion, and Survival",
+    skill_vals = [3, "Deception", "Insight", "Intimidation", "Investigation", "Lore", "Medicine", "Nature", "Persuasion", "Survival"],
     starting_equipment = [
         "(a) a simple vibroweapon or (b) a simple blaster and two power cells",
         "(a) scholar’s pack or (b) explorer’s pack",
@@ -1457,6 +1465,7 @@ scout = Class(
     tool_proficiencies = "None",
     saving_throw_proficiencies = "Strength, Dexterity",
     skills = "Choose three from Animal Handling, Athletics, Insight, Investigation, Perception, Piloting, Stealth, Survival, and Technology",
+    skill_vals = [3, "Animal Handling", "Athletics", "Insight", "Investigation", "Perception", "Piloting", "Stealth", "Survival", "Technology"],
     starting_equipment = [
         "(a) mesh armor or (b) combat suit, blaster carbine, and two power cells",
         "(a) a simple vibroweapon and a light or medium physical shield or (b) two simple vibroweapons",
@@ -1648,6 +1657,7 @@ sentinel = Class(
     tool_proficiencies = "One specialist's kit of your choice",
     saving_throw_proficiencies = "Dexterity, Charisma",
     skills = "Choose three from Acrobatics, Animal Handling, Insight, Intimidation, Perception, Persuasion, Piloting, Stealth, and Technology",
+    skill_vals = [3, "Acrobatics", "Animal Handling", "Insight", "Intimidation", "Perception", "Persuasion", "Piloting", "Stealth", "Technology"],
     starting_equipment = [
         "(a) two simple lightweapons or vibroweapons or (b) one martial lightweapon or vibroweapon with which you are proficient",
         "(a) a dungeoneer’s pack or (b) an explorer’s pack",

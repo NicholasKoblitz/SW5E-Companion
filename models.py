@@ -154,6 +154,7 @@ class Class(db.Model):
     tool_proficiencies = db.Column(db.Text, nullable=False)
     saving_throw_proficiencies = db.Column(db.PickleType, nullable=False)
     skills = db.Column(db.Text, nullable=False)
+    skill_vals = db.Column(db.PickleType, nullable=False)
     starting_equipment = db.Column(db.PickleType, nullable=False)
     variant_starting_wealth = db.Column(db.Text, nullable=False)
     description_by_level = db.Column(db.PickleType, nullable=False)
