@@ -11,7 +11,6 @@ USER_KEY = "current_user"
 armors = []
 weapons = []
 advent_gear = []
-skills = []
 
 app = Flask(__name__)
 
@@ -306,15 +305,26 @@ def save_class_choice(class_id):
         flash("Please Sign In")
         return redirect("/")
 
+    class_ = Class.query.get(class_id)
+
     _class = request.form["class"]
     level = request.form["level"]
+    skills = []
+
 
     if _class in ["Berserker", "Counsular", "Fighter", "Guardian", "Monk"]:
         skill_1 = request.form["0"]
         skill_2 = request.form["1"]
 
+
+        if skill_1 == skill_2:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
+
+
         skills.append(skill_1)
         skills.append(skill_2)
+
 
     elif _class == "Operative":
         skill_1 = request.form["0"]
@@ -327,6 +337,18 @@ def save_class_choice(class_id):
         skills.append(skill_3)
         skills.append(skill_4)
 
+        if skills.count(skill_1) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
+        elif skills.count(skill_2) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
+        elif skills.count(skill_3) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
+        elif skills.count(skill_4) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
 
     else:
         skill_1 = request.form["0"]
@@ -337,6 +359,15 @@ def save_class_choice(class_id):
         skills.append(skill_2)
         skills.append(skill_3)
 
+        if skills.count(skill_1) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
+        elif skills.count(skill_2) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
+        elif skills.count(skill_3) > 1:
+            flash(f"You selected the same skill. Please select again")
+            return redirect(f"/character/classes/{class_id}")
 
     session["skills"] = skills
     session["class"] = _class
@@ -374,16 +405,15 @@ def save_background_choice(background_id):
     if not g.user:
         flash("Please Sign In")
         return redirect("/")
-
+    skills = []
     background = request.form["background"]
     session["background"] = background
 
     skill_1 = request.form["0"]
     skill_2 = request.form["1"]
-    skill_3 = request.form["2"]
 
     for skill in  skills:
-        if skill in [skill_1, skill_2, skill_3]:
+        if skill in [skill_1, skill_2] or skill_1 == skill_2:
             flash(f"{skill} was already selected in Class selection")
             background = Background.query.get_or_404(background_id)
 
@@ -405,12 +435,29 @@ def get_ability_scores():
 
     if form.validate_on_submit():
 
-        session['strength'] = form.strength.data
-        session["dexterity"] = form.dexterity.data
-        session["constitution"] = form.constitution.data
-        session["intelligence"] = form.intelligence.data
-        session["wisdom"] = form.wisdom.data
-        session["charisma"] = form.charisma.data
+        abilities = [form.strength.data, form.dexterity.data, form.constitution.data, form.intelligence.data, form.wisdom.data, form.charisma.data]
+        # session['strength'] = form.strength.data
+        # session["dexterity"] = form.dexterity.data
+        # session["constitution"] = form.constitution.data
+        # session["intelligence"] = form.intelligence.data
+        # session["wisdom"] = form.wisdom.data
+        # session["charisma"] = form.charisma.data
+
+        for ability in abilities:
+            
+            for ability in abilities:
+                count = abilities.count(ability)
+
+                if count > 1:
+                    flash('You selected two or more abilities with the same score!')
+                    return render_template("ability_scores.html", form=form)
+
+        session['strength'] = abilities[0]
+        session["dexterity"] = abilities[1]
+        session["constitution"] = abilities[2]
+        session["intelligence"] = abilities[3]
+        session["wisdom"] = abilities[4]
+        session["charisma"] = abilities[5]
 
         return redirect("/character/description")
     
