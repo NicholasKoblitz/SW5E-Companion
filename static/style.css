@@ -1,0 +1,94 @@
+:root {
+  --main-bg-color: #2c394b;
+  --border-color: #ff4c29;
+  --text-color: #eae7ea;
+  --warning-color: #c02304;
+  --secondary-color: #334756;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  * Flash Messaging */ #flash {
+    background-color: var(--warning-color);
+    color: var(--text-color);
+    position: relative;
+    margin: 0 auto;
+  }
+
+  /* Nav Bar */
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid var(--border-color);
+    background-color: var(--border-color);
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+  .links {
+    position: relative;
+    top: 1.25em;
+    right: 2em;
+  }
+
+  nav h4 {
+    position: relative;
+    left: 2em;
+  }
+
+  /* ---------------------------------------------------------- */
+
+  /* Forms */
+
+  .form-layout form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    border: 5px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 1em;
+  }
+
+  /* ---------------------------------------------------------- */
+
+  /* Species */
+
+  .selection {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 100px;
+    column-gap: 3em;
+    row-gap: 3em;
+  }
+
+  .selection h3 a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+  .selection-list {
+    border: 4px solid var(--secondary-color);
+    border-radius: 20px;
+    padding: 1em;
+    text-align: center;
+  }
+}

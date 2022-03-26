@@ -7,15 +7,16 @@
     <button>Back</button>
 </form>
 
-<ul>
-{% for class in classes %}
+<div class="selection">
+    {% for class in classes %}
+        <div class="selection-list">
+            <h3><a href="/character/classes/{{class.id}}">{{class.name}}</a></h3>
 
-    <li>
-        <a href="/character/classes/{{class.id}}">
-        {{class.name}}
-        </a>
-    </li>
+        </div>
+        
 
-{% endfor %}
-</ul>
+    {% endfor %}
+</div>
+
+
 {% endblock %}

@@ -4,7 +4,8 @@
 {% block content %}
 
 <h2>Sign Up</h2>
-<form method="POST">
+<div class="form-layout">
+  <form method="POST">
     {{ form.hidden_tag() }}
 
     {% for field in form if field.widget.input_type != 'hidden' %}
@@ -15,7 +16,9 @@
         {% endfor %}
     {% endfor %}
     <button>Join</button>
-</form>
+  </form>
+</div>
+
 
 
 {% endblock %}

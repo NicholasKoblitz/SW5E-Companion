@@ -2,17 +2,18 @@
 
 {% block content %}
     <h1>Species</h1>
-    <ul>
-    {% for specie in species %}
 
-        <li>
-            <a href="/character/species/{{specie.id}}">
-            {{specie.name}}
-            </a>
-        </li>
+    <div class="selection">
+        {% for specie in species %}
+            <div class="selection-list">
+                <h3><a href="/character/species/{{specie.id}}">{{specie.name}}</a></h3>
 
-    {% endfor %}
-    </ul>
+            </div>
+            
+
+        {% endfor %}
+    </div>
+
 {% endblock %}
 
 

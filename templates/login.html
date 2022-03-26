@@ -4,15 +4,20 @@
 {% block content %}
 
 <h2>Login</h2>
-<form method="POST">
-    {{ form.hidden_tag() }}
-
-    {% for field in form if field.widget.input_type != 'hidden' %}
-        {{field.label}}
-        {{field}}
-    {% endfor %}
-    <button>Login</button>
-</form>
+<div class="form-layout">
+    <form method="POST">
+      {{ form.hidden_tag() }}
+  
+      {% for field in form if field.widget.input_type != 'hidden' %}
+          {{field.label}}
+          {{field}}
+          {% for error in field.errors %}
+            <span>{{ error }}</span>
+          {% endfor %}
+      {% endfor %}
+      <button>Login</button>
+    </form>
+  </div>
 
 
 {% endblock %}
