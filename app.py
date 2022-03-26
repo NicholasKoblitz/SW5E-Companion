@@ -1,8 +1,8 @@
-from ctypes import alignment
-from multiprocessing import reduction
+from imghdr import tests
 import os
 from random import randint
 from flask import Flask, render_template, redirect, flash, session, g, request
+from jinja2 import tests
 from sqlalchemy.exc import IntegrityError
 from models import db, connect_db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm

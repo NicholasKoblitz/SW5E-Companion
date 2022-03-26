@@ -33,75 +33,82 @@
         <button>Next</button>
     </form>
 
+
+
     <h2>{{_class.name}}</h2>
 
-    <h3><strong>Introduction</strong></h3>
-    {% for section in _class.intro %}
-        <p>{{section}}</p>
-    {% endfor %}
+    <section class="intro">
+            <h3><strong class="intro-title">Introduction</strong></h3>
+        {% for section in _class.intro %}
+            <p class="intro-para">{{section}}</p>
+        {% endfor %}
+    </section>
+    
 
-    <hr>
+    <section class="intro">
+        <h3><strong class="intro-title">{{_class.description_1_name}}</strong></h3>
+        <p class="intro-para">{{_class.description_1_info}}</p>
+        <hr>
+        <h3><strong class="intro-title">{{_class.description_2_name}}</strong></h3>
+        <p class="intro-para">{{_class.description_2_info}}</p>
+    </section>
 
-    <h3><strong>{{_class.description_1_name}}</strong></h3>
-    <p>{{_class.description_1_info}}</p>
-    <hr>
-    <h3><strong>{{_class.description_2_name}}</strong></h3>
-    <p>{{_class.description_2_info}}</p>
+    <section class="intro">
+        <h3  class="intro-title"><strong>Class Features</strong></h3>
+        <p class="feature"><strong class="feature-title">Hit Dice:</strong> {{_class.hit_dice}}</p>
+        <p class="feature"><strong class="feature-title">Hit Points at 1st Level:</strong> {{_class.hit_points_at_1st_level}}</p>
+        <p class="feature"><strong class="feature-title">Hit Points at Higher Levels:</strong> {{_class.hit_points_at_higher_levels}}</p>
+    </section>
 
-    <hr>
+    <section class="intro">
+        <h3 class="intro-title"><strong>Proficiecies</strong></h3>
+        <p class="feature"><strong class="feature-title">Armor:</strong> {{_class.armor_proficiencies}}</p>
+        <p class="feature"><strong class="feature-title">Weapons:</strong >{{_class.weapon_proficiencies}}</p>
+        <p class="feature"><strong class="feature-title">Tools:</strong> {{_class.tool_proficiencies}}</p>
+        <p class="feature"><strong class="feature-title">Saving Throws:</strong> {{_class.saving_throw_proficiencies}}</p>
 
-    <h3><strong>Class Features</strong></h3>
-    <p><strong>Hit Dice: </strong>{{_class.hit_dice}}</p>
-    <p><strong>Hit Points at 1st Level: </strong>{{_class.hit_points_at_1st_level}}</p>
-    <p><strong>Hit Points at Higher Levels: </strong>{{_class.hit_points_at_higher_levels}}</p>
+    </section>
+        
+    <section class=intro>
+        <h3 class="intro-title"><strong>Skills</strong></h3>
+        <p class="feature">{{_class.skills}}</p>
+    </section>
 
-    <hr>
+    <section class="intro">
+        <h3 class="intro-title"><strong>Starting Equipment</strong></h3>
+        {% for section in _class.starting_equipment %}
+            <p class="feature">{{section}}</p>
+        {% endfor %}
+    </section>
 
-    <h3><strong>Proficiecies</strong></h3>
-    <p><strong>Armor: </strong>{{_class.armor_proficiencies}}</p>
-    <p><strong>Weapons: </strong>{{_class.weapon_proficiencies}}</p>
-    <p><strong>Tools: </strong>{{_class.tool_proficiencies}}</p>
-    <p><strong>Saving Throws: </strong>{{_class.saving_throw_proficiencies}}</p>
-
-    <hr>
-
-    <h3><strong>Skills</strong></h3>
-    <p>{{_class.skills}}</p>
-
-    <hr>
-
-    <h3><strong>Starting Equipment</strong></h3>
-    {% for section in _class.starting_equipment %}
-        <p>{{section}}</p>
-    {% endfor %}
-
-    <hr>
-
-    <h3><strong>Variant Starting Wealth</strong></h3>
-    <p>In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If you do so, you receive no equipment from your class and background, and instead roll for your starting wealth using the criteria below: </p>
-    <p>{{_class.variant_starting_wealth}}</p>
-
-    <hr>
+    <section class="intro">
+        <h3 class="intro-title"><strong>Variant Starting Wealth</strong></h3>
+        <p>In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If you do so, you receive no equipment from your class and background, and instead roll for your starting wealth using the criteria below: </p>
+        <p class="feature">{{_class.variant_starting_wealth}}</p>
+    </section>
+   
 
     {% set lst = _class.description_by_level.items() %}
     {% set keys = _class.description_by_level["2"].keys() %}
 
-        <table class="table-fixed">
+        <table class="table">
             <thead>
                 <tr>
+                    <th>Level</th>
                     {% for item in keys %}
                             <th>{{item}}</th>   
                     {% endfor %}
                 </tr> 
             </thead>
             <tbody>
+                {% set i = [] %}
                     {% for (num, section) in lst %} 
                         <tr>
                             <td>{{num}}</td>
                             {% set vals = section.values() %}
                                 {% for item in vals %}
                                 <td>{{item}}</td>
-                            {% endfor %}
+                                {% endfor %}
                         </tr>
                     {% endfor %}
             </tbody>

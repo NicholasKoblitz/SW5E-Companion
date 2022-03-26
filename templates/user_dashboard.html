@@ -5,26 +5,26 @@
 
 <h2>{{g.user.username}}</h2>
 
-<section>
+<form action="/character/species" class="dash-form">
+    <button class="btn">Add Character</button>
+</form>
+
+<section class="character-list">
     {% for character in g.user.character %}
+    
+        <a href="/character/{{character.id}}">
+            <div class="character-tile">
+                <p><strong>Name: </strong>{{character.name}}</p>
+                <p><strong>Level: </strong>{{character.level}}</p>
+                <p><strong>Class: </strong>{{character.character_class.name}}</p>
+                <p><strong>Species: </strong>{{character.character_species.name}}</p>
+            </div>
+        </a>
 
-        <div>
-            <ul>
-                <li><strong>Name: </strong>{{character.name}}</li>
-                <li><strong>Level: </strong>{{character.level}}</li>
-                <li><strong>Class: </strong>{{character.character_class.name}}</li>
-                <li><form action="/character/{{character.id}}/delete" method="POST">
-                        <button>Delete Character</button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-
+        
     {% endfor %}
 </section>
 
-<form action="/character/species">
-    <button>Add Character</button>
-</form>
+
 
 {% endblock %}

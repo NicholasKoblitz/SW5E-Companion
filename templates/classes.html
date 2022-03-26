@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Classes</h1>
 
-<form action="/character/species">
-    <button>Back</button>
-</form>
+<a href="/character/species" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+
+<h1 class="title">Classes</h1>
 
 <div class="selection">
     {% for class in classes %}
