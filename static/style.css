@@ -21,11 +21,15 @@ body {
 }
 
 @media (max-width: 600px) {
-  * Flash Messaging */ #flash {
+  #flash {
     background-color: var(--warning-color);
+    /* border: 3px solid var(--warning-color); */
     color: var(--text-color);
     position: relative;
+    top: 2em;
     margin: 0 auto;
+    padding: 0;
+    text-align: center;
   }
 
   .btn {
@@ -50,6 +54,8 @@ body {
   nav a {
     text-decoration: none;
     color: var(--text-color);
+    font-family: "Major Mono Display", monospace;
+    font-size: 14px;
   }
 
   .links {
@@ -60,7 +66,7 @@ body {
 
   nav h4 {
     position: relative;
-    left: 2em;
+    left: 1em;
   }
 
   /* ---------------------------------------------------------- */
@@ -78,9 +84,35 @@ body {
     padding: 1em;
   }
 
+  .form-layout label {
+    font-family: "Major Mono Display", monospace;
+  }
+
   .form-layout input {
-    border: none;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
+    outline: none;
+    font-family: "Quicksand", sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  .form-layout select {
+    outline: none;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: "Quicksand", sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  .form-layout textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    outline: none;
+    font-family: "Quicksand", sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
   }
 
   .form-layout form button:active {
@@ -93,6 +125,20 @@ body {
   .title {
     font-family: "Major Mono Display", monospace;
   }
+
+  .title a {
+    text-decoration: none;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25em;
+  }
+
+  .title-class {
+    font-family: "Major Mono Display", monospace;
+    position: relative;
+    top: 1em;
+  }
+
   .selection {
     display: grid;
     grid-template-columns: auto auto;
@@ -183,6 +229,40 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
+.feature-left {
+  /* padding-left: -0.5em; */
+
+  padding-right: 0.25em;
+  margin: 1em 0 2em 0;
+  line-height: 1.5em;
+  font-family: "Quicksand", sans-serif;
+}
+
+.intro-left {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.intro-title-center {
+  position: relative;
+  left: 3.5em;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.25em;
+  font-family: "Major Mono Display", monospace;
+}
+
+.class-level {
+  position: absolute;
+  top: 3.2em;
+}
+
+.class-level input:focus {
+  outline: none;
+}
+
 /* Buttons */
 
 .next {
@@ -190,8 +270,18 @@ body {
   background-color: var(--main-bg-color);
   color: var(--text-color);
   position: relative;
-  left: 5em;
+  left: 7em;
   bottom: 0.2em;
+  font-size: 21px;
+}
+
+.next-class {
+  border: none;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  position: absolute;
+  right: 2em;
+  top: 4em;
   font-size: 21px;
 }
 
@@ -199,15 +289,48 @@ body {
   text-decoration: none;
   color: var(--text-color);
   position: relative;
-  right: 5em;
+  right: 7em;
   top: 1.25em;
   font-size: 20px;
+}
+
+.back-class {
+  text-decoration: none;
+  color: var(--text-color);
+  position: absolute;
+  left: 2em;
+  top: 4em;
+  font-size: 21px;
 }
 
 /* Table */
 
 .table {
-  /* margin: 2em; */
-  border: 1px solid var(--border-color);
   border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  font-size: 10px;
+}
+
+.table thead {
+  background-color: #da4224;
+  padding: 0;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--secondary-color);
+  padding: 0;
+}
+
+.table button {
+  background-color: var(--main-bg-color);
+  border: none;
+  color: var(--secondary-color);
+  width: 2em;
+}
+
+.table tbody tr:nth-child(even) button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: var(--main-bg-color);
 }

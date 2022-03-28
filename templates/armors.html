@@ -1,48 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
-        <table>
-            <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Properties</th>
-                        <th>Cost</th>
-                        <th>Weight (lbs)</th>
-                        <th>Height</th>
-                        <th>Armor Class</th>
-                        <th>Stealth</th>
-                        <th style="display: none;">Details</th>
-                    </tr>
-            </thead>
-            <tbody>
-                    {% for armor in armors %}
-                        <tr>
-                            <td>{{armor.name}}</td>>
-                            <td>{{armor.type}}</td>>
-                            <td>{{armor.properties}}</td>>
-                            <td>{{armor.cost}}</td>>
-                            <td>{{armor.weight}}</td>>
-                            <td>{{armor.height}}</td>>
-                            <td>{{armor.armor_class}}</td>>
-                            <td>{{armor.stealth}}</td>>
-                            <td style="display: none;">{{armor.details}}</td>>
-                            <td>
-                                <form action="/character/equipment/armors", method="POST">
 
-                                    <input type="text" value="{{armor.name}}" name="armor" hidden>
-                                    <button type="submit">Select</button>
-                                </form>
+<a href="/character/equipment" class="back"><i class="fa-solid fa-arrow-left"></i></a>
 
-                            </td>
-                        </tr>
-                    {% endfor %}
-            </tbody>
-        </table>
-
-    <form action="/character/equipment">
-        <button>Back</button>
-    </form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Properties</th>
+            <th>Cost</th>
+            <th>Weight (lbs)</th>
+            <th>Armor Class</th>
+            <th>Stealth</th>
+            <th></th>
+            <th style="display: none;">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for armor in armors %}
+            <tr>
+                <td>{{armor.name}}</td>>
+                <td>{{armor.type}}</td>>
+                <td>{{armor.properties}}</td>>
+                <td>{{armor.cost}}</td>>
+                <td>{{armor.weight}}</td>>
+                <td>{{armor.armor_class}}</td>>
+                <td>{{armor.stealth}}</td>>
+                <td style="display: none;">{{armor.details}}</td>>
+                <td>
+                    <form action="/character/equipment/armors", method="POST">
+                        <input type="text" value="{{armor.name}}" name="armor" hidden>
+                        <button type="submit"><i class="fa-solid fa-square"></i></button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

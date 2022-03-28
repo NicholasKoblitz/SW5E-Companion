@@ -2,36 +2,29 @@
 
 {% block content %}
 
-<form action="/character/description">
-    <button>Back</button>
-</form>
+<a href="/character/description" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
+
 
 <form action="/character/create-character", method="POST">
-    <button>Create</button>
+    <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
+
 </form>
 
-<h2><a href="/character/equipment/armors">Armor</a></h2>
+<h2 class="title"><a href="/character/equipment/armors">Armor</a></h2>
 
-    <ul>
         {% for item in session["armor"] %}
-            <li>{{item}} <button>X</button></li>
+            <p class="feature">{{item}}</p>
         {% endfor %}
-    </ul>
 
-<h2><a href="/character/equipment/weapons">Weapons</a></h2>
+<h2 class="title"><a href="/character/equipment/weapons">Weapons</a></h2>
 
-    <ul>
         {% for item in session["weapon"] %}
-            <li>{{item}} <button>X</button></li>
+        <p class="feature">{{item}}</p>
         {% endfor %}
-    </ul>
 
-<h2><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
-
-    <ul>
+<h2 class="title"><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
         {% for item in session["gear"] %}
-            <li>{{item}} <button>X</button></li>
+        <p class="feature">{{item}}</p>
         {% endfor %}
-    </ul>
     
 {% endblock %}

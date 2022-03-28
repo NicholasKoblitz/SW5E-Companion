@@ -2,50 +2,50 @@
 
 {% block content %}
 
-<form action="/character/backgrounds">
-    <button>Back</button>
-</form>
 
-<form method="POST">
-    <input type="text" value="{{background.name}}" name="background" hidden>
+<a href="/character/backgrounds" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
 
-    <label>Choose Skills</label>
-        {% for skill in range(0, background.skill_vals[0]) %}
-            <select name="{{skill}}">
-                    {% for item in background.skill_vals %}
 
-                    {% if item != background.skill_vals[0] %}
-                        {% set val = 0 %}
 
-                        <option value="{{item}}">{{item}}</option>
+<h2 class="title-class">{{background.name}}</h2>
 
-                        {% set val = val + 1 %}
-                    {% endif %}
-                        
+<div class="intro">
+    <h3 class="intro-title"><strong>Introduction</strong></h3>
+    <p class="intro-para">{{background.intro}}</p>
+</div>
+
+<div class="intro">
+    <p class="feature"><strong class="feature-title">Skill Proficiencies:</strong> {{background.skill_proficiencies}}</p>
+    <div class="form-layout">
+        <form method="POST">
+            <input type="text" value="{{background.name}}" name="background" hidden>
+            <label class="title">Choose Skills</label>
+                {% for skill in range(0, background.skill_vals[0]) %}
+                    <select name="{{skill}}">
+                            {% for item in background.skill_vals %}
+                                {% if item != background.skill_vals[0] %}
+                                    {% set val = 0 %}
+                                    <option value="{{item}}">{{item}}</option>
+                                    {% set val = val + 1 %}
+                                {% endif %}    
+                        {% endfor %}
+                    </select>
                 {% endfor %}
-            </select>
-        {% endfor %}
+                <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
+        </form>
+    </div>
+</div>
 
-    <button>Next</button>
-</form>
-
-<h2>{{background.name}}</h2>
-
-<h3><strong>Introduction</strong></h3>
-<p>{{background.intro}}</p>
-
-<hr>
-
-<p><strong>Skill Proficiencies: </strong>{{background.skill_proficiencies}}</p>
-<p><strong>Languages: </strong>{{background.languages}}</p>
-<p><strong>Equipment: </strong>{{background.equipment}}</p>
-
-<hr>
-
-<h4><strong>{{background.background_feature_name}}</strong></h4>
-<p>{{background.background_feature_details}}</p>
+<div class="intro-left">
+    <p class="feature-left"><strong class="feature-title">Languages:</strong> {{background.languages}}</p>
+    <p class="feature-left"><strong class="feature-title">Equipment:</strong> {{background.equipment}}</p>
+</div>
 
 
+<div class="intro">
+    <h4 class="feature-title"><strong>{{background.background_feature_name}}</strong></h4>
+    <p class="feature">{{background.background_feature_details}}</p>
+</div>
 
 
 {% endblock %}

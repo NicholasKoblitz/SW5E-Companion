@@ -1,18 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<a href="/character/ability-scores" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
 
-<form method="POST">
-    {{ form.hidden_tag() }}
-    <ul>
-    {% for field in form if field.widget.input_type != 'hidden' %}
-       <li> {{field.label}} {{field}}</li> 
-        
-    {% endfor %}
-    </ul>
-    <button>Next</button>
-</form>
 
+<div class="form-layout">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {% for field in form if field.widget.input_type != 'hidden' %}
+            {{field.label}}
+            {{field}}
+        {% endfor %}
+        <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+</div>
 
 
 {% endblock %}

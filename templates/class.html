@@ -2,40 +2,10 @@
 
 {% block content %}
 
-    <form action="/character/classes">
-        <button>Back</button>
-    </form>
+<a href="/character/classes" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
 
-    <form method="POST">
-        <input type="text" value="{{_class.name}}" name="class" hidden>
-        <label for="level"><strong>Class Level: </strong>
-        <input type="number" name="level" min="1" max="20">
-        </label>
-
-
-        <label>Choose Skills</label>
-        {% for skill in range(0, _class.skill_vals[0]) %}
-            <select name="{{skill}}">
-                    {% for item in _class.skill_vals %}
-
-                    {% if item != _class.skill_vals[0] %}
-                        {% set val = 0 %}
-
-                        <option value="{{item}}">{{item}}</option>
-
-                        {% set val = val + 1 %}
-                    {% endif %}
-                        
-                {% endfor %}
-            </select>
-        {% endfor %}
-
-        <button>Next</button>
-    </form>
-
-
-
-    <h2>{{_class.name}}</h2>
+    
+    <h2 class="title-class">{{_class.name}}</h2>
 
     <section class="intro">
             <h3><strong class="intro-title">Introduction</strong></h3>
@@ -48,20 +18,19 @@
     <section class="intro">
         <h3><strong class="intro-title">{{_class.description_1_name}}</strong></h3>
         <p class="intro-para">{{_class.description_1_info}}</p>
-        <hr>
         <h3><strong class="intro-title">{{_class.description_2_name}}</strong></h3>
         <p class="intro-para">{{_class.description_2_info}}</p>
     </section>
 
-    <section class="intro">
-        <h3  class="intro-title"><strong>Class Features</strong></h3>
+    <section class="intro-left">
+        <h3  class="intro-title-center"><strong>Class Features</strong></h3>
         <p class="feature"><strong class="feature-title">Hit Dice:</strong> {{_class.hit_dice}}</p>
         <p class="feature"><strong class="feature-title">Hit Points at 1st Level:</strong> {{_class.hit_points_at_1st_level}}</p>
         <p class="feature"><strong class="feature-title">Hit Points at Higher Levels:</strong> {{_class.hit_points_at_higher_levels}}</p>
     </section>
 
-    <section class="intro">
-        <h3 class="intro-title"><strong>Proficiecies</strong></h3>
+    <section class="intro-left">
+        <h3 class="intro-title-center"><strong>Proficiecies</strong></h3>
         <p class="feature"><strong class="feature-title">Armor:</strong> {{_class.armor_proficiencies}}</p>
         <p class="feature"><strong class="feature-title">Weapons:</strong >{{_class.weapon_proficiencies}}</p>
         <p class="feature"><strong class="feature-title">Tools:</strong> {{_class.tool_proficiencies}}</p>
@@ -72,6 +41,39 @@
     <section class=intro>
         <h3 class="intro-title"><strong>Skills</strong></h3>
         <p class="feature">{{_class.skills}}</p>
+
+        <div class="form-layout">
+            <form method="POST">
+                <input type="text" value="{{_class.name}}" name="class" hidden>
+
+                <div class="class-level">
+                    <label for="level"><strong>Class Level: </strong>
+                        <input type="number" name="level" min="1" max="20">
+                    </label>
+                </div>
+                
+                <label class="title">Choose Skills</label>
+                {% for skill in range(0, _class.skill_vals[0]) %}
+                    <select name="{{skill}}">
+                            {% for item in _class.skill_vals %}
+        
+                            {% if item != _class.skill_vals[0] %}
+                                {% set val = 0 %}
+        
+                                <option value="{{item}}">{{item}}</option>
+        
+                                {% set val = val + 1 %}
+                            {% endif %}
+                                
+                        {% endfor %}
+                    </select>
+                {% endfor %}
+        
+                <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
+            </form>
+        </div>
+
+
     </section>
 
     <section class="intro">
@@ -82,7 +84,7 @@
     </section>
 
     <section class="intro">
-        <h3 class="intro-title"><strong>Variant Starting Wealth</strong></h3>
+        <h3 class="intro-title"><strong>Variant Wealth</strong></h3>
         <p>In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If you do so, you receive no equipment from your class and background, and instead roll for your starting wealth using the criteria below: </p>
         <p class="feature">{{_class.variant_starting_wealth}}</p>
     </section>

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Backgrounds</h1>
 
-<form action="/character/classes">
-    <button>Back</button>
-</form>
+<a href="/character/classes" class="back"><i class="fa-solid fa-arrow-left"></i></a>
 
+<h1 class="title">Backgrounds</h1>
+
+<!-- 
 <ul>
 {% for background in backgrounds %}
 
@@ -17,5 +17,21 @@
     </li>
 
 {% endfor %}
-</ul>
+</ul> -->
+
+
+
+<div class="selection">
+    {% for background in backgrounds %}
+        <div class="selection-list">
+            <h3><a href="/character/backgrounds/{{background.id}}">{{background.name}}</a></h3>
+
+        </div>
+        
+
+    {% endfor %}
+</div>
+
+
+
 {% endblock %}

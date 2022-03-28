@@ -2,19 +2,22 @@
 
 {% block content %}
 
-<form action="/character/backgrounds">
-    <button>Back</button>
-</form>
+<a href="/character/backgrounds" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
 
-<form method="POST">
-    <button>Next</button>
-    {{ form.hidden_tag() }}
+<h3 class="title">Ability Scores</h3>
 
-    {% for field in form if field.widget.input_type != 'hidden' %}
-        {{field.label}}
-        {{field}}
-    {% endfor %}
+<div class="form-layout">
+    <form method="POST">
+        <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
+        {{ form.hidden_tag() }}
     
-</form>
+        {% for field in form if field.widget.input_type != 'hidden' %}
+                {{field.label}}
+                {{field}}
+            
+        {% endfor %}
+        
+    </form>
+</div>
 
 {% endblock %}
