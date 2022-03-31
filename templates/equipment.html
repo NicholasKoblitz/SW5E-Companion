@@ -13,18 +13,20 @@
 <h2 class="title"><a href="/character/equipment/armors">Armor</a></h2>
 
         {% for item in session["armor"] %}
-            <p class="feature">{{item}}</p>
+            <p class="feature">{{item}} <button class="delete-btn">X</button></p>
         {% endfor %}
 
 <h2 class="title"><a href="/character/equipment/weapons">Weapons</a></h2>
 
         {% for item in session["weapon"] %}
-        <p class="feature">{{item}}</p>
+        <p class="feature">{{item}} <button class="delete-btn">X</button></p>
         {% endfor %}
 
 <h2 class="title"><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
         {% for item in session["gear"] %}
-        <p class="feature">{{item}}</p>
+        <p class="feature">{{item}} <button class="delete-btn">X</button></p>
         {% endfor %}
     
+        <script src="/static/delete_equipment.js"></script>
+
 {% endblock %}

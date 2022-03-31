@@ -2,38 +2,43 @@
 
 {% block content %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Cost</th>
-                <th>Weight (lbs)</th>
-                <th  style="display: none;">Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in gear %}
-                <tr>
-                    <td>{{item.name}}</td>
-                    <td>{{item.catrgory}}</td>
-                    <td>{{item.cost}}</td>
-                    <td>{{item.weight}}</td>
-                    <td style="display: none;">{{item.details}}</td>
-                    <td>
-                        <form action="/character/equipment/adventure-gear", method="POST">
-                            <input type="text" value="{{item.name}}" name="gear" hidden>
-                            <button type="submit">Select</button>
-                    </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<a href="/character/equipment" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+   
+    <div class="card-area">
+        {% for item in gear %}
+    
+        <div class="item-card">
+            <button class="toggle-open toggle-btn"><h3 class="item-title">{{item.name}}</h3></button>
+            <div class="item-detials hidden">
+                <span></span>
+                <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
+                <p>Adventuring Gear Category</p>
+                <p>{{item.catrgory}}</p>
+                <p>Cost</p>
+                <p>{{item.cost}}</p>
+                <p>Weight</p>
+                <p>{{item.weight}}</p>
+                {% if item.details != None %}
+                    <p>Adventuring Gear Details</p>
+                    <p>{{item.details}}</p>
+                {% endif %}
+                
+                <form action="/character/equipment/adventure-gear", method="POST">
+                    <input type="text" value="{{item.name}}" name="gear" hidden>
+                    <button type="submit" class="toggle-close"><i class="close fa-solid fa-check"></i></button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+    <script src="/static/equipment-card.js"></script>
 
-    <form action="/character/equipment">
-        <button>Back</button>
-    </form>
+
+
+
+
+
 
 
 {% endblock %}

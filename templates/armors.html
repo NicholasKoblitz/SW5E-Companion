@@ -4,40 +4,52 @@
 
 <a href="/character/equipment" class="back"><i class="fa-solid fa-arrow-left"></i></a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Properties</th>
-            <th>Cost</th>
-            <th>Weight (lbs)</th>
-            <th>Armor Class</th>
-            <th>Stealth</th>
-            <th></th>
-            <th style="display: none;">Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for armor in armors %}
-            <tr>
-                <td>{{armor.name}}</td>>
-                <td>{{armor.type}}</td>>
-                <td>{{armor.properties}}</td>>
-                <td>{{armor.cost}}</td>>
-                <td>{{armor.weight}}</td>>
-                <td>{{armor.armor_class}}</td>>
-                <td>{{armor.stealth}}</td>>
-                <td style="display: none;">{{armor.details}}</td>>
-                <td>
-                    <form action="/character/equipment/armors", method="POST">
-                        <input type="text" value="{{armor.name}}" name="armor" hidden>
-                        <button type="submit"><i class="fa-solid fa-square"></i></button>
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="card-area">
+    {% for armor in armors %}
+
+    <div class="item-card">
+        <button class="toggle-open toggle-btn"><h3 class="item-title">{{armor.name}}</h3></button>
+        <div class="item-detials hidden">
+            <span></span>
+            <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
+            <p>Armor Type</p>
+            <p>{{armor.type}}</p>
+            <p>Properties</p>
+            <p>
+                {% if armor.properties == None %}
+                    None
+                {% else %}
+                    {% for prop in armor.properties %}
+                        {{prop}}
+                    {% endfor %}
+                    
+                {% endif %}
+            </p>
+            <p>Cost</p>
+            <p>{{armor.cost}}</p>
+            <p>Weight</p>
+            <p>{{armor.weight}}</p>
+            <p>Armor Class</p>
+            <p>{{armor.armor_class}}</p>
+            {% if armor.stealth != None %}
+                <p>Stealth</p>
+                <p>{{armor.stealth}}</p>
+            {% endif %}
+            {% if armor.details != None %}
+                <p>Armor Details</p>
+                <p>{{armor.details}}</p>
+            {% endif %}
+            
+            <form action="/character/equipment/armors", method="POST">
+                <input type="text" value="{{armor.name}}" name="armor" hidden>
+                <button type="submit" class="toggle-close"><i class="close fa-solid fa-check"></i></button>
+            </form>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<script src="/static/equipment-card.js"></script>
+
 
 {% endblock %}

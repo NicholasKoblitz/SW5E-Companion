@@ -21,9 +21,14 @@ body {
 }
 
 @media (max-width: 600px) {
+  @font-face {
+    font-family: StarWarsTitle;
+    src: url(SfDistantGalaxyAltoutline-e2Bp.ttf);
+    font-weight: lighter;
+  }
+
   #flash {
     background-color: var(--warning-color);
-    /* border: 3px solid var(--warning-color); */
     color: var(--text-color);
     position: relative;
     top: 2em;
@@ -54,7 +59,7 @@ body {
   nav a {
     text-decoration: none;
     color: var(--text-color);
-    font-family: "Major Mono Display", monospace;
+    font-family: StarWarsTitle;
     font-size: 14px;
   }
 
@@ -84,8 +89,14 @@ body {
     padding: 1em;
   }
 
+  .ability-form {
+    margin: 0;
+  }
+
   .form-layout label {
-    font-family: "Major Mono Display", monospace;
+    font-family: StarWarsTitle;
+    padding: 0 1em;
+    font-size: 20px;
   }
 
   .form-layout input {
@@ -123,7 +134,7 @@ body {
 
   /* Species and class selection */
   .title {
-    font-family: "Major Mono Display", monospace;
+    font-family: StarWarsTitle;
   }
 
   .title a {
@@ -134,7 +145,7 @@ body {
   }
 
   .title-class {
-    font-family: "Major Mono Display", monospace;
+    font-family: StarWarsTitle;
     position: relative;
     top: 1em;
   }
@@ -191,7 +202,7 @@ body {
 
 /* ------------------------------------------------------------ */
 
-/* Single species page */
+/* Single species and single class page */
 
 .intro {
   display: flex;
@@ -204,7 +215,8 @@ body {
 .intro-title {
   border-bottom: 1px solid var(--border-color);
   padding: 0.25em;
-  font-family: "Major Mono Display", monospace;
+  font-family: StarWarsTitle;
+  letter-spacing: 0.1em;
 }
 
 .intro-para {
@@ -218,7 +230,8 @@ body {
 .feature-title {
   border-bottom: 1px solid var(--border-color);
   padding: 0.25em;
-  font-family: "Major Mono Display", monospace;
+  font-family: StarWarsTitle;
+  letter-spacing: 0.1em;
 }
 
 .feature {
@@ -230,8 +243,6 @@ body {
 }
 
 .feature-left {
-  /* padding-left: -0.5em; */
-
   padding-right: 0.25em;
   margin: 1em 0 2em 0;
   line-height: 1.5em;
@@ -251,7 +262,7 @@ body {
   left: 3.5em;
   border-bottom: 1px solid var(--border-color);
   padding: 0.25em;
-  font-family: "Major Mono Display", monospace;
+  font-family: StarWarsTitle;
 }
 
 .class-level {
@@ -303,13 +314,90 @@ body {
   font-size: 21px;
 }
 
-/* Table */
+/* Tables */
 
-.table {
+.card-area {
+  position: relative;
+  top: 3em;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
+  column-gap: 3em;
+  row-gap: 3em;
+}
+
+.item-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 3px solid var(--secondary-color);
+  border-radius: 10px;
+}
+
+.item-title {
+  font-family: StarWarsTitle;
+  font-size: 16px;
+  visibility: visible;
+  padding-bottom: 0;
+}
+
+.item-card p {
+  font-size: 12px;
+}
+
+.item-detials {
+  position: absolute;
+  top: 1em;
+  left: 0.1em;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.5em;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto auto auto;
+  column-gap: 0.5em;
+  row-gap: 0.5em;
+  background-color: var(--secondary-color);
+}
+
+.item-detials button {
+  font-size: 25px;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.toggle-open {
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.toggle-close {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: end;
+}
+
+.close {
+  background-color: var(--secondary-color);
+  font-size: 20px;
+}
+
+/* .table {
   border-collapse: collapse;
   table-layout: fixed;
   width: 100%;
   font-size: 10px;
+  margin-top: 4em;
 }
 
 .table thead {
@@ -333,4 +421,9 @@ body {
   background-color: var(--secondary-color);
   border: none;
   color: var(--main-bg-color);
+} */
+
+/* equipment page */
+
+.delete-btn {
 }

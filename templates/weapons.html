@@ -1,41 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="/character/equipment">
-        <button>Back</button>
-    </form>
+<a href="/character/equipment" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+    
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Properties</th>
-                <th>Cost</th>
-                <th>Weight (lbs)</th>
-                <th>Damage</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for weapon in weapons %}
-                <tr>
-                    <td>{{weapon.name}}</td>
-                    <td>{{weapon.type}}</td>
-                    <td>{{weapon.properties}}</td>
-                    <td>{{weapon.cost}}</td>
-                    <td>{{weapon.weight}}</td>
-                    <td>{{weapon.damage}}</td>
-                    <td>
-                        <form action="/character/equipment/weapons", method="POST">
-                            <input type="text" value="{{weapon.name}}" name="weapon" hidden>
-                            <button type="submit">Select</button>
-                        </form>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="card-area">
+        {% for weapon in weapons %}
 
-
+        <div class="item-card">
+            <button class="toggle-open toggle-btn"><h3 class="item-title">{{weapon.name}}</h3></button>
+            <div class="item-detials hidden">
+                <span></span>
+                <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
+                <p>Weapon Type</p>
+                <p>{{weapon.type}}</p>
+                <p>Properties</p>
+                <p>
+                    {% for prop in weapon.properties %}
+                        {{prop}}
+                    {% endfor %}
+                </p>       
+                <p>Cost</p>
+                <p>{{weapon.cost}}</p>
+                <p>Weight</p>
+                <p>{{weapon.weight}}</p>
+                <p>Damage</p>
+                <p>{{weapon.damage}}</p>
+                <form action="/character/equipment/weapons", method="POST">
+                    <input type="text" value="{{weapon.name}}" name="weapon" hidden>
+                    <button type="submit" class="toggle-close"><i class="close fa-solid fa-dice-d20"></i></button>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+        
+    <script src="/static/equipment-card.js"></script>
     
 {% endblock %}
