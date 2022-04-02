@@ -48,4 +48,95 @@
 </div>
 
 
+    {% set len = background.traits|length %}
+    {% set ideal_len = background.ideals|length %}
+    {% set bond_len = background.bonds|length %}
+    {% set flaw_len = background.flaws|length %}
+
+    <div class="tables">
+        <table>
+            <thead>
+                <tr>
+                    <th>d8</th>
+                    <th>Personality Trait</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for i in range(0, len) %}
+                    <tr>
+                        <td>{{i + 1}}</td>
+                        <td>{{background.traits[i].details}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>d6</th>
+                    <th>Ideals</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for i in range(0, ideal_len) %}
+                    <tr>
+                        <td>{{i + 1}}</td>
+                        <td>{{background.ideals[i].details}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>d6</th>
+                    <th>Bonds</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for i in range(0, bond_len) %}
+                    <tr>
+                        <td>{{i + 1}}</td>
+                        <td>{{background.bonds[i].details}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>d6</th>
+                    <th>Flaws</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+                {% for i in range(0, flaw_len) %}
+                    <tr>
+                        <td>{{i + 1}}</td>
+                        <td>{{background.flaws[i].details}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+
+
+
+
+
+
+    
+
+    
+
+
 {% endblock %}

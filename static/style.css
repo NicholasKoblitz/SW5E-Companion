@@ -392,36 +392,31 @@ body {
   font-size: 20px;
 }
 
-/* .table {
-  border-collapse: collapse;
-  table-layout: fixed;
-  width: 100%;
-  font-size: 10px;
-  margin-top: 4em;
+.tables table {
+  margin-bottom: 2em;
+  /* border-collapse: collapse; */
+  /* table-layout: */
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+}
+.tables table thead {
+  font-family: StarWarsTitle;
+  letter-spacing: 0.05em;
 }
 
-.table thead {
-  background-color: #da4224;
-  padding: 0;
+.tables table thead th:nth-child(even) {
+  text-align: start;
 }
 
-.table tbody tr:nth-child(even) {
+.tables table tbody tr {
+  letter-spacing: 0.05em;
+  font-family: "Quicksand", sans-serif;
+}
+
+.tables table tbody tr:nth-child(odd) {
   background-color: var(--secondary-color);
-  padding: 0;
+  /* border: 1px solid var(--border-color); */
 }
-
-.table button {
-  background-color: var(--main-bg-color);
-  border: none;
-  color: var(--secondary-color);
-  width: 2em;
-}
-
-.table tbody tr:nth-child(even) button {
-  background-color: var(--secondary-color);
-  border: none;
-  color: var(--main-bg-color);
-} */
 
 /* equipment page */
 
