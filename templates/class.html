@@ -89,32 +89,43 @@
         <p class="feature">{{_class.variant_starting_wealth}}</p>
     </section>
    
+    <h3 class="intro-title">Class By Level</h3>
 
     {% set lst = _class.description_by_level.items() %}
-    {% set keys = _class.description_by_level["2"].keys() %}
+    <div class="card-area">
+        {% for (num, section) in lst %}
+    
+            <div class="class-card item-card">
+                <button class="toggle-open toggle-btn"><h3 class="item-title">{{num}}</h3></button>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Level</th>
-                    {% for item in keys %}
-                            <th>{{item}}</th>   
-                    {% endfor %}
-                </tr> 
-            </thead>
-            <tbody>
-                {% set i = [] %}
-                    {% for (num, section) in lst %} 
-                        <tr>
-                            <td>{{num}}</td>
-                            {% set vals = section.values() %}
-                                {% for item in vals %}
-                                <td>{{item}}</td>
+                <div class="item-detials hidden">
+                    <span></span>
+                    <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
+                    {% set i = section.items() %}
+
+                    {% for (title, val) in i %}
+                        <p>{{title}}</p>
+                            <!-- {{val}} -->
+                        <p>
+                            {% if val is not string %}
+                                {% for i in val %}
+                                    {{i}}
                                 {% endfor %}
-                        </tr>
-                    {% endfor %}
-            </tbody>
-        </table>
+                            {% else %}
+                                {{val}}
+                            {% endif %}
 
+                        </p>    
+                        
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+   
+
+    <script src="/static/equipment-card.js"></script>
     
 {% endblock %}
