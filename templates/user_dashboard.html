@@ -18,8 +18,12 @@
                 <p><strong>Level: </strong>{{character.level}}</p>
                 <p><strong>Class: </strong>{{character.character_class.name}}</p>
                 <p><strong>Species: </strong>{{character.character_species.name}}</p>
+                <form action="/character/{{character.id}}/delete" class="dash-form" method="POST">
+                    <button class="btn">Delete Character</button>
+                </form>
             </div>
         </a>
+        
 
         
     {% endfor %}
