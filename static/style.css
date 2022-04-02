@@ -333,6 +333,11 @@ body {
   flex-direction: column;
   border: 3px solid var(--secondary-color);
   border-radius: 10px;
+  position: relative;
+}
+
+.class-card {
+  padding: 2em;
 }
 
 .item-title {
@@ -359,6 +364,7 @@ body {
   column-gap: 0.5em;
   row-gap: 0.5em;
   background-color: var(--secondary-color);
+  z-index: 1;
 }
 
 .item-detials button {
@@ -394,8 +400,6 @@ body {
 
 .tables table {
   margin-bottom: 2em;
-  /* border-collapse: collapse; */
-  /* table-layout: */
   border: 1px solid var(--border-color);
   border-radius: 10px;
 }
