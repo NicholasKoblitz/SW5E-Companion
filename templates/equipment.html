@@ -9,23 +9,38 @@
     <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
 
 </form>
+<!-- {{session["armor"]}} -->
 
 <h2 class="title"><a href="/character/equipment/armors">Armor</a></h2>
 
         {% for item in session["armor"] %}
-            <p class="feature">{{item}} <button class="delete-btn">X</button></p>
+                <!-- <form action="/character/equipment/armors/delete" method="POST"> -->
+                <p class="feature" style="display: inline;">{{item}} </p>
+                <!-- <input type="text" name="armor" value="{{item}}" hidden>
+                <button class="delete-btn" style="display: inline;">X</button>
+                    </form> -->
+                    
         {% endfor %}
 
 <h2 class="title"><a href="/character/equipment/weapons">Weapons</a></h2>
 
         {% for item in session["weapon"] %}
-        <p class="feature">{{item}} <button class="delete-btn">X</button></p>
+        <!-- <form action="/character/equipment/delete" method="POST"> -->
+                <p class="feature" style="display: inline;">{{item}} </p>
+                <!-- <input type="text" name="weapon" value="{{item}}" hidden>
+                <button class="delete-btn" style="display: inline;">X</button>
+                    </form> -->
         {% endfor %}
 
 <h2 class="title"><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
         {% for item in session["gear"] %}
-        <p class="feature">{{item}} <button class="delete-btn">X</button></p>
+        <!-- <form action="/character/equipment/delete" method="POST"> -->
+                <p class="feature" style="display: inline;">{{item}} </p>
+                <!-- <input type="text" name="gear" value="{{item}}" hidden>
+                <button class="delete-btn" style="display: inline;">X</button>
+                    </form> -->
         {% endfor %}
+
     
         <script src="/static/delete_equipment.js"></script>
 
