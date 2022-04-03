@@ -1,14 +1,344 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{{character.character_background.name}}
+    
+    
+
+    {% if "Athletics" in character.skills %}
+    <p><span><i class="fa-solid fa-circle"></i></span></p>
+    {% endif %} 
 
     <section>
         <p><strong>Name: </strong>{{character.name}}</p>
         <p><strong>Level: </strong>{{character.level}}</p>
         <p><strong>Class: </strong>{{character.character_class.name}}</p>
-        <p><strong>Background: </strong>{{character.character_background.name}}</p>
-        <p><strong>Experince Points: </strong>{{character.xp_points}}</p>
     </section>
 
+
+    <div class="character-area">
+        <div class="character-tabs">
+            <h5 class="tab select-tab" id="ability">Abilities</h5>
+            <h5 class="tab" id="feature">Features</h5>
+            <h5 class="tab" id="character">Character</h5>
+            <h5 class="tab" id="equipment">Equipment</h5>
+            <h5 class="tab" id="powers">Powers</h5>
+            <h5 class="tab" id="proficiencies">Proficiencies</h5>
+        </div>
+        <div class="abilities setup">
+            <section>
+                <h3>{{character.strength}} Strength</h3>
+                <p>
+                    {% if "Strength" in character.class_saving_throw_pros %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.str_saving_throw + character.proficiency_bonus}}
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.str_saving_throw }}
+                    {% endif %}
+
+                    Saving Throw
+                </p>
+                <p>
+                    {% if "Athletics" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.athletics + character.proficiency_bonus}}
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.athletics}}
+                    {% endif %} 
+                    Athletics
+                </p>
+            </section>
+            <section>
+                <h3>{{character.dexterity}} Dexterity</h3>
+                <p>
+                    {% if "Dexterity" in character.class_saving_throw_pros %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.dex_saving_throw + character.proficiency_bonus}}
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.dex_saving_throw }}
+                    {% endif %}
+                    
+                    Saving Throw
+                </p>
+                <p>
+                    {% if "Acrobactics" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.acrobatics + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.acrobatics}} 
+                    {% endif %} 
+                    Acrobatics
+                </p>
+                <p>
+                    {% if "Sleight of Hand" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.sleight_of_hand + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.sleight_of_hand}} 
+                    {% endif %} 
+                    Sleight of Hand 
+                </p>
+                <p>
+                    {% if "Stealth" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.stealth + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.stealth}} 
+                    {% endif %} 
+                    Stealth
+                </p>
+            </section>
+            <section>
+                <h3>{{character.constitution}} Constitution</h3>
+                <p>
+                    {% if "Constitution" in character.class_saving_throw_pros %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.con_saving_thorw + character.proficiency_bonus}}
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.con_saving_thorw}}
+                    {% endif %}
+                    Saving Throw
+                </p>
+            </section>
+            <section>
+                <h3>{{character.intelligence}} Intelligence</h3>
+                <p>
+                    {% if "Intelligence" in character.class_saving_throw_pros %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.int_saving_throw + character.proficiency_bonus}}
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.int_saving_throw}}
+                    {% endif %}
+                    Saving Throw
+                </p>
+                <p>
+                    {% if "Investigation" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.investagation + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.investagation}} 
+                    {% endif %} 
+                    Investigation
+                </p>
+                <p>
+                    {% if "Lore" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.lore + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.lore}} 
+                    {% endif %} 
+                    Lore 
+                </p>
+                <p>
+                    {% if "Nature" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.nature + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.nature}} 
+                    {% endif %} 
+                    Nature 
+                </p>
+                <p>
+                    {% if "Piloting" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.piloting + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.piloting}} 
+                    {% endif %} 
+                    Piloting
+                </p>
+                <p>
+                    {% if "Technology" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.technology + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.technology}} 
+                    {% endif %} 
+                     Technology
+                </p>
+            </section>
+            <section>
+                <h3>{{character.wisdom}} Wisdom</h3>
+                <p>
+                    {% if "Wisdom" in character.class_saving_throw_pros %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.wis_saving_throw + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.wis_saving_throw}}
+                    {% endif %}
+                    Saving Throw
+                </p>
+                <p>
+                    {% if "Animal Handling" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.animal_handling + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.animal_handling}} 
+                    {% endif %} 
+                    Animal Handling 
+                </p>
+                <p>
+                    {% if "Insight" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.insight+ character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.insight}} 
+                    {% endif %} 
+                    Insight 
+                </p>
+                <p>
+                    {% if "Medicine" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.medicine + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.medicine}} 
+                    {% endif %} 
+                    Medicine 
+                </p>
+                <p>
+                    {% if "Perception" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.perception + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.perception}} 
+                    {% endif %} 
+                    Perception 
+                </p>
+                <p>
+                    {% if "Survival" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.survival + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.survival}} 
+                    {% endif %} 
+                    Survival
+                </p>
+            </section>
+            <section>
+                <h3>{{character.charisma}} Charisma</h3>
+                <p>
+                    {% if "Charisma" in character.class_saving_throw_pros %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.cha_saving_throw + character.proficiency_bonus}}
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span> {{character.cha_saving_throw}}
+                    {% endif %}
+                    Saving Throw
+                </p>
+                <p>
+                    {% if "Deception" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.deception + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.deception}} 
+                    {% endif %} 
+                    Deception 
+                </p>
+                <p>
+                    {% if "Intimidation" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.intimidation + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.intimidation}} 
+                    {% endif %} 
+                    Intimidation
+                </p>
+                <p>
+                    {% if "Performance" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.performance + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.performance}} 
+                    {% endif %} 
+                    Performance
+                </p>
+                <p>
+                    {% if "Persuasion" in character.skills %}
+                        <span><i class="fa-solid fa-circle"></i></span>
+                        {{character.persuasion + character.proficiency_bonus}} 
+                    {% else %}
+                        <span><i class="fa-regular fa-circle"></i></span>  {{character.persuasion}} 
+                    {% endif %} 
+                    Persuasion
+                </p>
+            </section>
+        </div>
+        <div class="features setup hidden" >
+            <h3>Background Feature</h3>
+                <div>
+                    <h4 id="bg-feat">{{character.character_background.background_feature_name}}<span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                    <div class="feat-info hidden">
+                        <p>{{character.character_background.background_feature_details}}</p>
+                    </div>
+                </div>
+
+                
+
+
+            <h3>Features</h3>
+            {% for feature in character.character_class.features %}
+            <div>
+                <h4>{{feature.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                <div class="feat-info hidden">
+                    <span>Levels: 
+                        {% for level in feature.levels %}
+                            {{level}}
+                        {% endfor %}
+                    </span>
+                    <p>{{feature.details}}</p>
+                </div> 
+            </div>
+            {% endfor %}
+
+        </div>
+        <div class="character setup hidden">
+            <div>
+                <p><strong>Alignment:</strong> {{character.alignment}}</p>
+                <p><strong>Background:</strong> {{character.character_background.name}}</p>
+                <p><strong>Personality Traits:</strong> {{character.personality_traits}}</p>
+                <p><strong>Ideals:</strong> {{character.ideal}}</p>
+                <p><strong>Bonds:</strong> {{character.bond}}</p>
+                <p><strong>Flaw:</strong> {{character.flaw}}</p>
+                <p><strong>Place of Birth:</strong> {{character.place_of_birth}}</p>
+                <p><strong>Gender:</strong> {{character.gender}}</p>
+                <p><strong>Age:</strong> {{character.age}}</p>
+                <p><strong>Eyes:</strong> {{character.eyes}}</p>
+                <p><strong>Hair:</strong> {{character.hair}}</p>
+                <p><strong>Skin:</strong> {{character.skin}}</p>
+                <p><strong>Height:</strong> {{character.height}}</p>
+                <p><strong>Weight:</strong> {{character.weight}}</p>
+                <p><strong>Apperance:</strong> {{character.apperance}}</p>
+                <p><strong>Backstory:</strong> {{character.backstory}}</p>
+            </div>
+        </div>
+        <div class="equipment setup hidden">
+            <div>
+                <h3>Armor</h3>
+                {% for armor in character.armor %}
+                    <p>{{armor.name}}</p>
+                {% endfor %}
+                <h3>Weapon</h3>
+                {% for weapon in character.weapon %}
+                    <p>{{weapon.name}}</p>
+                {% endfor %}
+                <h3>Adventuring Gear</h3>
+                {% for gear in character.adventuring_gear %}
+                    <p>{{gear.name}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="powers setup hidden">
+
+
+
+            <h3>Force Powers <span><i class="fa-solid fa-plus"></i></span></h3>
+
+            <h3>Tech Powers <span><i class="fa-solid fa-plus"></i></span></h3>
+        </div>
+    </div>
+
+    
+    
+    <script src="/static/overview.js"></script>
 
 {% endblock %}

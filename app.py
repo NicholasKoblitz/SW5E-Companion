@@ -4,13 +4,14 @@ from random import randint
 from flask import Flask, render_template, redirect, flash, session, g, request
 from jinja2 import tests
 from sqlalchemy.exc import IntegrityError
-from models import db, connect_db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear
+from models import db, connect_db, User, Character, Class, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
 armors = []
 weapons = []
 advent_gear = []
+
 
 app = Flask(__name__)
 
@@ -161,6 +162,10 @@ def roll_hit_dice(ability_score, level, _class):
 @app.route("/")
 def home_page():
     """Displays the home page for the site"""
+
+    for item in list(session.keys()):
+        if item != USER_KEY and item != "csrf_token":
+           session.pop(item)
 
 
     return render_template("homepage.html", user = User)
@@ -405,6 +410,7 @@ def save_background_choice(background_id):
     if not g.user:
         flash("Please Sign In")
         return redirect("/")
+
     skills = []
     background = request.form["background"]
     session["background"] = background
@@ -412,15 +418,21 @@ def save_background_choice(background_id):
     skill_1 = request.form["0"]
     skill_2 = request.form["1"]
 
-    for skill in  skills:
-        if skill in [skill_1, skill_2] or skill_1 == skill_2:
+    skills.append(skill_1)
+    skills.append(skill_2)
+
+    for skill in skills:
+        if skill in session["skills"] or skill_1 == skill_2:
             flash(f"{skill} was already selected in Class selection")
             background = Background.query.get_or_404(background_id)
 
             return render_template("single_background.html", background=background)
 
+        else:
+            session["skills"].append(skill_1)
+            session["skills"].append(skill_2)
 
-    return redirect("/character/ability-scores")
+            return redirect("/character/ability-scores")
 
 
 @app.route("/character/ability-scores", methods=["GET", "POST"])
@@ -436,12 +448,6 @@ def get_ability_scores():
     if form.validate_on_submit():
 
         abilities = [form.strength.data, form.dexterity.data, form.constitution.data, form.intelligence.data, form.wisdom.data, form.charisma.data]
-        # session['strength'] = form.strength.data
-        # session["dexterity"] = form.dexterity.data
-        # session["constitution"] = form.constitution.data
-        # session["intelligence"] = form.intelligence.data
-        # session["wisdom"] = form.wisdom.data
-        # session["charisma"] = form.charisma.data
 
         for ability in abilities:
             
@@ -504,6 +510,8 @@ def get_equipment():
         flash("Please Sign In")
         return redirect("/")
 
+    
+
     return render_template('equipment.html')
 
 
@@ -528,6 +536,33 @@ def choose_armor():
     session["armor"] = armors
 
     return redirect("/character/equipment")
+
+
+# @app.route("/character/equipment/armors/delete", methods=["POST"])
+# def delete_equipment():
+#     """Deletes Equipment """
+
+#     if not g.user:
+#         flash("Please Sign In")
+#         return redirect("/")
+
+
+#     data = request.form["armor"]
+
+#     print(data)
+#     i = armors.index(data)
+#     armors.pop(i)
+#     print(armors)
+
+    # session["armor"] = armors
+
+    # idx = session["armor"].index(data)
+    # del session["armor"][idx]
+
+    # print(session["armor"])
+
+    # return redirect("/character/equipment")
+
 
 
 @app.route("/character/equipment/weapons")
@@ -579,6 +614,12 @@ def choose_gear():
     return redirect("/character/equipment")
 
 
+
+    
+
+
+
+
 @app.route("/character/create-character", methods=["POST"])
 def get_create_character():
     """Creates the user's character"""
@@ -599,6 +640,7 @@ def get_create_character():
         species_id = specie.id,
         background_id = background.id,
         level = int(session["level"]),
+        class_saving_throw_pros = _class.saving_throw_proficiencies,
         xp_points = 0,
         strength = int(session["strength"]),
         str_saving_throw = check_attrubutes(int(session["strength"])),
@@ -662,11 +704,32 @@ def get_create_character():
     db.session.add(character)
     db.session.commit()
 
+    for item in session["armor"]:
+        armor = Armor.query.filter_by(name=item).first()
+        ca = CharacterArmor(aromr_id=armor.id, character_id=character.id)
+        db.session.add(ca)
+        db.session.commit()
+
+    for item in session["weapon"]:
+        weapon = Weapon.query.filter_by(name=item).first()
+        cw = CharacterWeapon(weapon_id=weapon.id, character_id=character.id)
+        db.session.add(cw)
+        db.session.commit()
+
+    for item in session["gear"]:
+        gear = AdventureingGear.query.filter_by(name=item).first()
+        ca = CharacterAdventuringGear(adventuring_gear_id=gear.id, character_id=character.id)
+        db.session.add(ca)
+        db.session.commit()
+
     for item in list(session.keys()):
         if item != USER_KEY and item != "csrf_token":
            session.pop(item)
 
-
+    armors = []
+    weapons = []
+    advent_gear = []
+    skills = []
     return redirect(f'/character/{character.id}')
 
 

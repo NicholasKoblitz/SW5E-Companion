@@ -67,6 +67,7 @@ class Character(db.Model):
     species_id = db.Column(db.Integer, db.ForeignKey("species.id", ondelete="cascade"))
     background_id = db.Column(db.Integer, db.ForeignKey("backgrounds.id", ondelete="cascade"))
     level = db.Column(db.Integer, nullable=False)
+    class_saving_throw_pros = db.Column(db.PickleType, nullable=False)
     xp_points = db.Column(db.Integer, nullable=False)
     strength = db.Column(db.Integer, nullable=False)
     str_saving_throw = db.Column(db.Integer, nullable=False)

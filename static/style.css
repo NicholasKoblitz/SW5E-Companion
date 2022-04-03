@@ -426,3 +426,124 @@ body {
 
 .delete-btn {
 }
+
+/* Character Overview */
+
+.character-area {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--border-color);
+  border-bottom: none;
+  padding: 0;
+  width: 95%;
+  position: relative;
+}
+
+.character-tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: baseline;
+  padding: 0;
+  font-size: 12px;
+}
+
+.tab {
+  padding: 1em;
+  /* z-index: 1; */
+  margin: 0;
+}
+
+.select-tab {
+  background-color: var(--main-bg-color);
+}
+
+.setup {
+  background-color: var(--main-bg-color);
+  position: absolute;
+  right: -1px;
+  width: 100%;
+
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+}
+
+.abilities h3 {
+  border-bottom: 1px solid var(--border-color);
+  width: 55%;
+  padding: 0.25em;
+  font-family: StarWarsTitle;
+  letter-spacing: 0.1em;
+}
+
+.abilities section i {
+  font-size: 10px;
+  margin-right: 8px;
+  margin-left: 5px;
+}
+
+.abilities section p {
+  position: relative;
+  left: 1em;
+  font-family: "Quicksand", sans-serif;
+}
+
+.features {
+  padding-top: 1em;
+}
+
+.features h3 {
+  border-bottom: 1px solid var(--border-color);
+  width: 55%;
+  padding: 0.25em;
+  font-family: StarWarsTitle;
+  letter-spacing: 0.1em;
+}
+
+.features h4 {
+  font-family: "Quicksand", sans-serif;
+  position: relative;
+  left: 0.5em;
+}
+
+.feat-info {
+  position: absolute;
+  font-family: "Quicksand", sans-serif;
+  letter-spacing: 0.1em;
+  line-height: 2em;
+}
+
+.features h4 span {
+  position: relative;
+  left: 0.5em;
+}
+
+.character div {
+  line-height: 2em;
+}
+
+.character p strong {
+  border-bottom: 1px solid var(--border-color);
+  width: 55%;
+  padding: 0.25em;
+  font-family: StarWarsTitle;
+  letter-spacing: 0.1em;
+}
+
+.character p {
+  font-family: "Quicksand", sans-serif;
+}
+
+.equipment h3 {
+  border-bottom: 1px solid var(--border-color);
+  width: 55%;
+  padding: 0.25em;
+  font-family: StarWarsTitle;
+  letter-spacing: 0.1em;
+}
+
+.equipment p {
+  font-family: "Quicksand", sans-serif;
+  position: relative;
+  left: 1em;
+}
