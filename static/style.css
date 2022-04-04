@@ -424,9 +424,6 @@ body {
 
 /* equipment page */
 
-.delete-btn {
-}
-
 /* Character Overview */
 
 .character-area {
@@ -449,7 +446,6 @@ body {
 
 .tab {
   padding: 1em;
-  /* z-index: 1; */
   margin: 0;
 }
 
@@ -546,4 +542,14 @@ body {
   font-family: "Quicksand", sans-serif;
   position: relative;
   left: 1em;
+}
+
+.powers h3 {
+  /* margin-left: 1em; */
+  border-bottom: 1px solid var(--border-color);
+  width: 50%;
+}
+
+.powers div p {
+  margin-left: 0.5em;
 }

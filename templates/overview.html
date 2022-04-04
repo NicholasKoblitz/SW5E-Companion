@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{character.character_background.name}}
     
-    
-
-    {% if "Athletics" in character.skills %}
-    <p><span><i class="fa-solid fa-circle"></i></span></p>
-    {% endif %} 
 
     <section>
         <p><strong>Name: </strong>{{character.name}}</p>
@@ -329,11 +323,25 @@
         </div>
         <div class="powers setup hidden">
 
+            {% if character.force_powers %}
+                <h3 class="title">Force Powers</h3>
+                <div id="force-powers">
+                    {% for item in character.force_powers %}
+                        <p>{{item.name}}</p>
+                    {% endfor %}
+                </div>
+
+            {% else %}
+                <h3>Tech Powers</h3>
+                <div id="tech-powers">
+                    {% for item in character.tech_powers %}
+                        <p>{{item.name}}</p>
+                    {% endfor %}
+                </div>
 
 
-            <h3>Force Powers <span><i class="fa-solid fa-plus"></i></span></h3>
+            {% endif %}
 
-            <h3>Tech Powers <span><i class="fa-solid fa-plus"></i></span></h3>
         </div>
     </div>
 

@@ -4,7 +4,7 @@ from random import randint
 from flask import Flask, render_template, redirect, flash, session, g, request
 from jinja2 import tests
 from sqlalchemy.exc import IntegrityError
-from models import db, connect_db, User, Character, Class, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear
+from models import db, connect_db, User, Character, Class, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterTechPower, CharacterForcePower
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
@@ -378,6 +378,45 @@ def save_class_choice(class_id):
     session["class"] = _class
     session["level"] = level
 
+    return redirect("/character/powers")
+
+
+
+@app.route("/character/powers")
+def get_powers():
+    """Shows powers page"""
+
+    _class = Class.query.filter_by(name=session["class"]).first()
+    force_powers = ForcePowers.query.all()
+    tech_powers = TechPowers.query.all()
+
+
+    return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers)
+
+
+@app.route("/character/powers", methods=["POST"])
+def save_powers():
+
+    powers = []
+
+    _class = Class.query.filter_by(name=session["class"]).first()
+
+    if "Techcasting" in _class.description_by_level["1"]["Features"]:
+
+        count =  _class.description_by_level[session["level"]]["Tech Powers Known"]
+
+        for item in range(1, int(count) + 1):
+            powers.append(request.form[str(item)])
+
+    elif "Forcecasting" in _class.description_by_level["1"]["Features"]:
+        
+        count =  _class.description_by_level[session["level"]]["Force Powers Known"]
+
+        for item in range(1, int(count) + 1):
+            powers.append(request.form[str(item)])
+
+    session["powers"] = powers
+
     return redirect("/character/backgrounds")
 
 
@@ -721,6 +760,20 @@ def get_create_character():
         ca = CharacterAdventuringGear(adventuring_gear_id=gear.id, character_id=character.id)
         db.session.add(ca)
         db.session.commit()
+
+    if "Techcasting" in _class.description_by_level["1"]["Features"]:
+        for item in session["powers"]:
+            tech = TechPowers.query.filter_by(name=item).first()
+            ct = CharacterForcePower(char_id=character.id, tech_power_id=tech.id)
+            db.session.add(ct)
+            db.commit()
+    elif "Forcecasting" in _class.description_by_level["1"]["Features"]:
+        for item in session["powers"]:
+            power = ForcePowers.query.filter_by(name=item).first()
+            cp = CharacterForcePower(char_id=character.id, force_power_id=power.id)
+            db.session.add(cp)
+            db.session.commit()
+
 
     for item in list(session.keys()):
         if item != USER_KEY and item != "csrf_token":

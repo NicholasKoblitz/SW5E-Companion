@@ -61,7 +61,6 @@ function select(evt) {
     
 }
 
-
 tabs.addEventListener("click", select)
 
 // Feature Events
@@ -99,5 +98,13 @@ function dropdown(evt) {
     
 }
 
-
 features.addEventListener("click", dropdown)
+
+
+// Powers Events
+
+function addPower(evt) {
+    console.dir(evt.target)
+}
+
+powers.addEventListener("click", addPower)

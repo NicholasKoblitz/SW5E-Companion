@@ -246,7 +246,7 @@ class TechPowers(db.Model):
     concentration = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
 
-    to_class = db.relationship("Class", secondary="character_tech_powers", backref="tech_powers")
+    to_class = db.relationship("Character", secondary="character_tech_powers", backref="tech_powers")
 
     
 
@@ -266,7 +266,7 @@ class ForcePowers(db.Model):
     prerequisite = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
 
-    to_class = db.relationship("Class", secondary="character_force_powers", backref="force_powers")
+    to_class = db.relationship("Character", secondary="character_force_powers", backref="force_powers")
 
 # Class specific abilities
 class BerserkerInstincts(db.Model):
@@ -402,14 +402,15 @@ class CharacterForcePower(db.Model):
 	
 	__tablename__ = "character_force_powers"
 	
-	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+	char_id = db.Column(db.Integer,  db.ForeignKey("characters.id", ondelete="cascade"), primary_key=True)
 	force_power_id = db.Column(db.Integer,  db.ForeignKey("force_powers.id", ondelete="cascade"), primary_key=True)
+
 	
 class CharacterTechPower(db.Model):
 	
 	__tablename__ = "character_tech_powers"
 
-	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
+	char_id = db.Column(db.Integer,  db.ForeignKey("characters.id", ondelete="cascade"), primary_key=True)
 	tech_power_id = db.Column(db.Integer,  db.ForeignKey("tech_powers.id", ondelete="cascade"), primary_key=True)
 	
 	
