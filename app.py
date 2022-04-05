@@ -1,19 +1,18 @@
-from imghdr import tests
 import os
 from random import randint
 from flask import Flask, render_template, redirect, flash, session, g, request
-from jinja2 import tests
 from sqlalchemy.exc import IntegrityError
-from models import db, connect_db, User, Character, Class, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterTechPower, CharacterForcePower
+from models import db, connect_db, User, Character, Class, TechPowers, ForcePowers, Specie, Background, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterTechPower, CharacterForcePower
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
-armors = []
-weapons = []
-advent_gear = []
+ARMORS = []
+WEAPONS = []
+GEAR = []
 
 
 app = Flask(__name__)
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
     os.environ.get('DATABASE_URL', 'postgresql:///sw5e'))
@@ -549,7 +548,6 @@ def get_equipment():
         flash("Please Sign In")
         return redirect("/")
 
-    
 
     return render_template('equipment.html')
 
@@ -571,8 +569,8 @@ def choose_armor():
     """Saves armor choice to session"""
 
 
-    armors.append(request.form["armor"])
-    session["armor"] = armors
+    ARMORS.append(request.form["armor"])
+    session["armor"] = ARMORS
 
     return redirect("/character/equipment")
 
@@ -589,18 +587,26 @@ def choose_armor():
 #     data = request.form["armor"]
 
 #     print(data)
-#     i = armors.index(data)
-#     armors.pop(i)
-#     print(armors)
+    
+    # armors = session["armor"]
+    # i = ARMORS.index(data)
+    # print(i)
+    # armors.pop(i)
+    # print(ARMORS)
 
     # session["armor"] = armors
 
     # idx = session["armor"].index(data)
+    # print(idx)
     # del session["armor"][idx]
-
+    # session["armor"].pop(idx)
+    # session["armor"] = armors
     # print(session["armor"])
+    # armors = session["armor"]
 
-    # return redirect("/character/equipment")
+
+    # return render_template("equipment.html")
+    # return redirect(url_for('get_equipment', armors=armors))
 
 
 
@@ -621,9 +627,9 @@ def get_weapons():
 def choose_weapon():
     """Saves weapon choice to session"""
 
-    weapons.append(request.form["weapon"])
+    WEAPONS.append(request.form["weapon"])
 
-    session["weapon"] = weapons
+    session["weapon"] = WEAPONS
 
     return redirect("/character/equipment")
 
@@ -646,9 +652,9 @@ def get_adventure_gear():
 def choose_gear():
     """Saves adventure gear choice to session"""
 
-    advent_gear.append(request.form["gear"])
+    GEAR.append(request.form["gear"])
 
-    session["gear"] = advent_gear
+    session["gear"] = GEAR
 
     return redirect("/character/equipment")
 
@@ -718,9 +724,9 @@ def get_create_character():
         hit_points = roll_hit_dice(int(session["constitution"]), int(session['level']), session['class']),
         hit_dice = _class.hit_dice,
         base_speed = specie.speed_val,
-        vision = "Normal" if "Darvision" not in specie.traits else "Darkvision",
+        vision = "Normal Vision" if "Darvision" not in specie.traits else "Darkvision",
         credits = background.credits,
-        proficiencies = [_class.armor_proficiencies, _class.weapon_proficiencies, _class.tool_proficiencies, background.skill_proficiencies, background.tool_proficiencies],
+        proficiencies = [_class.armor_proficiencies, _class.weapon_proficiencies, _class.tool_proficiencies, background.tool_proficiencies],
         skills = session["skills"],
         languages = specie.language_vals,
         alignment = session["alignment"],
@@ -743,30 +749,31 @@ def get_create_character():
     db.session.add(character)
     db.session.commit()
 
-    for item in session["armor"]:
-        armor = Armor.query.filter_by(name=item).first()
-        ca = CharacterArmor(aromr_id=armor.id, character_id=character.id)
-        db.session.add(ca)
-        db.session.commit()
-
-    for item in session["weapon"]:
-        weapon = Weapon.query.filter_by(name=item).first()
-        cw = CharacterWeapon(weapon_id=weapon.id, character_id=character.id)
-        db.session.add(cw)
-        db.session.commit()
-
-    for item in session["gear"]:
-        gear = AdventureingGear.query.filter_by(name=item).first()
-        ca = CharacterAdventuringGear(adventuring_gear_id=gear.id, character_id=character.id)
-        db.session.add(ca)
-        db.session.commit()
+    if "armor" in session:
+        for item in session["armor"]:
+            armor = Armor.query.filter_by(name=item).first()
+            ca = CharacterArmor(aromr_id=armor.id, character_id=character.id)
+            db.session.add(ca)
+            db.session.commit()
+    elif "weapon" in session:
+        for item in session["weapon"]:
+            weapon = Weapon.query.filter_by(name=item).first()
+            cw = CharacterWeapon(weapon_id=weapon.id, character_id=character.id)
+            db.session.add(cw)
+            db.session.commit()
+    elif "gear" in session:
+        for item in session["gear"]:
+            gear = AdventureingGear.query.filter_by(name=item).first()
+            ca = CharacterAdventuringGear(adventuring_gear_id=gear.id, character_id=character.id)
+            db.session.add(ca)
+            db.session.commit()
 
     if "Techcasting" in _class.description_by_level["1"]["Features"]:
         for item in session["powers"]:
             tech = TechPowers.query.filter_by(name=item).first()
-            ct = CharacterForcePower(char_id=character.id, tech_power_id=tech.id)
+            ct = CharacterTechPower(char_id=character.id, tech_power_id=tech.id)
             db.session.add(ct)
-            db.commit()
+            db.session.commit()
     elif "Forcecasting" in _class.description_by_level["1"]["Features"]:
         for item in session["powers"]:
             power = ForcePowers.query.filter_by(name=item).first()

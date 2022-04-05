@@ -5,6 +5,7 @@ const features = document.querySelector(".features")
 const charcter = document.querySelector(".character")
 const equipment = document.querySelector(".equipment")
 const powers = document.querySelector(".powers")
+const proficiencies = document.querySelector(".proficiencies")
 
 const featArrow = document.querySelectorAll(".fa-arrow-down")
 
@@ -57,6 +58,13 @@ function select(evt) {
         powers.classList.remove("hidden")
     }
 
+    if(evt.target.id !== "proficiencies") {
+        proficiencies.classList.add("hidden")
+    }
+    else {
+        proficiencies.classList.remove("hidden")
+    }
+
     evt.target.classList.toggle("select-tab")
     
 }
@@ -87,7 +95,6 @@ function dropdown(evt) {
         span.append(newEle)
     }
     else if(evt.target.parentNode.parentNode.id === "bg-feat") {
-        feat = document.querySelector(".bg-feat") 
         feat.classList.remove("hidden")
         feat.style.position = "relative"
         evt.target.remove(evt.target)
@@ -95,10 +102,26 @@ function dropdown(evt) {
         newEle.classList = "fa-solid fa-arrow-up"
         span.append(newEle)
     }
-    
+    else if(evt.target.parentNode.parentNode.id === "species-feat") { 
+    feat.classList.remove("hidden")
+    feat.style.position = "relative"
+    evt.target.remove(evt.target)
+    newEle = document.createElement("i")
+    newEle.classList = "fa-solid fa-arrow-up"
+    span.append(newEle)
+    }
+    else if(evt,target.parentNode.parentNode.id === "force-power") {
+        feat.classList.remove("hidden")
+    feat.style.position = "relative"
+    evt.target.remove(evt.target)
+    newEle = document.createElement("i")
+    newEle.classList = "fa-solid fa-arrow-up"
+    span.append(newEle)
+    }
 }
 
 features.addEventListener("click", dropdown)
+powers.addEventListener("click", dropdown)
 
 
 // Powers Events

@@ -4,9 +4,10 @@
     
 
     <section>
-        <p><strong>Name: </strong>{{character.name}}</p>
-        <p><strong>Level: </strong>{{character.level}}</p>
-        <p><strong>Class: </strong>{{character.character_class.name}}</p>
+        <p class="intro-para"><strong class="intro-title">Name:</strong> {{character.name}}</p>
+        <p class="intro-para"><strong class="intro-title">Level:</strong> {{character.level}}</p>
+        <p class="intro-para"><strong class="intro-title">Class:</strong> {{character.character_class.name}}</p>
+        <p class="intro-para"><strong class="intro-title">Hit Points:</strong> {{character.hit_points}}</p>
     </section>
 
 
@@ -266,13 +267,22 @@
                     </div>
                 </div>
 
-                
+            <h3>Species Features</h3>
+            {% for trait in character.character_species.traits %}
+            <div>
+                <h4>{{trait.name}}<span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                <div class="feat-info hidden">
+                    <p>{{trait.details}}</p>
+                </div>
+            </div> 
+            {% endfor %}
+                   
 
 
-            <h3>Features</h3>
+            <h3>Class Features</h3>
             {% for feature in character.character_class.features %}
             <div>
-                <h4>{{feature.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                <h4 id="species-feat">{{feature.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
                 <div class="feat-info hidden">
                     <span>Levels: 
                         {% for level in feature.levels %}
@@ -299,9 +309,9 @@
                 <p><strong>Eyes:</strong> {{character.eyes}}</p>
                 <p><strong>Hair:</strong> {{character.hair}}</p>
                 <p><strong>Skin:</strong> {{character.skin}}</p>
-                <p><strong>Height:</strong> {{character.height}}</p>
-                <p><strong>Weight:</strong> {{character.weight}}</p>
-                <p><strong>Apperance:</strong> {{character.apperance}}</p>
+                <p><strong>Height:</strong> {{character.heigth}}</p>
+                <p><strong>Weight:</strong> {{character.weigth}}</p>
+                <p><strong>Apperance:</strong> {{character.appearance}}</p>
                 <p><strong>Backstory:</strong> {{character.backstory}}</p>
             </div>
         </div>
@@ -325,22 +335,69 @@
 
             {% if character.force_powers %}
                 <h3 class="title">Force Powers</h3>
-                <div id="force-powers">
                     {% for item in character.force_powers %}
-                        <p>{{item.name}}</p>
+                        <div>
+                            <h4 id="force-power">{{item.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                            <div class="feat-info hidden">
+                                <span>
+                                    {% if item.level == 0 %}
+                                        At-Will
+                                    {% else %}
+                                        Level: {{item.level}}
+                                    {% endif %}
+                                </span>
+                                <p>{{item.description}}</p>
+                            </div>
+                        </div>
                     {% endfor %}
-                </div>
+
+
+            {% elif character.tech_powers %}
+                <h3 class="title">Tech Powers</h3>
+                {% for item in character.tech_powers %}
+                    <div>
+                        <h4 id="tech-power">{{item.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                        <div class="feat-info hidden">
+                            <span>
+                                {% if item.level == 0 %}
+                                    At-Will
+                                {% else %}
+                                    Level: {{item.level}}
+                                {% endif %}
+                            </span>
+                            <p>{{item.description}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                
 
             {% else %}
-                <h3>Tech Powers</h3>
-                <div id="tech-powers">
-                    {% for item in character.tech_powers %}
-                        <p>{{item.name}}</p>
-                    {% endfor %}
-                </div>
-
-
+                <h3>This Class has no powers</h3>
             {% endif %}
+
+        </div>
+        <div class="proficiencies setup hidden">
+
+            
+
+            <p class="feature"><strong class="feature-title">Armor Class:</strong> {{character.armor_class}}</p>
+            <p class="feature"><strong class="feature-title">Proficiency Bonus:</strong> + {{character.proficiency_bonus}}</p>
+            <p class="feature"><strong class="feature-title">Initiative:</strong> {{character.initiative}}</p>
+            <p class="feature"><strong class="feature-title">Passive Perception:</strong> {{character.passive_perception}}</p>
+            <p class="feature"><strong class="feature-title">Base Speed:</strong> {{character.base_speed}}</p>
+            <p class="feature"><strong class="feature-title">Vision:</strong> {{character.vision}}</p>
+            <p class="feature"><strong class="feature-title">Languages:</strong>
+                {% for item in character.languages %} 
+                    {{item}}
+                {% endfor %}
+            </p>
+            <p><strong class="feature-title">Proficiencies:</strong></p>
+            {% for item in character.proficiencies %}
+                {% if item != "None" %}
+                    <p class="feature">{{item}}</p>
+                {% endif %}
+            {% endfor %}
+
 
         </div>
     </div>

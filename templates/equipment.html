@@ -9,16 +9,15 @@
     <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
 
 </form>
-<!-- {{session["armor"]}} -->
 
 <h2 class="title"><a href="/character/equipment/armors">Armor</a></h2>
 
         {% for item in session["armor"] %}
                 <!-- <form action="/character/equipment/armors/delete" method="POST"> -->
-                <p class="feature" style="display: inline;">{{item}} </p>
-                <!-- <input type="text" name="armor" value="{{item}}" hidden>
-                <button class="delete-btn" style="display: inline;">X</button>
-                    </form> -->
+                        <p class="feature" style="display: inline;">{{item}} </p>
+                        <!-- <input type="text" name="armor" value="{{item}}" hidden>
+                        <button type="submit" class="delete-btn" style="display: inline;">X</button> -->
+                </form>
                     
         {% endfor %}
 
@@ -42,6 +41,6 @@
         {% endfor %}
 
     
-        <script src="/static/delete_equipment.js"></script>
+        <!-- <script src="/static/delete_equipment.js"></script> -->
 
 {% endblock %}

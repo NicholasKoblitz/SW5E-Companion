@@ -29,7 +29,7 @@
         
             
             <label class="title">Tech Powers</label>
-            {% for item in range(1, len) %}
+            {% for item in range(1, known + 1) %}
                 <select name="{{item}}">
                     <option value="">Select Power</option>
                     {% for item in techs %}
@@ -37,8 +37,13 @@
                     {% endfor %}
                 </select>
             {% endfor %}
+
+
+        {% else %}
+                <h4>This Class does not have Powers</h4>
+
         {% endif %}
-        <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
+        <button class="power-btn next-class"><i class="fa-solid fa-arrow-right"></i></button>
         </form>
         
 
