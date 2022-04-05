@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h2>Sign Up</h2>
+<h2 class="intro-title">Sign Up</h2>
 <div class="form-layout">
   <form method="POST">
     {{ form.hidden_tag() }}
@@ -15,7 +15,7 @@
           <span>{{ error }}</span>
         {% endfor %}
     {% endfor %}
-    <button class="btn">Join</button>
+    <button class="btn title">Join</button>
   </form>
 </div>
 

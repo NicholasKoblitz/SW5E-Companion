@@ -65,13 +65,34 @@ body {
 
   .links {
     position: relative;
-    top: 1.25em;
     right: 2em;
+    letter-spacing: 0.15em;
+  }
+
+  .after-links {
+    position: relative;
+    right: 1em;
   }
 
   nav h4 {
     position: relative;
     left: 1em;
+    letter-spacing: 0.1em;
+  }
+
+  /* home Page */
+
+  h3 {
+    margin-top: 1em;
+  }
+
+  #feat-list {
+    font-family: "Quicksand", sans-serif;
+    list-style-type: none;
+    padding-left: 0.75em;
+    padding-right: 0.25em;
+    margin: 0;
+    line-height: 2em;
   }
 
   /* ---------------------------------------------------------- */
@@ -200,6 +221,9 @@ body {
   gap: 1em;
 }
 
+.text {
+  font-family: "Quicksand", sans-serif;
+}
 /* ------------------------------------------------------------ */
 
 /* Single species and single class page */
@@ -409,7 +433,8 @@ body {
 }
 .tables table thead {
   font-family: StarWarsTitle;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.25em;
+  margin-bottom: 1em;
 }
 
 .tables table thead th:nth-child(even) {
@@ -449,7 +474,7 @@ body {
 }
 
 .tab {
-  padding: 1em;
+  padding: 0.75em;
   margin: 0;
 }
 

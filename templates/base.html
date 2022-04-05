@@ -16,12 +16,12 @@
     <nav>
         <h4><a href="/">SW5E Companion</a></h4>
         {% if g.user %}
-            <div class="links">
-                <a href="/logout">Logout</a> / <a href="/user/{{g.user.id}}" >Dashboard</a>
+            <div class="after-links">
+                <h3><a href="/logout">Logout</a> / <a href="/user/{{g.user.id}}" >Dashboard</a></h3>
             </div>
         {% else %}
             <div class="links">
-                <a href="/signup" class="first-link">Sign-up</a> / <a href="/login">login</a>
+                <h3><a href="/signup" class="first-link">Sign-up</a> / <a href="/login">login</a></h3>
             </div>
                   
         {% endif %}

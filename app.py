@@ -389,8 +389,11 @@ def get_powers():
     force_powers = ForcePowers.query.all()
     tech_powers = TechPowers.query.all()
 
-
-    return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers)
+    if "Techcasting" not in _class.description_by_level["1"]["Features"] or "Forcecasting" not in _class.description_by_level["1"]["Features"]:
+        return redirect("/character/backgrounds")
+    else:
+  
+        return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers)
 
 
 @app.route("/character/powers", methods=["POST"])
@@ -399,6 +402,8 @@ def save_powers():
     powers = []
 
     _class = Class.query.filter_by(name=session["class"]).first()
+
+
 
     if "Techcasting" in _class.description_by_level["1"]["Features"]:
 
@@ -413,6 +418,7 @@ def save_powers():
 
         for item in range(1, int(count) + 1):
             powers.append(request.form[str(item)])
+
 
     session["powers"] = powers
 

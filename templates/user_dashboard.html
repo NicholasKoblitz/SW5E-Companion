@@ -3,10 +3,10 @@
 
 {% block content %}
 
-<h2>{{g.user.username}}</h2>
+<h2 class="intro-title">{{g.user.username}}</h2>
 
 <form action="/character/species" class="dash-form">
-    <button class="btn">Add Character</button>
+    <button class="btn text">Add Character</button>
 </form>
 
 <section class="character-list">
@@ -14,12 +14,12 @@
     
         <a href="/character/{{character.id}}">
             <div class="character-tile">
-                <p><strong>Name: </strong>{{character.name}}</p>
-                <p><strong>Level: </strong>{{character.level}}</p>
-                <p><strong>Class: </strong>{{character.character_class.name}}</p>
-                <p><strong>Species: </strong>{{character.character_species.name}}</p>
+                <p class="text"><strong class="title">Name: </strong>{{character.name}}</p>
+                <p class="text"><strong class="title">Level: </strong>{{character.level}}</p>
+                <p class="text"><strong class="title">Class: </strong>{{character.character_class.name}}</p>
+                <p class="text"><strong class="title">Species: </strong>{{character.character_species.name}}</p>
                 <form action="/character/{{character.id}}/delete" class="dash-form" method="POST">
-                    <button class="btn">Delete Character</button>
+                    <button class="btn text">Delete Character</button>
                 </form>
             </div>
         </a>
