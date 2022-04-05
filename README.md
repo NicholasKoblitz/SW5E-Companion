@@ -1,6 +1,6 @@
 # Welcome to SW5E-Companion
 
-SW5E Companion is a light-weight character creator for the Dungeons and Dragons 5th Edition Star Wars overhaul by Galiphie and his collabortors. The Creator allows for a user to design a basic character to allow the use of that character within a campagain.
+SW5E Companion is a light-weight, mobile character creator for the Dungeons and Dragons 5th Edition Star Wars overhaul by Galiphie and his collabortors. The Creator allows for a user to design a basic character to allow the use of that character within a campagain.
 
 ## Features
 
