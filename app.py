@@ -21,7 +21,7 @@ if uri.startswith("postgres://"):
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get(uri, 'postgresql:///sw5e'))
+    os.environ.get('DATABASE_URL', 'postgresql:///sw5e'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
