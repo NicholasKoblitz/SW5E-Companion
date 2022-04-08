@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgresql:///sw5e'))
+    os.environ.get(('DATABASE_URL?sslmode=require').replace('postgres://', 'postgresql://'), 'postgresql:///sw5e'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
@@ -594,25 +594,19 @@ def choose_armor():
 
 #     print(data)
     
-    # armors = session["armor"]
-    # i = ARMORS.index(data)
-    # print(i)
-    # armors.pop(i)
-    # print(ARMORS)
+#     armors = session["armor"]
+#     i = ARMORS.index(data)
+#     print(i)
+#     armors.pop(i)
+#     print(ARMORS)
 
-    # session["armor"] = armors
-
-    # idx = session["armor"].index(data)
-    # print(idx)
-    # del session["armor"][idx]
-    # session["armor"].pop(idx)
-    # session["armor"] = armors
-    # print(session["armor"])
-    # armors = session["armor"]
+#     session.pop('armor',None)
+#     session["armor"] = armors
 
 
-    # return render_template("equipment.html")
-    # return redirect(url_for('get_equipment', armors=armors))
+
+#     return render_template("equipment.html")
+#     return redirect(url_for('get_equipment', armors=armors))
 
 
 

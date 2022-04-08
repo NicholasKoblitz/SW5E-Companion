@@ -1,5 +1,5 @@
 from app import app
-from models import SpeciesToTraits, db, User, Character, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, SpecieTraits, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterConditions, Condition, BerserkerInstincts, ForceEmpoweredCasting, Maneuver, GuardianAura, MonasticVows, OperativeExploits, ScholarDiscovery, ScoutRoutine, SentinelIdeals, FeatsBackround, PersonalityBackground, IdealsBackgrounds, BondsBackgrounds, FlawsBackgrounds
+from models import SpeciesToTraits, db, Class, ClassFeatures, Archetype, FightingMastery, FightingStyles, LightsaberForms, TechPowers, ForcePowers, Specie, SpecieTraits, Background, Feat, PersonalityTraits, Ideals, Bonds, Flaws, Armor, Weapon, AdventureingGear, Condition, BerserkerInstincts, ForceEmpoweredCasting, Maneuver, GuardianAura, MonasticVows, OperativeExploits, ScholarDiscovery, ScoutRoutine, SentinelIdeals, FeatsBackround, PersonalityBackground, IdealsBackgrounds, BondsBackgrounds, FlawsBackgrounds
 
 
 db.drop_all()
