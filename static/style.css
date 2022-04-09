@@ -502,7 +502,7 @@ body {
   }
 
   .class-card {
-    padding: 4em;
+    padding: 3em;
   }
 
   .item-title {
@@ -568,19 +568,19 @@ body {
   }
 
   .item-detials-right button {
-    font-size: 30px;
+    font-size: 20px;
   }
 
   .item-detials-left button {
-    font-size: 30px;
+    font-size: 20px;
   }
 
   .item-detials-right p {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .item-detials-left p {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .hidden {
