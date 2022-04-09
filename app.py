@@ -394,9 +394,10 @@ def get_powers():
     _class = Class.query.filter_by(name=session["class"]).first()
     force_powers = ForcePowers.query.all()
     tech_powers = TechPowers.query.all()
+    level = int(session["level"])
 
     if "Techcasting" in _class.description_by_level["1"]["Features"] or "Forcecasting" in _class.description_by_level["1"]["Features"]:
-        return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers)
+        return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers, level=level)
     else:
         return redirect("/character/backgrounds")
 

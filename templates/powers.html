@@ -17,7 +17,9 @@
                 <select name="{{item}}">
                     <option value="">Select Power</option>
                     {% for item in forces %}
+                        {% if session["level"]|int is ge(item.level) %}
                         <option value="{{item.name}}">{{item.name}}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             {% endfor %}
@@ -33,7 +35,9 @@
                 <select name="{{item}}">
                     <option value="">Select Power</option>
                     {% for item in techs %}
-                        <option value="{{item.name}}">{{item.name}}</option>
+                        {% if session["level"]|int is ge(item.level) %}
+                            <option value="{{item.name}}">{{item.name}}</option>
+                        {% endif %}
                     {% endfor %}
                 </select>
             {% endfor %}
