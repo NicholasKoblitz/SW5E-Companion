@@ -68,6 +68,10 @@ body {
     font-weight: lighter;
   }
 
+  #too-big {
+    visibility: hidden;
+  }
+
   #flash {
     background-color: var(--warning-color);
     color: var(--text-color);
