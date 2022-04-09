@@ -2091,6 +2091,9 @@ master_of_combat = ClassFeatures(
     class_id = 4
 )
 
+db.session.add_all([fighting_style, second_wind, action_surge, combat_superiority, fighting_mastery, fighter_specialty, ability_score_improvement_fighter, extra_attack_fighter, indomitable, greater_extra_attack, master_of_combat])
+db.session.commit()
+
 #? Guardian Features
 forcecasting_guardian = ClassFeatures(
     name = "Forcecasting",
