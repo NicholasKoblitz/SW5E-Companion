@@ -4,7 +4,7 @@
 <a href="/character/ability-scores" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
 
 
-<div class="form-layout">
+<div class="form-layout description-form">
     <form method="POST">
         {{ form.hidden_tag() }}
         {% for field in form if field.widget.input_type != 'hidden' %}

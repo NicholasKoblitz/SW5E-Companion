@@ -318,7 +318,6 @@ def save_class_choice(class_id):
     class_ = Class.query.get(class_id)
 
     _class = request.form["class"]
-    level = request.form["level"]
     skills = []
 
 
@@ -381,64 +380,8 @@ def save_class_choice(class_id):
 
     session["skills"] = skills
     session["class"] = _class
-    session["level"] = level
-
-    return redirect("/character/powers")
-
-
-
-@app.route("/character/powers")
-def get_powers():
-    """Shows powers page"""
-
-    _class = Class.query.filter_by(name=session["class"]).first()
-    force_powers = ForcePowers.query.all()
-    tech_powers = TechPowers.query.all()
-    level = int(session["level"])
-
-    if "Techcasting" in _class.description_by_level["1"]["Features"] or "Forcecasting" in _class.description_by_level["1"]["Features"]:
-        return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers, level=level)
-    else:
-        return redirect("/character/backgrounds")
-
-
-
-@app.route("/character/powers", methods=["POST"])
-def save_powers():
-
-    powers = []
-
-    _class = Class.query.filter_by(name=session["class"]).first()
-
-
-
-    if "Techcasting" in _class.description_by_level["1"]["Features"]:
-
-        count =  _class.description_by_level[session["level"]]["Tech Powers Known"]
-
-        for item in range(1, int(count) + 1):
-            if request.form[str(item)] in powers:
-                flash("You Selected the same powers. Please select again.")
-                return redirect("/character/powers")
-            else:
-                powers.append(request.form[str(item)])
-
-    elif "Forcecasting" in _class.description_by_level["1"]["Features"]:
-        
-        count =  _class.description_by_level[session["level"]]["Force Powers Known"]
-
-        for item in range(1, int(count) + 1):
-            if request.form[str(item)] in powers:
-                flash("You Selected the same powers. Please select again.")
-                return redirect("/character/powers")
-            else:
-                powers.append(request.form[str(item)])
-
-
-    session["powers"] = powers
 
     return redirect("/character/backgrounds")
-
 
 
 @app.route("/character/backgrounds")
@@ -542,6 +485,7 @@ def get_description():
 
         session["name"] = form.name.data
         session["alignment"] = form.alignment.data
+        session["level"] = form.level.data
         session["personality_trait"] = form.personality_trait.data
         session["ideal"] = form.ideal.data
         session["bond"] = form.bond.data
@@ -557,9 +501,63 @@ def get_description():
         session["appearance"] = form.appearance.data
         session["backstory"] = form.backstory.data
 
-        return redirect("/character/equipment")
+        return redirect("/character/powers")
     
     return render_template("description.html", form=form)
+
+@app.route("/character/powers")
+def get_powers():
+    """Shows powers page"""
+
+    _class = Class.query.filter_by(name=session["class"]).first()
+    force_powers = ForcePowers.query.all()
+    tech_powers = TechPowers.query.all()
+    level = session["level"]
+
+    if "Techcasting" in _class.description_by_level["1"]["Features"] or "Forcecasting" in _class.description_by_level["1"]["Features"]:
+        return render_template("powers.html", _class=_class, forces=force_powers, techs=tech_powers, level=level)
+    else:
+        return redirect("/character/equipment")
+
+
+
+@app.route("/character/powers", methods=["POST"])
+def save_powers():
+
+    powers = []
+
+    _class = Class.query.filter_by(name=session["class"]).first()
+
+
+
+    if "Techcasting" in _class.description_by_level["1"]["Features"]:
+
+        count =  _class.description_by_level[session["level"]]["Tech Powers Known"]
+
+        for item in range(1, int(count) + 1):
+            if request.form[str(item)] in powers:
+                flash("You Selected the same powers. Please select again.")
+                return redirect("/character/powers")
+            else:
+                powers.append(request.form[str(item)])
+
+    elif "Forcecasting" in _class.description_by_level["1"]["Features"]:
+        
+        count =  _class.description_by_level[session["level"]]["Force Powers Known"]
+
+        for item in range(1, int(count) + 1):
+            if request.form[str(item)] in powers:
+                flash("You Selected the same powers. Please select again.")
+                return redirect("/character/powers")
+            else:
+                powers.append(request.form[str(item)])
+
+
+    session["powers"] = powers
+
+    return redirect("/character/equipment")
+
+
 
 @app.route("/character/equipment")
 def get_equipment():
@@ -699,7 +697,7 @@ def get_create_character():
         class_id = _class.id,
         species_id = specie.id,
         background_id = background.id,
-        level = int(session["level"]),
+        level = session["level"],
         class_saving_throw_pros = _class.saving_throw_proficiencies,
         xp_points = 0,
         strength = int(session["strength"]),

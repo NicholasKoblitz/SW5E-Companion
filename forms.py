@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SelectField, TextAreaField
+from wtforms import StringField, PasswordField, SelectField, TextAreaField, IntegerField
 from wtforms.validators import InputRequired, Length
 
 class SignupForm(FlaskForm):
@@ -29,7 +29,7 @@ class DescriptionForm(FlaskForm):
     """Character Description Form"""
 
     name = StringField("Name")
-    alignment = SelectField("Choose Charatcer Alignment", choices=[
+    alignment = SelectField("Alignment", choices=[
         ("Lawful Light", "Lawful Light"), 
         ("Neutral Light", "Neutral Light"), 
         ("Chaotic Light", "Chaotic Light"), 
@@ -40,6 +40,7 @@ class DescriptionForm(FlaskForm):
         ("Neutral Dark", "Neutral Dark"), 
         ("Chaotic Dark", "Chaotic Dark")
         ])
+    level = IntegerField("Class Level", validators=[InputRequired(message="Enter Class Level")])
     personality_trait = StringField("Personality Traits")
     ideal = StringField("Ideal")
     bond = StringField("Bond")

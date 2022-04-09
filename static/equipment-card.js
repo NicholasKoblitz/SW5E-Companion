@@ -14,7 +14,7 @@ function toggleOpen(evt) {
 }
 
 function toggleClose(evt) {
-    if(evt.target.classList[2] === "fa-compress") {
+    if(evt.target.classList[1] === "fa-x") {
         evt.target.parentNode.parentNode.classList.toggle("hidden")
     }
 }

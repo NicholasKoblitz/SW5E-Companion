@@ -6,12 +6,12 @@
    
     <div class="card-area">
         {% for item in gear %}
-    
+        {% if item.id is even() %}
         <div class="item-card">
             <button class="toggle-open toggle-btn"><h3 class="item-title">{{item.name}}</h3></button>
-            <div class="item-detials hidden">
+            <div class="item-detials-left hidden">
                 <span></span>
-                <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
+                <button class="toggle-close toggle-btn"><i class="fa-regular fa-x"></i></button>
                 <p>Adventuring Gear Category</p>
                 <p>{{item.catrgory}}</p>
                 <p>Cost</p>
@@ -29,6 +29,30 @@
                 </form>
             </div>
         </div>
+        {% else %}
+        <div class="item-card">
+            <button class="toggle-open toggle-btn"><h3 class="item-title">{{item.name}}</h3></button>
+            <div class="item-detials-right hidden">
+                <span></span>
+                <button class="toggle-close toggle-btn"><i class="fa-regular fa-x"></i></button>
+                <p>Adventuring Gear Category</p>
+                <p>{{item.catrgory}}</p>
+                <p>Cost</p>
+                <p>{{item.cost}}</p>
+                <p>Weight</p>
+                <p>{{item.weight}}</p>
+                {% if item.details != None %}
+                    <!-- <p>Adventuring Gear Details</p>
+                    <p>{{item.details}}</p> -->
+                {% endif %}
+                
+                <form action="/character/equipment/adventure-gear", method="POST">
+                    <input type="text" value="{{item.name}}" name="gear" hidden>
+                    <button type="submit" class="toggle-close"><i class="close fa-solid fa-check"></i></button>
+                </form>
+            </div>
+        </div>
+        {% endif %}
     {% endfor %}
     </div>
     

@@ -6,46 +6,87 @@
 
 <div class="card-area">
     {% for armor in armors %}
+        {% if armor.id is even() %}
+            <div class="item-card">
+                <button class="toggle-open toggle-btn"><h3 class="item-title">{{armor.name}}</h3></button>
+                <div class="item-detials-left hidden">
+                    <span></span>
+                    <button class="toggle-close toggle-btn"><i class="fa-regular fa-x"></i></button>
+                    <p>Armor Type</p>
+                    <p>{{armor.type}}</p>
+                    <p>Properties</p>
+                    <p>
+                        {% if armor.properties == None %}
+                            None
+                        {% else %}
+                            {% for prop in armor.properties %}
+                                {{prop}}
+                            {% endfor %}
 
-    <div class="item-card">
-        <button class="toggle-open toggle-btn"><h3 class="item-title">{{armor.name}}</h3></button>
-        <div class="item-detials hidden">
-            <span></span>
-            <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
-            <p>Armor Type</p>
-            <p>{{armor.type}}</p>
-            <p>Properties</p>
-            <p>
-                {% if armor.properties == None %}
-                    None
-                {% else %}
-                    {% for prop in armor.properties %}
-                        {{prop}}
-                    {% endfor %}
-                    
+                        {% endif %}
+                    </p>
+                    <p>Cost</p>
+                    <p>{{armor.cost}}</p>
+                    <p>Weight</p>
+                    <p>{{armor.weight}}</p>
+                    <p>Armor Class</p>
+                    <p>{{armor.armor_class}}</p>
+                    {% if armor.stealth != None %}
+                        <p>Stealth</p>
+                        <p>{{armor.stealth}}</p>
+                    {% endif %}
+                    {% if armor.details != None %}
+                        <!-- <p>Armor Details</p>
+                        <p>{{armor.details}}</p> -->
+                    {% endif %}
+                        
+                    <form action="/character/equipment/armors", method="POST">
+                        <input type="text" value="{{armor.name}}" name="armor" hidden>
+                        <button type="submit" class="toggle-close"><i class="close fa-solid fa-check"></i></button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+        <div class="item-card">
+            <button class="toggle-open toggle-btn"><h3 class="item-title">{{armor.name}}</h3></button>
+            <div class="item-detials-right hidden">
+                <span></span>
+                <button class="toggle-close toggle-btn"><i class="fa-regular fa-x"></i></button>
+                <p>Armor Type</p>
+                <p>{{armor.type}}</p>
+                <p>Properties</p>
+                <p>
+                    {% if armor.properties == None %}
+                        None
+                    {% else %}
+                        {% for prop in armor.properties %}
+                            {{prop}}
+                        {% endfor %}
+
+                    {% endif %}
+                </p>
+                <p>Cost</p>
+                <p>{{armor.cost}}</p>
+                <p>Weight</p>
+                <p>{{armor.weight}}</p>
+                <p>Armor Class</p>
+                <p>{{armor.armor_class}}</p>
+                {% if armor.stealth != None %}
+                    <p>Stealth</p>
+                    <p>{{armor.stealth}}</p>
                 {% endif %}
-            </p>
-            <p>Cost</p>
-            <p>{{armor.cost}}</p>
-            <p>Weight</p>
-            <p>{{armor.weight}}</p>
-            <p>Armor Class</p>
-            <p>{{armor.armor_class}}</p>
-            {% if armor.stealth != None %}
-                <p>Stealth</p>
-                <p>{{armor.stealth}}</p>
-            {% endif %}
-            {% if armor.details != None %}
-                <!-- <p>Armor Details</p>
-                <p>{{armor.details}}</p> -->
-            {% endif %}
-            
-            <form action="/character/equipment/armors", method="POST">
-                <input type="text" value="{{armor.name}}" name="armor" hidden>
-                <button type="submit" class="toggle-close"><i class="close fa-solid fa-check"></i></button>
-            </form>
+                {% if armor.details != None %}
+                    <!-- <p>Armor Details</p>
+                    <p>{{armor.details}}</p> -->
+                {% endif %}
+                    
+                <form action="/character/equipment/armors", method="POST">
+                    <input type="text" value="{{armor.name}}" name="armor" hidden>
+                    <button type="submit" class="toggle-close"><i class="close fa-solid fa-check"></i></button>
+                </form>
+            </div>
         </div>
-    </div>
+        {% endif %}
 {% endfor %}
 </div>
 
