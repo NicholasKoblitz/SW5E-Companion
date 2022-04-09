@@ -547,7 +547,7 @@ body {
     row-gap: 0.5em;
     background-color: var(--secondary-color);
     z-index: 1; 
-    top: 50%;
+    top: 20%;
     right: 50%;
   }
 
@@ -563,7 +563,7 @@ body {
     row-gap: 0.5em;
     background-color: var(--secondary-color);
     z-index: 1; 
-    top: 50%;
+    top: 20%;
     left: 50%;
   }
 
