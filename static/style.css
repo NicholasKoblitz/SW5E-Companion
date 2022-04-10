@@ -450,7 +450,7 @@ body {
     background-color: var(--main-bg-color);
     color: var(--text-color);
     position: absolute;
-    right: .4em;
+    right: .05em;
     top: 3.8em;
     font-size: 30px;
   }
@@ -468,7 +468,7 @@ body {
     text-decoration: none;
     color: var(--text-color);
     position: absolute;
-    left: .5em;
+    left: .2em;
     top: 3.9em;
     font-size: 30px;
   }
@@ -729,6 +729,19 @@ body {
     left: 0.5em;
     font-size: 20px;
 
+  }
+
+  .powers h4 {
+    font-family: "Quicksand", sans-serif;
+    position: relative;
+    left: 0.5em;
+    font-size: 20px;
+  }
+
+  .powers h4 span {
+    position: relative;
+    left: 0.5em;
+    font-size: 20px;
   }
 
   .feat-info {

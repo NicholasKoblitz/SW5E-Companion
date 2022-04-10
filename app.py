@@ -532,7 +532,7 @@ def save_powers():
 
     if "Techcasting" in _class.description_by_level["1"]["Features"]:
 
-        count =  _class.description_by_level[session["level"]]["Tech Powers Known"]
+        count =  _class.description_by_level["1"]["Tech Powers Known"]
 
         for item in range(1, int(count) + 1):
             if request.form[str(item)] in powers:
@@ -543,7 +543,7 @@ def save_powers():
 
     elif "Forcecasting" in _class.description_by_level["1"]["Features"]:
         
-        count =  _class.description_by_level[session["level"]]["Force Powers Known"]
+        count =  _class.description_by_level["1"]["Force Powers Known"]
 
         for item in range(1, int(count) + 1):
             if request.form[str(item)] in powers:

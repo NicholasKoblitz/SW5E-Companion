@@ -174,11 +174,6 @@ class ClassFeatures(db.Model):
 
     to_class = db.relationship("Class", backref="features")
 
-    
-
-
-
-
 
 class TechPowers(db.Model):
     """Tech-Power Table"""
