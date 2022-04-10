@@ -13,18 +13,33 @@
             {% set known = _class.description_by_level[session["level"]|string]["Force Powers Known"]|int %}
          
             <label class="title">Force Powers</label>
+            <select name="alignment" id="alignment">
+                <option value="universal">Universal</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
             {% for item in range(1, known + 1) %}
-                <select name="{{item}}">
+                <select name="{{item}}" class="power-selection">
                     <option value="">Select Power</option>
                     {% for item in forces %}
                         {% if session["level"]|int is ge(item.level) %}
-                        <option value="{{item.name}}">
                             {% if item.level == 0 %}
-                                    {{item.name}}-At-Will
+                                {% if item.force_alignment == "Universal" %}
+                                    <option value="{{item.name}}" class="universal">{{item.name}}-At-Will</option>
+                                {% elif item.force_alignment == "Light" %}
+                                    <option value="{{item.name}}" class="light">{{item.name}}-At-Will</option>
                                 {% else %}
-                                    {{item.name}}-1
+                                    <option value="{{item.name}}" class="dark">{{item.name}}-At-Will</option>
+                                {% endif %}   
+                            {% else %}
+                                {% if item.force_alignment == Universal %}
+                                    <option value="{{item.name}}" class="universal">{{item.name}}-1</option>
+                                {% elif item.force_alignment == Light %}
+                                    <option value="{{item.name}}" class="light">{{item.name}}-1</option>
+                                {% else %}
+                                    <option value="{{item.name}}" class="dark">{{item.name}}-1</option>
                                 {% endif %}
-                        </option>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </select>
@@ -66,6 +81,6 @@
 
     </div>
 
-
+    <script src="/static/powers.js"></script>
 
 {% endblock %}
