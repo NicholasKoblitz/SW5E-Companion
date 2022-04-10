@@ -176,58 +176,7 @@ class ClassFeatures(db.Model):
 
     
 
-class Archetype(db.Model):
-    """Archetypes table"""
 
-    __tablename__ = "archetypes"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    caster_type = db.Column(db.Text, nullable=False)
-    features = db.Column(db.PickleType, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="archetypes")
-
-
-
-class FightingStyles(db.Model):
-    """Fighting Styles Table"""
-
-    __tablename__ = "fighting_styles"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    description = db.Column(db.Text, nullable=False)
-
-    to_class = db.relationship("Class", secondary="character_fighting_styles", backref="fighting_styles")
-
-
-
-class FightingMastery(db.Model):
-    """Fighting Mastery Table"""
-
-    __tablename__ = "fighting_masteries"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    description = db.Column(db.Text, nullable=False)
-
-    to_class = db.relationship("Class", secondary="character_fighting_masteries", backref="fighting_masteries")
-
-
-
-class LightsaberForms(db.Model):
-    """Lightsaber Forms Table"""
-
-    __tablename__ = "lightsaber_forms"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    prerequisite = db.Column(db.Text)
-    description = db.Column(db.Text, nullable=False)
-
-    to_class = db.relationship("Class", secondary="character_lightsaber_forms", backref="lightsaber_forms")
 
 
 
@@ -267,135 +216,7 @@ class ForcePowers(db.Model):
 
     to_class = db.relationship("Character", secondary="character_force_powers", backref="force_powers")
 
-# Class specific abilities
-class BerserkerInstincts(db.Model):
-    """Berserker Instincts Table"""
 
-    __tablename__ = "berserker_instincts"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    prerequisite = db.Column(db.Text)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="instincts")
-
-
-class ForceEmpoweredCasting(db.Model):
-    """Force-empowered Casting Table"""
-
-    __tablename__ = "force-empowered casting"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-    
-    to_class = db.relationship("Class", backref="force_empowered")
-
-class Maneuver(db.Model):
-    """Maneuvers Table"""
-
-    __tablename__ = "maneuvers"
-    
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="maneuver")
-
-class GuardianAura(db.Model):
-    """Guardian Aura Table"""
-
-    __tablename__ = "guardian_aura"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="aura")
-
-
-class MonasticVows(db.Model):
-    """Monastic Vows Table"""
-
-    __tablename__ = "monastic_vows"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    prerequisite = db.Column(db.Text)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="vows")
-
-
-class OperativeExploits(db.Model):
-    """Operative Exploits Table"""
-
-    __tablename__ = "operative_exploits"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    prerequisite = db.Column(db.Text)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="exploits")
-
-
-class ScholarDiscovery(db.Model):
-    """Scholar's Discoveries Table"""
-
-    __tablename__ = "scholar_discoveries"
-    
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    prerequisite = db.Column(db.Text)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="discoveries")
-
-
-class ScoutRoutine(db.Model):
-    """Scout Routines Table"""
-
-    __tablename__ = "scout_routines"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="routines")
-
-
-class SentinelIdeals(db.Model):
-    """Sentinel Ideals Table"""
-
-    __tablename__ = "sentinel_ideals"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    details = db.Column(db.Text, nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey("classes.id"))
-
-    to_class = db.relationship("Class", backref="ideals")
-
-
-
-# Many-to-many tables
-class CharacterFightingStyle(db.Model):
-	
-	__tablename__ = "character_fighting_styles"
-	
-	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
-	fighting_style_id = db.Column(db.Integer,  db.ForeignKey("fighting_styles.id", ondelete="cascade"), primary_key=True)
-	
 
 class CharacterForcePower(db.Model):
 	
@@ -412,21 +233,6 @@ class CharacterTechPower(db.Model):
 	char_id = db.Column(db.Integer,  db.ForeignKey("characters.id", ondelete="cascade"), primary_key=True)
 	tech_power_id = db.Column(db.Integer,  db.ForeignKey("tech_powers.id", ondelete="cascade"), primary_key=True)
 	
-	
-class CharacterFightingMastery(db.Model):
-	
-	__tablename__ = "character_fighting_masteries"
-	
-	class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
-	fighting_mastery_id = db.Column(db.Integer,  db.ForeignKey("fighting_masteries.id", ondelete="cascade"), primary_key=True)
-
-class CharacterLightsaberForms(db.Model):
-
-    __tablename__ = "character_lightsaber_forms"
-    
-    class_id = db.Column(db.Integer,  db.ForeignKey("classes.id", ondelete="cascade"), primary_key=True)
-    lightsaber_form_id = db.Column(db.Integer,  db.ForeignKey("lightsaber_forms.id", ondelete="cascade"), primary_key=True)
-
 
 # Speces and associated tables
 
@@ -675,23 +481,3 @@ class AdventureingGear(db.Model):
     to_character = db.relationship("Character", secondary="character_adventuring_gears", backref="adventuring_gear")
 
 
-# Conditions Tables
-
-class CharacterConditions(db.Model):
-    """Character's Conditions table"""
-
-    __tablename__ = "character_conditions"
-    condition_id = db.Column(db.Integer, db.ForeignKey("conditions.id"), primary_key=True)
-    character_id = db.Column(db.Integer, db.ForeignKey("characters.id"), primary_key=True)
-
-
-class Condition(db.Model):
-    """Conditions Table"""
-
-    __tablename__ = "conditions"
-
-    id = db.Column(db.Integer, primary_key=True,  autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
-    details = db.Column(db.Text, nullable=False)
-
-    to_character = db.relationship("Character", secondary="character_conditions", backref="conditions")

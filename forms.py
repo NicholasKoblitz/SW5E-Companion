@@ -40,7 +40,7 @@ class DescriptionForm(FlaskForm):
         ("Neutral Dark", "Neutral Dark"), 
         ("Chaotic Dark", "Chaotic Dark")
         ])
-    level = IntegerField("Class Level", validators=[InputRequired(message="Enter Class Level")])
+    # level = IntegerField("Class Level", validators=[InputRequired(message="Enter Class Level")])
     personality_trait = StringField("Personality Traits")
     ideal = StringField("Ideal")
     bond = StringField("Bond")

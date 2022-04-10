@@ -485,7 +485,7 @@ def get_description():
 
         session["name"] = form.name.data
         session["alignment"] = form.alignment.data
-        session["level"] = form.level.data
+        session["level"] = 1
         session["personality_trait"] = form.personality_trait.data
         session["ideal"] = form.ideal.data
         session["bond"] = form.bond.data
