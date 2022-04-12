@@ -346,7 +346,7 @@
                 <h3 class="title">Force Powers</h3>
                     {% for item in character.force_powers %}
                         <div>
-                            <h4 id="force-power">{{item.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                            <h4 id="force-power">{{item.name}} <span class="arrow"><i class="fa-solid fa-plus"></i></span></h4>
                             <div class="feat-info hidden">
                                 <span>
                                     {% if item.level == 0 %}
@@ -365,7 +365,7 @@
                 <h3 class="title">Tech Powers</h3>
                 {% for item in character.tech_powers %}
                     <div>
-                        <h4 id="tech-power">{{item.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                        <h4 id="tech-power">{{item.name}} <span class="arrow"><i class="fa-solid fa-plus"></i></span></h4>
                         <div class="feat-info hidden">
                             <span>
                                 {% if item.level == 0 %}
