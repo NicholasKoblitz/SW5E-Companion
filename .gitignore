@@ -1,3 +1,4 @@
 vevn/ 
 __pycache__/
-
+venv/
+ignore-seed.py

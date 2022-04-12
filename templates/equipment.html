@@ -10,7 +10,7 @@
 
 </form>
 
-<h2 class="title"><a href="/character/equipment/armors">Armor</a></h2>
+<h2 class="title-abilities"><a href="/character/equipment/armors">Armor</a></h2>
 
         {% for item in session["armor"] %}
                 <!-- <form action="/character/equipment/armors/delete" method="POST"> -->
@@ -21,20 +21,20 @@
                     
         {% endfor %}
 
-<h2 class="title"><a href="/character/equipment/weapons">Weapons</a></h2>
+<h2 class="title-abilities"><a href="/character/equipment/weapons">Weapons</a></h2>
 
         {% for item in session["weapon"] %}
         <!-- <form action="/character/equipment/delete" method="POST"> -->
-                <p class="feature" style="display: inline;">{{item}} </p>
+                <p class="feature-equipment" style="display: inline;">{{item}} </p>
                 <!-- <input type="text" name="weapon" value="{{item}}" hidden>
                 <button class="delete-btn" style="display: inline;">X</button>
                     </form> -->
         {% endfor %}
 
-<h2 class="title"><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
+<h2 class="title-abilities"><a href="/character/equipment/adventure-gear">Adventure Gear</a></h2>
         {% for item in session["gear"] %}
         <!-- <form action="/character/equipment/delete" method="POST"> -->
-                <p class="feature" style="display: inline;">{{item}} </p>
+                <p class="feature-equipment" style="display: inline;">{{item}} </p>
                 <!-- <input type="text" name="gear" value="{{item}}" hidden>
                 <button class="delete-btn" style="display: inline;">X</button>
                     </form> -->

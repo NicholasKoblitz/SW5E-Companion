@@ -34,11 +34,15 @@
         <p class="feature"><strong class="feature-title">Armor:</strong> {{_class.armor_proficiencies}}</p>
         <p class="feature"><strong class="feature-title">Weapons:</strong >{{_class.weapon_proficiencies}}</p>
         <p class="feature"><strong class="feature-title">Tools:</strong> {{_class.tool_proficiencies}}</p>
-        <p class="feature"><strong class="feature-title">Saving Throws:</strong> {{_class.saving_throw_proficiencies}}</p>
+        <p class="feature"><strong class="feature-title">Saving Throws:</strong> 
+            {% for item in _class.saving_throw_proficiencies %}
+                {{item}} 
+            {% endfor %}
+        </p>
 
     </section>
         
-    <section class=intro>
+    <section class="intro">
         <h3 class="intro-title"><strong>Skills</strong></h3>
         <p class="feature">{{_class.skills}}</p>
 
@@ -46,11 +50,7 @@
             <form method="POST">
                 <input type="text" value="{{_class.name}}" name="class" hidden>
 
-                <div class="class-level">
-                    <label for="level"><strong>Class Level: </strong>
-                        <input type="number" name="level" min="1" max="20">
-                    </label>
-                </div>
+                
                 
                 <label class="title">Choose Skills</label>
                 {% for skill in range(0, _class.skill_vals[0]) %}
@@ -85,26 +85,25 @@
 
     <section class="intro">
         <h3 class="intro-title"><strong>Variant Wealth</strong></h3>
-        <p>In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If you do so, you receive no equipment from your class and background, and instead roll for your starting wealth using the criteria below: </p>
+        <p class="intro-para">In lieu of the equipment granted by your class and background, you can elect to purchase your starting gear. If you do so, you receive no equipment from your class and background, and instead roll for your starting wealth using the criteria below: </p>
         <p class="feature">{{_class.variant_starting_wealth}}</p>
     </section>
 
-    <h3 class="intro-title">Class By Level</h3>
+    <h2 class="intro-title">Class By Level</h2>
     {% set lst = _class.description_by_level.items() %}
     <div class="card-area">
         {% for (num, section) in lst %}
     
             <div class="class-card item-card">
                 <button class="toggle-open toggle-btn"><h3 class="item-title">{{num}}</h3></button>
-
-                <div class="item-detials hidden">
+                {% if num|int is even() %}
+                <div class="item-detials-left hidden">
                     <span></span>
-                    <button class="toggle-close toggle-btn"><i class="close fa-solid fa-compress"></i></button>
+                    <button class="toggle-close toggle-btn"><i class="fa-regular fa-x"></i></button>
                     {% set i = section.items() %}
 
                     {% for (title, val) in i %}
                         <p>{{title}}</p>
-                            <!-- {{val}} -->
                         <p>
                             {% if val is not string %}
                                 {% for i in val %}
@@ -116,9 +115,34 @@
 
                         </p>    
                         
-                    {% endfor %}
-                    
+                    {% endfor %}    
                 </div>
+                {% else %}
+                <div class="item-detials-right hidden">
+                    <span></span>
+                    <button class="toggle-close toggle-btn"><i class="fa-regular fa-x"></i></button>
+                    {% set i = section.items() %}
+
+                    {% for (title, val) in i %}
+                        <p>{{title}}</p>
+                        <p>
+                            {% if val is not string %}
+                                {% for i in val %}
+                                    {{i}}
+                                {% endfor %}
+                            {% else %}
+                                {{val}}
+                            {% endif %}
+
+                        </p>    
+                        
+                    {% endfor %}    
+                </div>
+                {% endif %}
+
+
+
+
             </div>
         {% endfor %}
     </div>
