@@ -657,16 +657,31 @@ body {
   .character-tabs {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:space-between;
     align-items: baseline;
     padding: 0;
-    font-size: 12px;
+    /* font-size: 12px; */
   }
 
   .tab {
-    padding: 0.75em;
+    padding: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
     margin: 0;
+    /* margin-left: .5em;
+    margin-right: .5em; */
+
   }
+  
+
+
+  .tab i {
+    font-size: 35px;
+  }
+
+  /* .tab #proficiencies {
+    font-size: 50px;
+  } */
 
   .select-tab {
     background-color: var(--main-bg-color);

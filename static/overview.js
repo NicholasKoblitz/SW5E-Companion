@@ -2,7 +2,7 @@ const tabs = document.querySelector(".character-tabs")
 const tab = document.querySelectorAll(".tab")
 const abilities = document.querySelector(".abilities")
 const features = document.querySelector(".features")
-const charcter = document.querySelector(".character")
+const character = document.querySelector(".character")
 const equipment = document.querySelector(".equipment")
 const powers = document.querySelector(".powers")
 const proficiencies = document.querySelector(".proficiencies")
@@ -38,10 +38,10 @@ function select(evt) {
 
 
     if(evt.target.id !== "character") {
-        charcter.classList.add("hidden")
+        character.classList.add("hidden")
     }
     else {
-        charcter.classList.remove("hidden")
+        character.classList.remove("hidden")
     }
 
     if(evt.target.id !== "equipment") {
@@ -65,7 +65,7 @@ function select(evt) {
         proficiencies.classList.remove("hidden")
     }
 
-    evt.target.classList.toggle("select-tab")
+    evt.target.parentNode.classList.toggle("select-tab")
     
 }
 
