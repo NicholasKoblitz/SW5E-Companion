@@ -109,6 +109,7 @@ class Character(db.Model):
     credits = db.Column(db.Integer, nullable=False)
     proficiencies = db.Column(db.PickleType, nullable=False)
     skills = db.Column(db.PickleType, nullable=False)
+    background_feat = db.Column(db.Text, nullable=False)
     languages = db.Column(db.PickleType, nullable=False)
     alignment = db.Column(db.Text, nullable=False)
     personality_traits = db.Column(db.Text)
