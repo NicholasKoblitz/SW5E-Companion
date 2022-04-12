@@ -417,7 +417,7 @@ def save_background_choice(background_id):
     background = request.form["background"]
     feat = request.form["feat"]
     session["background"] = background
-    session["background-feat"] feat 
+    session["background-feat"] = feat 
 
     skill_1 = request.form["0"]
     skill_2 = request.form["1"]
