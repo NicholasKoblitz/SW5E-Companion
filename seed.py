@@ -3682,17 +3682,328 @@ armor_of_abeloth = ForcePowers(
     prerequisite = "-",
     description = "A protective force surrounds you, manifesting as shimmering light that covers you and your gear. You gain 5 temporary hit points for the duration. If a creature hits you with a melee attack while you have these hit points, the creature takes 5 psychic damage. Force Potency. When you cast this power using a force slot of 2nd level or higher, both the temporary hit points and the psychic damage increase by 5 for each slot."
 )
-# qq = ForcePowers(
-#     name = "",
-#     level = 1,
-#     force_alignment = "",
-#     casting_period = "",
-#     range = "",
-#     duration = "",
-#     concentration = "",
-#     prerequisite = "",
-#     description = ""
-# )
+battle_precognition = ForcePowers(
+    name = "Battle Precognition",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "8 hours",
+    concentration = "-",
+    prerequisite = "-",
+    description = "Your attunement to the Force warns you when you are about to enter danger. Until the power ends, your base AC becomes 13 + your Dexterity modifier. This power has no effect if you are wearing armor."
+)
+beast_trick = ForcePowers(
+    name = "Beast Trick",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 action",
+    range = "30 feet",
+    duration = "24 hours",
+    concentration = "-",
+    prerequisite = "-",
+    description = "This power lets you distract a beast. Choose a beast that you can see within range. If the beast’s Intelligence is 4 or higher, the power fails. Otherwise, the beast must succeed on a Wisdom saving throw or be charmed by you for the power’s duration. If you or one of your companions harms the target, the power ends. Force Potency: When you cast this power using a force slot of 2nd level or higher, you can affect one additional beast for each slot level above 1st."
+)
+breath_control = ForcePowers(
+    name = "Breath Control",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "10 minutes",
+    concentration = "-",
+    prerequisite = "-",
+    description = "You are able to slow your metabolism in such a way that you can stop breathing and resist the effect of toxins in your body. If you are poisoned, you neutralize the poison. If more than one poison afflicts you, you neutralize one poison that you know is present, or you neutralize one at random. For the duration, you have advantage on saving throws against being poisoned, resistance to poison damage, and you no longer need to breathe."
+)
+burst_of_speed = ForcePowers(
+    name = "Burst of Speed",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Touch",
+    duration = "1 hour",
+    concentration = "-",
+    prerequisite = "-",
+    description = "You touch a creature. The target’s speed increases by 10 feet until the power ends. Force Potency: When you cast this power using a force slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
+)
+cloud_mind = ForcePowers(
+    name = "Cloud Mind",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 action",
+    range = "90 feet",
+    duration = "1 minute",
+    concentration = "-",
+    prerequisite = "-",
+    description = "Roll 5d8; the total is how many hit points of creatures this power can affect. Creatures within 20 feet of a point you choose are affected in order of their current hit points. Starting with the creature that has the lowest current hit points, each creature affected by this power falls unconscious. If the power ends, the sleeper takes damage, or someone uses an action wake the sleeper, they will be awoken Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for that creature to be affected. This power has no effect on droids or constructs. Force Potency: When you cast this power using a force slot of 2nd level or higher, you can roll an additional 2d8 for each slot level above 1st."
+)
+comprehend_speech = ForcePowers(
+    name = "Comprehend Speech",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "1 hour",
+    concentration = "-",
+    prerequisite = "-",
+    description = "For the duration, you understand the literal meaning of any spoken language that you hear."
+)
+curse = ForcePowers(
+    name = "Cirse",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 action",
+    range = "30 feet",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "Denounce",
+    description = "Up to three creatures of your choice that you can see within range must make Charisma saving throws. The first time each turn a target that fails this saving throw makes an attack roll or a saving throw before the power ends, the target must roll a d4 and subtract the number rolled from the attack roll or saving throw. Force Potency. When you cast this power with a force slot of 3rd level or higher, you can target one additional creature for every two slot levels above 1st. When you cast this power at 3rd, 6th, or 9th level, the die increases to d6, d8, and d10, respectively."
+)
+dark_side_tendrils = ForcePowers(
+    name = "Dark Side Tendrils",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 action",
+    range = "Self (10-foot radius)",
+    duration = "Instatntaneous",
+    concentration = "-",
+    prerequisite = "-",
+    description = "Tendrils of dark energy erupt from you and batter all creatures within 10 feet of you. Each creature in that area must make a Strength saving throw. On a failed save, a target takes 2d6 necrotic damage and can’t take reactions until its next turn. On a successful save, the creature takes half damage, but suffers no other effect. Force Potency. When you cast this power using a power slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st."
+)
+dun_moch = ForcePowers(
+    name = "Dun Moch",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 bonus action",
+    range = "30 feet",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "You attempt to manipulate a creature into fighting you. One creature that you can see within range must make a Wisdom saving throw. On a failed save, the creature is drawn to you, compelled by your demands. For the duration, it has disadvantage on attack rolls against creatures other than you, and must make a Wisdom saving throw each time it attempts to move to a space that is more than 30 feet away from you; if it succeeds on this saving throw, this power doesn’t restrict the target’s movement for that turn. The power ends if you attack any other creature, if you cast a power that targets a hostile creature other than the target, if a creature friendly to you damages the target or casts a harmful power on it, or if you end your turn more than 30 feet away from the target. This power has no effect on droids or constructs."
+)
+fear = ForcePowers(
+    name = "Fear",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 action",
+    range = "60 feet",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "You awaken the sense of mortality in one creature you can see within range. The target must succeed on a Wisdom saving throw or become frightened for the duration. A target with 25 hit points or fewer makes the saving throw with disadvantage. A frightened creature can repeat this save at the end of each of its turns, ending this effect on a success. This power has no effect on constructs or droids."
+)
+force_blinding = ForcePowers(
+    name = "Force Blinding",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 action",
+    range = "Self (15-foot cone)",
+    duration = "1 round",
+    concentration = "-",
+    prerequisite = "-",
+    description = "You use the Force to emit a blinding flash of light from your hand. Roll 6d10, the total is how many hit points of creatures this power can effect. Creatures in a 15-foot cone originating from you are affected in ascending order of their current hit points (ignoring unconscious creatures and creatures that can’t see). Starting with the creature that has the lowest current hit points, each creature affected by this power is blinded until the power ends. Subtract each creature’s hit points from the total before moving on to the creature with the next lowest hit points. A creature’s hit points must be equal to or less than the remaining total for the creature to be affected. Force Potency: When you cast this power using a force slot of 2nd level or higher, roll an additional 2d10 for each slot level above 1st."
+)
+force_body = ForcePowers(
+    name = "Force Body",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "1 hour",
+    concentration = "-",
+    prerequisite = "-",
+    description = "This power enables you to use your health to fuel your force powers. For the duration, when you cast a force power, half the cost is paid by your force points (rounded up) and half the cost is paid by your hit points (rounded down). Additionally, your maximum hit points are decreased by this amount while the power is active. You may end this effect at any time. If you cast a force power that would reduce your hit points to 0, the power automatically fails and this effect ends."
+)
+force_focus = ForcePowers(
+    name = "Force Focus",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 bonus action",
+    range = "Self",
+    duration = "Up to 1 minute",
+    concentration = "-",
+    prerequisite = "Force Technique",
+    description = "You let the Force guide you, empowering your strikes. Until the power ends, your weapon attacks deal an extra 1d4 force damage on a hit."
+)
+force_jump = ForcePowers(
+    name = "Force Jump",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "Force Leap",
+    description = "Using the Force to augment the strength in your legs, you leap up to 30 feet to an unoccupied space you can see. Force Potency: When you cast this power using a force slot of 2nd level or higher, your jump distance increases by 5 feet for each slot level above 1st."
+)
+force_mask = ForcePowers(
+    name = "Force Mask",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "1 hour",
+    concentration = "-",
+    prerequisite = "Mind Trick",
+    description = "Until the power ends or you use an action to dismiss it, you can disguise yourself through use of the Force in many ways. You can appear to be shorter or taller by about a foot and change the appearance of your body and weight, but you cannot change the basic structure of your body. This effect can include your clothes, weapons, and other belongings on your person. This effect is only visual, so any sort of physical contact will only interact with the real size and shape of you. A creature that uses its action to examine you can identify this effect with a successful Intelligence (Investigation) check against your force save DC. This power has no effect on droids or constructs."
+)
+force_propel = ForcePowers(
+    name = "Force Propel",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "60 feet",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "Force Push/Pull",
+    description = "Choose one or more creatures or objects not being worn or carried within 60 feet that weigh up to a combined total of 15 pounds. The creatures or objects immediately move 60 feet in a direction of your choice. If the creatures or objects end this movement in the air, they immediately fall to the ground. If the creatures or objects collide with any one target during its travel, both the creatures or objects and the target take 3d8 kinetic damage. If the target is a creature, it must make a Dexterity saving throw. On a failed save, it takes 3d8 kinetic damage, or half as much on a successful one. Force Potency: When you cast this power using a force slot of 2nd level or higher, the maximum weight increases by 15 pounds and the damage increases by 1d8 for each slot level above 1st."
+)
+heal = ForcePowers(
+    name = "Heal",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 action",
+    range = "Touch",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "-",
+    description = "A creature you touch regains a number of hit points equal to 1d8 + your forcecasting ability modifier. This power has no effect on droids or constructs. Force Potency: When you cast this power using a force slot of 2nd level or higher, the healing increases by 1d8 for each slot level above 1st."
+)
+heroism = ForcePowers(
+    name = "Heroism",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 action",
+    range = "Touch",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "A willing creature you touch is imbued with bravery. Until the power ends, the creature is immune to being frightened and gains temporary hit points equal to your forcecasting ability modifier at the start of each of its turns. When the power ends, the target loses any remaining temporary hit points from this power. This power has no effect on droids or constructs. Force Potency: When you cast this power using a force slot of 2nd level or higher, you can target one additional creature for each slot level above 1st."
+)
+hex = ForcePowers(
+    name = "Hex",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 bonus action",
+    range = "90 feet",
+    duration = "Up to 1 hour",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "You curse an opponent within range. Until the power ends, you deal an extra 1d6 necrotic damage to the target whenever you hit it with an attack. Also, choose one ability when you cast the power. The target has disadvantage on ability checks made with the chosen ability. If the target drops to 0 hit points before this power ends, you can use a bonus action on a subsequent turn of yours to curse a new creature. Force Potency: When you cast this power using a force slot of 3rd or 4th level, you can maintain your concentration on the power for up to 8 hours. When you use a force slot of 5th level or higher, you can maintain your concentration on the power for up to 24 hours."
+)
+improved_feedback = ForcePowers(
+    name = "Improved Feedback",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 action",
+    range = "60 feet",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "Feedback",
+    description = "You unleash a blast of psychic energy at a target within range. If the target can hear you (though it need not understand you), it must succeed on an Intelligence saving throw. On a failed save, it takes 3d6 psychic damage and must immediately use its reaction, if available, to move as far as its speed allows away from you. The creature doesn’t move into obviously dangerous ground, such as a fire or a pit. On a successful save, the target takes half as much damage and doesn’t have to move away. A deafened creature automatically succeeds on the save. Force Potency: When you cast this power using a force slot of 2nd level or higher, the damage increases by 1d6 for each slot level above 1st."
+)
+malacia = ForcePowers(
+    name = "Malacia",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "30 feet",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "Mind Trick",
+    description = "A creature of your choice that you can see within range is overcome with a sense of dizziness and nausea, as you disturb its equilibrium with the Force. The creature must make a Wisdom saving throw or fall prone, becoming incapacitated and unable to stand up for the duration. At the end of each of its turns, and each time it takes damage, the target can make another Wisdom saving throw. The target has advantage on the saving throw if it’s triggered by damage. On a success, the power ends. This power has no effect on droids or constructs."
+)
+phasestrike = ForcePowers(
+    name = "Phasestrike",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 bonus action",
+    range = "Self",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "Until the power ends, your movement doesn’t provoke opportunity attacks. Once before the power ends, you can give yourself advantage on one weapon attack roll on your turn. That attack deals an extra 1d8 force damage on a hit. Whether you hit or miss, your walking speed increases by 30 feet until the end of that turn."
+)
+project = ForcePowers(
+    name = "Project",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 action",
+    range = "120 feet",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "-",
+    description = "You lift three piles of debris or small objects from the ground and hurl them. Each pile hits a creature of your choice that you can see within range. The pile deals 1d4+1 force damage to its target. The piles all strike simultaneously and you can direct them to hit one creature or several. Force Potency. When you cast this power using a force slot of 2nd level or higher, you lift and throw an additional pile of debris for each slot level above 1st."
+)
+sanctuary = ForcePowers(
+    name = "Sanctuary",
+    level = 1,
+    force_alignment = "Light",
+    casting_period = "1 bonus action",
+    range = "30 feet",
+    duration = "1 minute",
+    concentration = "-",
+    prerequisite = "-",
+    description = "Until the power ends, any creature who targets the warded creature with an attack, a harmful power, or a hostile action must first make a Wisdom saving throw. On a failed save, the creature must choose a new target or lose the attack or power. This power doesn’t protect the warded creature from area effects. If the warded creature makes an attack, casts a power that affects an enemy creature, or takes a hostile action this power ends."
+)
+sense_emotion = ForcePowers(
+    name = "Sense Emotion",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "Up to 10 minutes",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "You attune your senses to pick up the emotions of others for the duration. When you cast the power, and as your action on each turn until the power ends, you can focus your senses on one humanoid you can see within 30 feet of you. You instantly learn the target’s prevailing emotion, whether it’s love, anger, pain, fear, calm, or something else, and you have advantage on Wisdom (Insight) checks against the target. If the target isn’t actually humanoid or it is immune to being charmed, you sense that it is calm."
+)
+sense_force = ForcePowers(
+    name = "Sense Force",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Self",
+    duration = "Up to 10 minutes",
+    concentration = "Concentration",
+    prerequisite = "-",
+    description = "For the duration, you sense the use of the Force, or its presence in an inanimate object within 30 feet of you. If you sense the Force in this way, you can use your action to determine the direction from which it originates and, if it’s in line of sight, you see a faint aura around the person or object from which the Force emanates. Force Potency: When you cast this power using a 3rd-level force slot, the range increases to 60 feet. When you use a 5th-level force slot, the range increases to 500 feet. When you use a 7th-level force slot, the range increases to 1 mile. When you use a 9th-level force slot, the range increases to 10 miles."
+)
+sustained_lightning = ForcePowers(
+    name = "Sustained Lightning",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 action",
+    range = "30 feet",
+    duration = "Up to 1 minute",
+    concentration = "Concentration",
+    prerequisite = "Shock",
+    description = "You lash out against a creature within range with continual jolts of Force lightning. Make a ranged force attack against that creature. On a hit, the target takes 1d12 lightning damage, and on each of your turns for the duration, you can use your action to deal 1d12 lightning damage to the target automatically. The power ends if you use your action to do anything else. The power also ends if the target is ever outside the power’s range or if it has total cover from you. Force Potency: When you cast this power using a force slot of 2nd level or higher, the initial damage increases by 1d12 for each slot level above 1st."
+)
+tremor = ForcePowers(
+    name = "Tremor",
+    level = 1,
+    force_alignment = "Universal",
+    casting_period = "1 action",
+    range = "Touch",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "Burst",
+    description = "You cause a tremor in the ground within range. Each creature other than you in a 5-foot-radius sphere centered on that point must make a Dexterity saving throw. On a failed save, a creature takes 1d8 kinetic damage and is knocked prone. On a successful save, the creature takes half as much damage and isn’t knocked prone. If the ground in that area is loose earth or stone, it becomes difficult terrain until cleared, with each 5-foot-diameter portion requiring at least 1 minute to clear by hand. Force Potency: When you cast this power using a force slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st."
+)
+wound = ForcePowers(
+    name = "Wound",
+    level = 1,
+    force_alignment = "Dark",
+    casting_period = "1 action",
+    range = "60 feet",
+    duration = "Instantaneous",
+    concentration = "-",
+    prerequisite = "-",
+    description = "You make a piercing gesture at a creature within range. Make a ranged force attack against the target. On a hit, the target takes 2d8 necrotic damage and must make a Constitution saving throw. On a failed save, it is also poisoned until the end of your next turn. Force Potency: When you cast this power using a force slot of 2nd level or higher, the damage increases by 1d8 for each slot level above 1st."
+)
+
+db.session.add_all([armor_of_abeloth, battle_precognition, beast_trick, breath_control, burst_of_speed, cloud_mind, comprehend_speech, curse, dark_side_tendrils, dun_moch, fear, force_blinding, force_body, force_focus, force_jump, force_mask, force_propel, heal, heroism, hex, improved_feedback, malacia, phasestrike, project, sanctuary, sense_emotion, sense_force, sustained_lightning, tremor, wound])
+db.session.commit()
 #--------------------------------------------------------------
 
 #--------------------Species-----------------------------------
