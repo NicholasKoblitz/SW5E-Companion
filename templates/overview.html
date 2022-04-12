@@ -261,16 +261,27 @@
         <div class="features setup hidden" >
             <h3>Background Feature</h3>
                 <div>
-                    <h4 id="bg-feat">{{character.character_background.background_feature_name}}<span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                    <h4 id="bg-feat">{{character.character_background.background_feature_name}}<span class="arrow"><i class="fa-solid fa-plus"></i></span></h4>
                     <div class="feat-info hidden">
                         <p>{{character.character_background.background_feature_details}}</p>
+                    </div>
+                </div>
+            <h3>Background Feat</h3>
+                <div>
+                    <h4 id="bg-feat-2">{{character.background_feat}}<span class="arrow"><i class="fa-solid fa-plus"></i></i></span></h4>
+                    <div class="feat-info hidden">
+                        {% for feat in character.character_background.feats %}
+                            {% if character.background_feat == feat.name %}
+                                <p>{{feat.details}}</p>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
 
             <h3>Species Features</h3>
             {% for trait in character.character_species.traits %}
             <div>
-                <h4>{{trait.name}}<span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                <h4>{{trait.name}}<span class="arrow"><i class="fa-solid fa-plus"></i></i></span></h4>
                 <div class="feat-info hidden">
                     <p>{{trait.details}}</p>
                 </div>
@@ -280,7 +291,7 @@
             <h3>Class Features</h3>
             {% for feature in character.character_class.features %}
             <div>
-                <h4 id="species-feat">{{feature.name}} <span class="arrow"><i class="fa-solid fa-arrow-down"></i></span></h4>
+                <h4 id="species-feat">{{feature.name}} <span class="arrow"><i class="fa-solid fa-plus"></i></span></h4>
                 <div class="feat-info hidden">
                     <span>Levels: 
                         {% for level in feature.levels %}

@@ -32,9 +32,9 @@
                     </select>
                 {% endfor %}
                 <select name="feat">
-                    {% for item in background.featbackground.feats %}
-                        <option value="{{item}}">{{item}}</option>
-                    {% endfendfor %}
+                    {% for item in background.feats %}
+                        <option value="{{item.name}}">{{item.name}}</option>
+                    {% endfor %}
                 </select>
                 <button class="next-class"><i class="fa-solid fa-arrow-right"></i></button>
         </form>

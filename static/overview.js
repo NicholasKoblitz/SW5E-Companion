@@ -77,20 +77,20 @@ function dropdown(evt) {
     console.dir(evt.target.parentNode.parentNode.childNodes)
     let feat = evt.target.parentNode.parentNode.parentNode.childNodes[3]
     let span = evt.target.parentNode
-    if(evt.target.classList[1] === "fa-arrow-down") {
+    if(evt.target.classList[1] === "fa-plus") {
         feat.classList.remove("hidden")
         feat.style.position = "relative"
         evt.target.remove(evt.target)
         newEle = document.createElement("i")
-        newEle.classList = "fa-solid fa-arrow-up"
+        newEle.classList = "fa-solid fa-minus"
         span.append(newEle)
     }
-    else if(evt.target.classList[1] === "fa-arrow-up") {
+    else if(evt.target.classList[1] === "fa-minus") {
         feat.classList.add("hidden")
         feat.style.position = "absolute"
         evt.target.remove(evt.target)
         newEle = document.createElement("i")
-        newEle.classList = "fa-solid fa-arrow-down"
+        newEle.classList = "fa-solid fa-plus"
         console.log(span)
         span.append(newEle)
     }
@@ -99,7 +99,7 @@ function dropdown(evt) {
         feat.style.position = "relative"
         evt.target.remove(evt.target)
         newEle = document.createElement("i")
-        newEle.classList = "fa-solid fa-arrow-up"
+        newEle.classList = "fa-solid fa-minus"
         span.append(newEle)
     }
     else if(evt.target.parentNode.parentNode.id === "species-feat") { 
@@ -107,7 +107,7 @@ function dropdown(evt) {
     feat.style.position = "relative"
     evt.target.remove(evt.target)
     newEle = document.createElement("i")
-    newEle.classList = "fa-solid fa-arrow-up"
+    newEle.classList = "fa-solid fa-minus"
     span.append(newEle)
     }
     else if(evt,target.parentNode.parentNode.id === "force-power") {
@@ -115,7 +115,15 @@ function dropdown(evt) {
     feat.style.position = "relative"
     evt.target.remove(evt.target)
     newEle = document.createElement("i")
-    newEle.classList = "fa-solid fa-arrow-up"
+    newEle.classList = "fa-solid fa-minus"
+    span.append(newEle)
+    }
+    else if(evt,target.parentNode.parentNode.id === "bg-feat-2") {
+        feat.classList.remove("hidden")
+    feat.style.position = "relative"
+    evt.target.remove(evt.target)
+    newEle = document.createElement("i")
+    newEle.classList = "fa-solid fa-minus"
     span.append(newEle)
     }
 }

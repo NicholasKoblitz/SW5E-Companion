@@ -743,7 +743,7 @@ def get_create_character():
         credits = background.credits,
         proficiencies = [_class.armor_proficiencies, _class.weapon_proficiencies, _class.tool_proficiencies, background.tool_proficiencies],
         skills = session["skills"],
-        background_feat = session["background_feat"],
+        background_feat = session["background-feat"],
         languages = specie.language_vals,
         alignment = session["alignment"],
         personality_traits = session["personality_trait"],
