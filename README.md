@@ -4,6 +4,8 @@ SW5E Companion is a light-weight, mobile character creator for the Dungeons and 
 
 Give it a try at [http://sw5e-companion.herokuapp.com/](http://sw5e-companion.herokuapp.com/)
 
+---
+
 ## Features
 
 - Species, Class, and Background Selection
@@ -13,6 +15,16 @@ Give it a try at [http://sw5e-companion.herokuapp.com/](http://sw5e-companion.he
 - Equipment Selection
 - Overview of created Character
 - User Dashboard to display created characters
+
+---
+
+## Examples of the Character Overview and User dashboard screens
+
+![Character Overview screen](</static/Screenshot%20(10).png>)
+
+![User Dashboard](</static/Screenshot%20(12).png>)
+
+---
 
 ## Download and Modify Source
 

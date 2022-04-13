@@ -6,9 +6,9 @@ from models import db, connect_db, User, Character, Class, TechPowers, ForcePowe
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
-ARMORS = []
-WEAPONS = []
-GEAR = []
+armors = []
+weapons = []
+gears = []
 
 
 app = Flask(__name__)
@@ -569,7 +569,7 @@ def get_equipment():
         flash("Please Sign In")
         return redirect("/")
 
-
+    
     return render_template('equipment.html')
 
 
@@ -590,8 +590,8 @@ def choose_armor():
     """Saves armor choice to session"""
 
 
-    ARMORS.append(request.form["armor"])
-    session["armor"] = ARMORS
+    armors.append(request.form["armor"])
+    session["armor"] = armors
 
     return redirect("/character/equipment")
 
@@ -642,9 +642,10 @@ def get_weapons():
 def choose_weapon():
     """Saves weapon choice to session"""
 
-    WEAPONS.append(request.form["weapon"])
+    weapons.append(request.form["weapon"])
 
-    session["weapon"] = WEAPONS
+    session["weapon"] = weapons
+
 
     return redirect("/character/equipment")
 
@@ -667,9 +668,9 @@ def get_adventure_gear():
 def choose_gear():
     """Saves adventure gear choice to session"""
 
-    GEAR.append(request.form["gear"])
+    gears.append(request.form["gear"])
 
-    session["gear"] = GEAR
+    session["gear"] = gears
 
     return redirect("/character/equipment")
 
@@ -692,6 +693,7 @@ def get_create_character():
     _class = Class.query.filter_by(name=session["class"]).first()
     background = Background.query.filter_by(name=session["background"]).first()
     specie = Specie.query.filter_by(name=session["species"]).first()
+
 
     character = Character(
         user_id = g.user.id,
@@ -771,13 +773,13 @@ def get_create_character():
             ca = CharacterArmor(aromr_id=armor.id, character_id=character.id)
             db.session.add(ca)
             db.session.commit()
-    elif "weapon" in session:
+    if "weapon" in session:
         for item in session["weapon"]:
             weapon = Weapon.query.filter_by(name=item).first()
             cw = CharacterWeapon(weapon_id=weapon.id, character_id=character.id)
             db.session.add(cw)
             db.session.commit()
-    elif "gear" in session:
+    if "gear" in session:
         for item in session["gear"]:
             gear = AdventureingGear.query.filter_by(name=item).first()
             ca = CharacterAdventuringGear(adventuring_gear_id=gear.id, character_id=character.id)
@@ -802,10 +804,12 @@ def get_create_character():
         if item != USER_KEY and item != "csrf_token":
            session.pop(item)
 
-    armors = []
-    weapons = []
-    advent_gear = []
+    armors.clear()
+    weapons.clear()
+    gears.clear()
     skills = []
+
+
     return redirect(f'/character/{character.id}')
 
 
@@ -817,6 +821,7 @@ def get_character(character_id):
         flash("Please Sign In")
         return redirect("/")
 
+    
     character = Character.query.get_or_404(character_id)
 
     return render_template("overview.html", character=character)
