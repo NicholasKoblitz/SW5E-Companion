@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{{session}}
 
 <a href="/character/description" class="back-class"><i class="fa-solid fa-arrow-left"></i></a>
 
@@ -14,7 +15,7 @@
 
         {% for item in session["armor"] %}
                 <!-- <form action="/character/equipment/armors/delete" method="POST"> -->
-                        <p class="feature" style="display: inline;">{{item}} </p>
+                        <p class="feature-equipment" style="display: inline;">{{item}} </p>
                         <!-- <input type="text" name="armor" value="{{item}}" hidden> -->
                         <!-- <button type="submit" class="delete-btn" style="display: inline;">X</button> -->
                 </form>

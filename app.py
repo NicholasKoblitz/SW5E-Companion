@@ -594,8 +594,9 @@ def get_armor():
 def choose_armor():
     """Saves armor choice to session"""
 
-
-    session["armor"].append(request.form["armor"])
+    armor = session["armor"]
+    armor.append(request.form["armor"])
+    session["armor"] = armor
     
 
     return redirect("/character/equipment")
@@ -648,8 +649,9 @@ def choose_weapon():
     """Saves weapon choice to session"""
 
     
-
-    session["weapon"].append(request.form["weapon"])
+    weapon = session["weapon"]
+    weapon.append(request.form["weapon"])
+    session["weapon"] = weapon
 
       
 
@@ -675,7 +677,9 @@ def get_adventure_gear():
 def choose_gear():
     """Saves adventure gear choice to session"""
 
-    session["gear"].append(request.form["gear"])
+    gear = session["gear"]
+    gear.append(request.form["gear"])
+    session["gear"] = gear
 
     
 
