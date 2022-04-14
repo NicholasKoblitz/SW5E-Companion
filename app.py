@@ -238,13 +238,9 @@ def display_user(user_id):
 
     user = User.query.get_or_404(user_id)
 
-
-
-
-
-  session["armor"] = [] 
-  session["weapon"] = []
-  session["gear"] = []
+    session["armor"] = [] 
+    session["weapon"] = []
+    session["gear"] = []
 
 
 
@@ -653,7 +649,7 @@ def choose_weapon():
 
     
 
-session["weapon"].append(request.form["weapon"])
+    session["weapon"].append(request.form["weapon"])
 
       
 
