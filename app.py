@@ -6,9 +6,7 @@ from models import db, connect_db, User, Character, Class, TechPowers, ForcePowe
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
 
 USER_KEY = "current_user"
-armors = []
-weapons = []
-gears = []
+
 
 
 app = Flask(__name__)
@@ -240,6 +238,17 @@ def display_user(user_id):
 
     user = User.query.get_or_404(user_id)
 
+
+
+
+
+  session["armor"] = [] 
+  session["weapon"] = []
+  session["gear"] = []
+
+
+
+   
     return render_template("user_dashboard.html", user=user)
 
 #--------------------------------------------------------------------------
@@ -590,8 +599,8 @@ def choose_armor():
     """Saves armor choice to session"""
 
 
-    armors.append(request.form["armor"])
-    session["armor"] = armors
+    session["armor"].append(request.form["armor"])
+    
 
     return redirect("/character/equipment")
 
@@ -642,9 +651,11 @@ def get_weapons():
 def choose_weapon():
     """Saves weapon choice to session"""
 
-    weapons.append(request.form["weapon"])
+    
 
-    session["weapon"] = weapons
+session["weapon"].append(request.form["weapon"])
+
+      
 
 
     return redirect("/character/equipment")
@@ -668,9 +679,9 @@ def get_adventure_gear():
 def choose_gear():
     """Saves adventure gear choice to session"""
 
-    gears.append(request.form["gear"])
+    session["gear"].append(request.form["gear"])
 
-    session["gear"] = gears
+    
 
     return redirect("/character/equipment")
 
@@ -804,10 +815,6 @@ def get_create_character():
         if item != USER_KEY and item != "csrf_token":
            session.pop(item)
 
-    armors.clear()
-    weapons.clear()
-    gears.clear()
-    skills = []
 
 
     return redirect(f'/character/{character.id}')
