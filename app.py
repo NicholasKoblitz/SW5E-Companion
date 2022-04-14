@@ -602,32 +602,21 @@ def choose_armor():
     return redirect("/character/equipment")
 
 
-# @app.route("/character/equipment/armors/delete", methods=["POST"])
-# def delete_equipment():
-#     """Deletes Equipment """
+@app.route("/character/equipment/armors/delete", methods=["POST"])
+def delete_armor():
+    """Deletes Armor """
 
-#     if not g.user:
-#         flash("Please Sign In")
-#         return redirect("/")
+    if not g.user:
+        flash("Please Sign In")
+        return redirect("/")
 
+    data = request.form["armor"]
+    armor = session["armor"]
+    i = armor.index(data)
+    armor.pop(i)
+    session["armor"] = armor
 
-#     data = request.form["armor"]
-
-#     print(data)
-    
-#     armors = session["armor"]
-#     i = ARMORS.index(data)
-#     print(i)
-#     armors.pop(i)
-#     print(ARMORS)
-
-#     session.pop('armor',None)
-#     session["armor"] = armors
-
-
-
-#     return render_template("equipment.html")
-#     return redirect(url_for('get_equipment', armors=armors))
+    return redirect('/character/equipment')
 
 
 
@@ -659,6 +648,24 @@ def choose_weapon():
     return redirect("/character/equipment")
 
 
+@app.route("/character/equipment/weapons/delete", methods=["POST"])
+def delete_weapon():
+    """Deletes Weapon"""
+
+    if not g.user:
+        flash("Please Sign In")
+        return redirect("/")
+
+    data = request.form["weapon"]
+    weapon = session["weapon"]
+    i = weapon.index(data)
+    weapon.pop(i)
+    session["weapon"] = weapon
+
+    return redirect('/character/equipment')
+
+
+
 
 @app.route("/character/equipment/adventure-gear")
 def get_adventure_gear():
@@ -685,9 +692,21 @@ def choose_gear():
 
     return redirect("/character/equipment")
 
+@app.route("/character/equipment/adventure-gear/delete", methods=["POST"])
+def delete_equipment():
+    """Deletes Equipment """
 
+    if not g.user:
+        flash("Please Sign In")
+        return redirect("/")
 
-    
+    data = request.form["gear"]
+    gear = session["gear"]
+    i = gear.index(data)
+    gear.pop(i)
+    session["gear"] = gear
+
+    return redirect('/character/equipment')
 
 
 
