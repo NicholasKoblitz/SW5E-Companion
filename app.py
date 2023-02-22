@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgres:///sw5e'))
+    os.environ.get('DATABASE_URL', 'postgres://nick:sonic0125/sw5e'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
