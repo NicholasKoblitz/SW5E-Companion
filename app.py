@@ -1,5 +1,6 @@
 import os
 from random import randint
+from config import *
 from flask import Flask, render_template, redirect, flash, session, g, request
 from sqlalchemy.exc import IntegrityError
 from models import db, connect_db, User, Character, Class, TechPowers, ForcePowers, Specie, Background, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterTechPower, CharacterForcePower
@@ -18,8 +19,9 @@ app = Flask(__name__)
 # # rest of connection code using the connection string `uri`
 
 
+
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ.get('DATABASE_URL', 'postgres://nick:sonic0125/sw5e'))
+    os.environ.get('DATABASE_URL', f'postgresql://${{ PGUSER }}:${{ PGPASSWORD }}@${{ PGHOST }}:${{ PGPORT }}/${{ PGDATABASE }}'))
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
