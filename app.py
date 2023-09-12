@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://sw5e_database_user:3zahSpM3JHlAqfCtN5k6ZB60VlnLrVub@dpg-cjvsq58js92s73b2gm10-a/sw5e_database"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://sw5e_database_user:3zahSpM3JHlAqfCtN5k6ZB60VlnLrVub@dpg-cjvsq58js92s73b2gm10-a/sw5e_database"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
