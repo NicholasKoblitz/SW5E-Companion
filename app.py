@@ -5,6 +5,7 @@ from flask import Flask, render_template, redirect, flash, session, g, request
 from sqlalchemy.exc import IntegrityError
 from models import db, connect_db, User, Character, Class, TechPowers, ForcePowers, Specie, Background, CharacterArmor, CharacterWeapon, CharacterAdventuringGear, Armor, Weapon, AdventureingGear, CharacterTechPower, CharacterForcePower
 from forms import SignupForm, LoginForm, AbilityScoresForm, DescriptionForm
+from config import DATABASE_URL
 
 USER_KEY = "current_user"
 
@@ -13,14 +14,9 @@ USER_KEY = "current_user"
 app = Flask(__name__)
 
 
-# uri = os.getenv("DATABASE_URL")  # or other relevant config var
-# if uri.startswith("postgres://"):
-#     uri = uri.replace("postgres://", "postgresql://", 1)
-# # rest of connection code using the connection string `uri`
 
 
-
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://sw5e_database_user:3zahSpM3JHlAqfCtN5k6ZB60VlnLrVub@dpg-cjvsq58js92s73b2gm10-a.oregon-postgres.render.com:5432/sw5e_database"
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False

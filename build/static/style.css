@@ -1,0 +1,821 @@
+:root {
+  --main-bg-color: #2c394b;
+  --border-color: #ff4c29;
+  --text-color: #eae7ea;
+  --warning-color: #c02304;
+  --secondary-color: #334756;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 610px) {
+  #too-big {
+    visibility: visible;
+  }
+
+  #defualt {
+    visibility: hidden;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid var(--border-color);
+    background-color: #da4224;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: StarWarsTitle;
+    font-size: 14px;
+  }
+
+  .links {
+    position: relative;
+    right: 2em;
+    letter-spacing: 0.15em;
+  }
+
+  .after-links {
+    position: relative;
+    right: 1em;
+  }
+
+  nav h4 {
+    position: relative;
+    left: 1em;
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (max-width: 600px) {
+  @font-face {
+    font-family: StarWarsTitle;
+    src: url(SfDistantGalaxyAltoutline-e2Bp.ttf);
+    font-weight: lighter;
+  }
+
+
+  #flash {
+    background-color: var(--warning-color);
+    color: var(--text-color);
+    position: relative;
+    top: 2em;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: var(--border-color);
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    padding: 0.25em .5em;
+    color: var(--text-color);
+  }
+
+  .delete-btn {
+    display: inline-block;
+    background-color: var(--border-color);
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    padding: 0.25em .5em;
+    color: var(--text-color);
+    font-size: 16px;
+  }
+
+  /* Nav Bar */
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid var(--border-color);
+    background-color: #da4224;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: StarWarsTitle;
+    font-size: 14px;
+  }
+
+  .links {
+    position: relative;
+    right: 2em;
+    letter-spacing: 0.15em;
+  }
+
+  .after-links {
+    position: relative;
+    right: 1em;
+  }
+
+  nav h4 {
+    position: relative;
+    left: 1em;
+    letter-spacing: 0.1em;
+  }
+
+  /* home Page */
+
+  h3 {
+    margin-top: 1em;
+  }
+
+  #feat-list {
+    font-family: "Quicksand", sans-serif;
+    list-style-type: none;
+    padding-left: 0.75em;
+    padding-right: 0.25em;
+    margin: 0;
+    line-height: 2em;
+  }
+
+  #too-big {
+    visibility: hidden;
+  }
+  #defualt h3 {
+    font-size: 30px;
+    line-height: 1.25em;
+  }
+
+  #defualt h2 {
+    font-size: 30px;
+    line-height: 1.25em;
+  }
+
+  #defualt p {
+    font-size: 20px;
+  }
+
+  #defualt ul li {
+    font-size: 20px;
+  }
+
+  /* ---------------------------------------------------------- */
+
+  /* Forms */
+
+  .form-layout form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    border: 5px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 1em;
+  }
+
+  .ability-form {
+    margin: 0;
+  }
+
+  .ability-form form label {
+    font-size: 30px;
+    line-height: 1em;
+    letter-spacing: .1em;
+  }
+
+  .ability-form form select {
+    margin-bottom: 1em;
+    margin-top: .5em;
+    font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+
+  }
+
+  .description-form form label {
+    font-size: 25px;
+    line-height: 1em;
+    letter-spacing: .1em;
+  }
+
+  .description-form form select {
+    margin-bottom: 1em;
+    margin-top: .5em;
+    font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+  .description-form form input {
+    margin-bottom: 1em;
+    margin-top: .5em;
+    font-size: 20px;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .description-form form textarea {
+    margin-bottom: 1em;
+    margin-top: .5em;
+    font-size: 20px;
+  }
+
+  .powers-form {
+    margin-top: 2em;
+  }
+
+  .form-layout label {
+    font-family: StarWarsTitle;
+    padding: 0 1em;
+    font-size: 25px;
+  }
+
+  .form-layout form input {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    outline: none;
+    font-family: "Quicksand", sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  .form-layout form select {
+    outline: none;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-family: "Quicksand", sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    font-size: 20px;
+
+  }
+
+  .form-layout form textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    outline: none;
+    font-family: "Quicksand", sans-serif;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+  }
+
+  .form-layout form button:active {
+    background-color: #e53411;
+  }
+
+  /* ---------------------------------------------------------- */
+
+  /* Species and class selection */
+  .title {
+    font-family: StarWarsTitle;
+  }
+  .title-abilities {
+    font-family: StarWarsTitle;
+    font-size: 30px;
+  }
+
+  .title a {
+    text-decoration: none;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25em;
+  }
+
+  .title-abilities a {
+    text-decoration: none;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25em;
+  }
+
+  .title-class {
+    font-family: StarWarsTitle;
+    position: relative;
+    top: 1em;
+  }
+
+  .selection {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 100px;
+    column-gap: 3em;
+    row-gap: 3em;
+  }
+
+  .selection h3 a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .selection-list {
+    border: 4px solid var(--secondary-color);
+    border-radius: 20px;
+    padding: 1em;
+    text-align: center;
+  }
+
+  /* Dashboard */
+
+  .character-list {
+    position: relative;
+    top: 3em;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    column-gap: 3em;
+    row-gap: 3em;
+  }
+
+  .character-list a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+  .character-tile {
+    border: 3px solid var(--secondary-color);
+    border-radius: 10px;
+    text-align: center;
+    padding: 1em;
+  }
+
+  .dash-form {
+    gap: 1em;
+  }
+
+  .text {
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .dash-form button{
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: bold;
+  }
+  /* ------------------------------------------------------------ */
+
+  /* Single species and single class page */
+
+  .intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 20px;
+  }
+
+  .intro-title {
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+    letter-spacing: 0.1em;
+  }
+
+  .intro-para {
+    padding-left: 0.75em;
+    padding-right: 0.25em;
+    margin: 0;
+    line-height: 1.5em;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .feature-title {
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+    letter-spacing: 0.1em;
+  }
+
+  .feature {
+    padding-left: 0.75em;
+    padding-right: 0.25em;
+    margin: 0 0 2em 0;
+    line-height: 1.5em;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .feature-equipment {
+    padding-left: 0.75em;
+    padding-right: 0.25em;
+    margin: 0 0 2em 0;
+    line-height: 1.5em;
+    font-family: "Quicksand", sans-serif;
+    font-size: 25px;
+  }
+
+  .feature-left {
+    padding-right: 0.25em;
+    margin: 1em 0 2em 0;
+    line-height: 1.5em;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .intro-left {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 20px;
+  }
+
+  .intro-title-center {
+    position: relative;
+    left: 3.5em;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+  }
+
+  .class-level {
+    position: absolute;
+    top: 3em;
+  }
+
+  .class-level input:focus {
+    outline: none;
+  }
+
+  /* Buttons */
+
+  .next {
+    border: none;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    position: relative;
+    left: 5.5em;
+    bottom: 0.1em;
+    font-size: 30px;
+  }
+
+  .next-class {
+    border: none;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    position: absolute;
+    right: .05em;
+    top: 3.8em;
+    font-size: 30px;
+  }
+
+  .back {
+    text-decoration: none;
+    color: var(--text-color);
+    position: relative;
+    right: 5.5em;
+    top: 1.25em;
+    font-size: 30px;
+  }
+
+  .back-class {
+    text-decoration: none;
+    color: var(--text-color);
+    position: absolute;
+    left: .2em;
+    top: 3.9em;
+    font-size: 30px;
+  }
+
+  .power-btn {
+    right: 1.5em;
+  }
+
+  /* Tables */
+
+  .card-area {
+    position: relative;
+    top: 3em;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    column-gap: .5em;
+    row-gap: 2em;
+  }
+
+  .item-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: 3px solid var(--secondary-color);
+    border-radius: 10px;
+    position: relative;
+    padding: 0;
+  }
+
+  .class-card {
+    padding: 3em;
+  }
+
+  .item-title {
+    font-family: StarWarsTitle;
+    font-size: 20px;
+    visibility: visible;
+    padding-bottom: 0;
+  }
+
+  /* .item-detials {
+    position: absolute;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1em;
+    top: 50%;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+    background-color: var(--secondary-color);
+    z-index: 1; 
+  }
+
+  .item-detials p {
+    font-size: 20px;
+  }
+
+  .item-detials form button {
+    font-size: 30px;
+  } */
+
+  .item-detials-left {
+    position: absolute;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+    background-color: var(--secondary-color);
+    z-index: 1; 
+    top: 20%;
+    right: 50%;
+  }
+
+  .item-detials-right {
+    position: absolute;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto auto auto;
+    column-gap: 0.5em;
+    row-gap: 0.5em;
+    background-color: var(--secondary-color);
+    z-index: 1; 
+    top: 20%;
+    left: 50%;
+  }
+
+  .item-detials-right button {
+    font-size: 20px;
+  }
+
+  .item-detials-left button {
+    font-size: 20px;
+  }
+
+  .item-detials-right p {
+    font-size: 16px;
+  }
+
+  .item-detials-left p {
+    font-size: 16px;
+  }
+
+  .hidden {
+    visibility: hidden;
+  }
+
+  .toggle-open {
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .toggle-close {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: end;
+    font-size: 20px;
+  }
+
+  .close {
+    background-color: var(--secondary-color);
+    font-size: 20px;
+  }
+
+  .tables table {
+    margin-bottom: 2em;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+  }
+  .tables table thead {
+    font-family: StarWarsTitle;
+    letter-spacing: 0.25em;
+    margin-bottom: 1em;
+  }
+
+  .tables table thead th:nth-child(even) {
+    text-align: start;
+  }
+
+  .tables table tbody tr {
+    letter-spacing: 0.05em;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .tables table tbody tr:nth-child(odd) {
+    background-color: var(--secondary-color);
+  }
+
+  /* equipment page */
+
+  /* Character Overview */
+
+  .overview p {
+    font-size: 20px;
+  }
+
+
+  .character-area {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    padding: 0;
+    width: 95%;
+    position: relative;
+    margin-top: 1em;
+  }
+
+  .character-tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding: 0;
+  }
+
+  .tab {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+  .tab i {
+    font-size: 40px;
+    padding: .3em;
+    margin: 0;
+  }
+
+
+  .select-tab {
+    background-color: var(--main-bg-color);
+  }
+
+  .setup {
+    background-color: var(--main-bg-color);
+    position: absolute;
+    right: -1px;
+    width: 100%;
+
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+  }
+
+  .abilities h3 {
+    border-bottom: 1px solid var(--border-color);
+    width: 55%;
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+    letter-spacing: 0.1em;
+    font-size: 18px;
+  }
+
+  .abilities section i {
+    font-size: 10px;
+    margin-right: 8px;
+    margin-left: 5px;
+  }
+
+  .abilities section p {
+    position: relative;
+    left: 1em;
+    font-family: "Quicksand", sans-serif;
+    font-size: 16px;
+  }
+
+  .features {
+    padding-top: 1em;
+  }
+
+  .features h3 {
+    border-bottom: 1px solid var(--border-color);
+    width: 55%;
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+    letter-spacing: 0.1em;
+  }
+
+  .features h4 {
+    font-family: "Quicksand", sans-serif;
+    position: relative;
+    left: 0.5em;
+    font-size: 20px;
+  }
+
+  .features h4 span {
+    position: relative;
+    left: 0.5em;
+    font-size: 20px;
+
+  }
+
+  .powers h4 {
+    font-family: "Quicksand", sans-serif;
+    position: relative;
+    left: 0.5em;
+    font-size: 20px;
+  }
+
+  .powers h4 span {
+    position: relative;
+    left: 0.5em;
+    font-size: 20px;
+  }
+
+  .feat-info {
+    position: absolute;
+    font-family: "Quicksand", sans-serif;
+    letter-spacing: 0.1em;
+    line-height: 2em;
+  }
+
+  
+
+  .character div {
+    line-height: 2em;
+  }
+
+  .character p strong {
+    border-bottom: 1px solid var(--border-color);
+    width: 55%;
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+    letter-spacing: 0.1em;
+  }
+
+  .character p {
+    font-family: "Quicksand", sans-serif;
+    font-size: 18px;
+  }
+
+  .equipment h3 {
+    border-bottom: 1px solid var(--border-color);
+    width: 55%;
+    padding: 0.25em;
+    font-family: StarWarsTitle;
+    letter-spacing: 0.1em;
+    font-size: 20px;
+  }
+
+  .equipment p {
+    font-family: "Quicksand", sans-serif;
+    position: relative;
+    left: 1em;
+    font-size: 18px;
+  }
+
+  .powers h3 {
+    /* margin-left: 1em; */
+    border-bottom: 1px solid var(--border-color);
+    width: 50%;
+    font-size: 20px;
+  }
+
+  .powers div p {
+    margin-left: 0.5em;
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .proficiencies p {
+    font-size: 18px;
+  }
+}
